@@ -40,21 +40,6 @@ class CourseSeeder extends Seeder
             'consultations' => '2024-06-01 14:00:00'
         ]); // id 3
         
-        Course::create([
-            'name' => 'Introduction to Programming',
-            'description' => 'Designed for beginners, this course teaches the fundamentals of programming using Python. Students will learn basic programming concepts such as variables, control structures, functions, and data types, and will apply these concepts to solve problems and create simple programs.',
-            'acronyms' => 'ITP',
-            'image' => 'intro_programming.jpg',
-            'consultations' => '2024-06-01 10:00:00'
-        ]); // id 4
-        
-        Course::create([
-            'name' => 'Computer Security',
-            'description' => 'In this course, students will learn about protecting computer systems and networks from various threats. Topics include cryptography, network security, risk management, and ethical hacking. By the end of the course, students will have a solid understanding of the principles and practices of computer security.',
-            'acronyms' => 'CS',
-            'image' => 'computer_security.jpg',
-            'consultations' => '2024-06-01 11:00:00'
-        ]); // id 5
 
         //Medicine's Courses
         Course::create([
@@ -63,7 +48,7 @@ class CourseSeeder extends Seeder
             'acronyms' => 'AP',
             'image' => 'anatomy.jpg',
             'consultations' => '2024-06-01 09:00:00'
-        ]); // id 6
+        ]); // id 4
         
         Course::create([
             'name' => 'Pathology',
@@ -71,23 +56,7 @@ class CourseSeeder extends Seeder
             'acronyms' => 'PATH',
             'image' => 'pathology.jpg',
             'consultations' => '2024-06-01 10:00:00'
-        ]); // id 7
-        
-        Course::create([
-            'name' => 'Pharmacology',
-            'description' => 'In this course, students will learn about the interactions between drugs and biological systems. Topics include the mechanisms of drug action, therapeutic uses, side effects, and drug interactions. Through case studies and practical sessions, students will gain a solid understanding of pharmacological principles.',
-            'acronyms' => 'PHARM',
-            'image' => 'pharmacology.jpg',
-            'consultations' => '2024-06-01 11:00:00'
-        ]); // id 8
-        
-        Course::create([
-            'name' => 'Clinical Medicine',
-            'description' => 'Clinical Medicine focuses on the application of medical knowledge to patient care. This course covers diagnostic methods, patient examination techniques, and the management of common diseases. Students will participate in clinical rotations, gaining hands-on experience in a variety of medical settings.',
-            'acronyms' => 'CLIN',
-            'image' => 'clinical_medicine.jpg',
-            'consultations' => '2024-06-01 12:00:00'
-        ]); // id 9
+        ]); // id 5
         
         //Architecture's Courses
         Course::create([
@@ -96,15 +65,7 @@ class CourseSeeder extends Seeder
             'acronyms' => 'AD',
             'image' => 'architectural_design.jpg',
             'consultations' => '2024-06-01 13:00:00'
-        ]); // id 10
-        
-        Course::create([
-            'name' => 'Building Materials and Construction',
-            'description' => 'This course explores the properties and uses of various building materials and construction methods. Topics include the selection, testing, and application of materials such as wood, concrete, steel, and composites. Students will learn about sustainable building practices and the latest advancements in construction technology.',
-            'acronyms' => 'BMC',
-            'image' => 'building_materials.jpg',
-            'consultations' => '2024-06-01 14:00:00'
-        ]); // id 11
+        ]); // id 6
         
         Course::create([
             'name' => 'History of Architecture',
@@ -112,15 +73,8 @@ class CourseSeeder extends Seeder
             'acronyms' => 'HA',
             'image' => 'history_of_architecture.jpg',
             'consultations' => '2024-06-01 15:00:00'
-        ]); // id 12
+        ]); // id 7
         
-        Course::create([
-            'name' => 'Urban Planning',
-            'description' => 'Urban Planning focuses on the development and management of urban spaces. The course covers topics such as zoning, land use, transportation systems, and environmental planning. Students will engage in planning projects and simulations, learning to create sustainable and livable urban environments.',
-            'acronyms' => 'UP',
-            'image' => 'urban_planning.jpg',
-            'consultations' => '2024-06-01 16:00:00'
-        ]); // id 13
 
         //Biology's Courses
         Course::create([
@@ -129,7 +83,7 @@ class CourseSeeder extends Seeder
             'acronyms' => 'MB',
             'image' => 'molecular_biology.jpg',
             'consultations' => '2024-06-01 09:00:00'
-        ]); // id 14
+        ]); // id 8
         
         Course::create([
             'name' => 'Ecology and Environmental Biology',
@@ -137,22 +91,6 @@ class CourseSeeder extends Seeder
             'acronyms' => 'EEB',
             'image' => 'ecology.jpg',
             'consultations' => '2024-06-01 10:00:00'
-        ]); // id 15
-        
-        Course::create([
-            'name' => 'Genetics',
-            'description' => 'Genetics focuses on the principles of heredity and variation in living organisms. The course covers classical genetics, molecular genetics, and genomics. Students will learn about genetic mutations, inheritance patterns, and the applications of genetic research in medicine and agriculture.',
-            'acronyms' => 'GEN',
-            'image' => 'genetics.jpg',
-            'consultations' => '2024-06-01 11:00:00'
-        ]); // id 16
-        
-        Course::create([
-            'name' => 'Microbiology',
-            'description' => 'Microbiology is the study of microorganisms, including bacteria, viruses, fungi, and protozoa. The course covers microbial physiology, genetics, and pathogenesis. Students will conduct experiments in the laboratory to identify and characterize microorganisms and understand their role in health and disease.',
-            'acronyms' => 'MIC',
-            'image' => 'microbiology.jpg',
-            'consultations' => '2024-06-01 12:00:00'
-        ]); // id 17
+        ]); // id 9
     }
 }
