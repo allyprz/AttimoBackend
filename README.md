@@ -5,10 +5,13 @@
 
 # Attimo - Backend
 
+Segunda parte del proyecto final para el curso TM-5100 consistente en la implementación del backend de una página web para la organización académica. 
+
+# Instrucciones
+
 Al descargar se sugiere ejecutar `npm install`.
 
 Para ejecutar `npm run dev`.
-
 
 ### Contribuidores
 
@@ -20,4 +23,4 @@ Para ejecutar `npm run dev`.
 
 ## Requerimientos
 
-Luego los pondré
+...
