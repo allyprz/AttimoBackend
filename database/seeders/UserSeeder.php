@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Administradores (users_type 3)
         User::create([
             'name' => 'John',
             'lastname1' => 'Doe',
@@ -21,21 +22,11 @@ class UserSeeder extends Seeder
             'email' => 'john@example.com',
             'username' => 'johndoe',
             'password' => 'qwerty123',
-            'image' => "https://randomuser.me/api/portraits/men/1.jpg",
+            'image' => "image.jpg",
             'users_types_id' => 3,
         ]);
-        
-        User::create([
-            'name' => 'Mary',
-            'lastname1' => 'Johnson',
-            'lastname2' => 'Brown',
-            'email' => 'mary@example.com',
-            'username' => 'maryjohnson',
-            'password' => 'password123',
-            'image' => "https://randomuser.me/api/portraits/women/1.jpg",
-            'users_types_id' => 2,
-        ]);
-        
+
+        // Estudiantes (users_type 1)
         User::create([
             'name' => 'Peter',
             'lastname1' => 'Williams',
@@ -43,10 +34,21 @@ class UserSeeder extends Seeder
             'email' => 'peter@example.com',
             'username' => 'peterwilliams',
             'password' => 'abc123',
-            'image' => "https://randomuser.me/api/portraits/men/2.jpg",
+            'image' => "image.jpg",
             'users_types_id' => 1,
         ]);
-        
+
+        User::create([
+            'name' => 'Mary',
+            'lastname1' => 'Johnson',
+            'lastname2' => 'Brown',
+            'email' => 'mary@example.com',
+            'username' => 'maryjohnson',
+            'password' => 'password123',
+            'image' => "image.jpg",
+            'users_types_id' => 1,
+        ]);
+
         User::create([
             'name' => 'Anna',
             'lastname1' => 'Davis',
@@ -54,10 +56,10 @@ class UserSeeder extends Seeder
             'email' => 'anna@example.com',
             'username' => 'annadavis',
             'password' => 'xyz456',
-            'image' => "https://randomuser.me/api/portraits/women/2.jpg",
-            'users_types_id' => 2,
+            'image' => "image.jpg",
+            'users_types_id' => 1,
         ]);
-        
+
         User::create([
             'name' => 'Charles',
             'lastname1' => 'Garcia',
@@ -65,10 +67,10 @@ class UserSeeder extends Seeder
             'email' => 'charles@example.com',
             'username' => 'charlesgarcia',
             'password' => 'password789',
-            'image' => "https://randomuser.me/api/portraits/men/3.jpg",
+            'image' => "image.jpg",
             'users_types_id' => 1,
         ]);
-        
+
         User::create([
             'name' => 'Laura',
             'lastname1' => 'Lopez',
@@ -76,10 +78,10 @@ class UserSeeder extends Seeder
             'email' => 'laura@example.com',
             'username' => 'lauralopez',
             'password' => 'pass123',
-            'image' => "https://randomuser.me/api/portraits/women/3.jpg",
-            'users_types_id' => 2,
+            'image' => "image.jpg",
+            'users_types_id' => 1,
         ]);
-        
+
         User::create([
             'name' => 'George',
             'lastname1' => 'Clark',
@@ -87,10 +89,10 @@ class UserSeeder extends Seeder
             'email' => 'george@example.com',
             'username' => 'georgeclark',
             'password' => 'password123',
-            'image' => "https://randomuser.me/api/portraits/men/4.jpg",
+            'image' => "image.jpg",
             'users_types_id' => 1,
         ]);
-        
+
         User::create([
             'name' => 'Elena',
             'lastname1' => 'Roberts',
@@ -98,10 +100,10 @@ class UserSeeder extends Seeder
             'email' => 'elena@example.com',
             'username' => 'elenaroberts',
             'password' => 'abc456',
-            'image' => "https://randomuser.me/api/portraits/women/4.jpg",
-            'users_types_id' => 2,
+            'image' => "image.jpg",
+            'users_types_id' => 1,
         ]);
-        
+
         User::create([
             'name' => 'Paul',
             'lastname1' => 'Harris',
@@ -109,10 +111,10 @@ class UserSeeder extends Seeder
             'email' => 'paul@example.com',
             'username' => 'paulharris',
             'password' => 'xyz789',
-            'image' => "https://randomuser.me/api/portraits/men/5.jpg",
+            'image' => "image.jpg",
             'users_types_id' => 1,
         ]);
-        
+
         User::create([
             'name' => 'Sophia',
             'lastname1' => 'King',
@@ -120,9 +122,64 @@ class UserSeeder extends Seeder
             'email' => 'sophia@example.com',
             'username' => 'sophiaking',
             'password' => 'password789',
-            'image' => "https://randomuser.me/api/portraits/women/5.jpg",
+            'image' => "image.jpg",
+            'users_types_id' => 1,
+        ]);
+
+        // Profesores (users_type 2)
+        User::create([
+            'name' => 'Karl',
+            'lastname1' => 'Jinn',
+            'lastname2' => 'Cuy',
+            'email' => 'Karl@example.com',
+            'username' => 'karljinn',
+            'password' => 'password709',
+            'image' => "image.jpg",
             'users_types_id' => 2,
         ]);
-        
+
+        User::create([
+            'name' => 'Pamm',
+            'lastname1' => 'Kirsh',
+            'lastname2' => 'Stown',
+            'email' => 'pamm@example.com',
+            'username' => 'pammkirsh',
+            'password' => 'passwor7d789',
+            'image' => "image.jpg",
+            'users_types_id' => 2,
+        ]);
+
+        User::create([
+            'name' => 'Peter',
+            'lastname1' => 'Yuaqa',
+            'lastname2' => 'Poluy',
+            'email' => 'peter@example.com',
+            'username' => 'peteryuaqa',
+            'password' => 'pas1ssword789',
+            'image' => "image.jpg",
+            'users_types_id' => 2,
+        ]);
+
+        User::create([
+            'name' => 'Betta',
+            'lastname1' => 'Lummens',
+            'lastname2' => 'Rwell',
+            'email' => 'justin@example.com',
+            'username' => 'justinlummens',
+            'password' => 'password7as89',
+            'image' => "image.jpg",
+            'users_types_id' => 2,
+        ]);
+
+        User::create([
+            'name' => 'Lewis',
+            'lastname1' => 'Hamilton',
+            'lastname2' => 'Ety',
+            'email' => 'lewis@example.com',
+            'username' => 'lewishamilton',
+            'password' => 'password784r9',
+            'image' => "image.jpg",
+            'users_types_id' => 2,
+        ]);
     }
 }
