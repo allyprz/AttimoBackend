@@ -9,16 +9,40 @@ Segunda parte del proyecto final para el curso TM-5100 consistente en la impleme
 
 # Instrucciones
 
-Al descargar se sugiere ejecutar `npm install`.
+### Paso 1: Clonar el repositorio
+git clone <URL_DEL_REPOSITORIO>
+cd <NOMBRE_DEL_PROYECTO>
 
-Para ejecutar `npm run dev`.
+### Paso 2: Crear el archivo .env
+Crear una copia del archivo .env.example y renombarla a .env con el comando `cp .env.example .env`.
 
-### Contribuidores
+### Paso 3: Crear la base de datos.
+Crear una base de datos llamada `attimoBackend` en su servidor local (HeidiSQL en el caso de este proyecto)
 
-* Ashley
-* Benjamin
-* Ian
-* Krisly
+### Paso 4: Modificar el archivo .env.
+Editar el archivo .env para configurar la conexión a la base de datos local. Asegúrese de que los detalles de la base de datos son correctos:
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=attimoBackend
+
+### Paso 5: Generar una clave de aplicación.
+Ejecutar `php artisan key:generate`
+
+### Paso 6: Migrar la base de datos.
+Ejecutar `php artisan migrate`
+
+### Paso 7: Instalar dependencias.
+Ejecutar `Ejecutar `php artisan migrate`
+
+### Paso 8: Ejecutar el servidor de desarrollo.
+Ejecutar `npm run dev`.
+
+### Contribuidores (Nombre/Usuarios de github)
+* Ashley Rojas Pérez, @allyprz
+* Benjamin Paniagua Rojas, @benjaminpaniagua
+* Ian, @PuzzledStone
+* Krisly, @krisarias
 
 
 ## Requerimientos
