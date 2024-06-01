@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('majors_users', function (Blueprint $table) {
+        Schema::create('status_activities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained();
-            $table->foreignId('majors_id')->constrained();
+            $table->boolean('isActive');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('majors_users');
+        Schema::dropIfExists('status_activities');
     }
 };

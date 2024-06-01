@@ -13,13 +13,23 @@ class GroupSeeder extends Seeder
      */
     public function run(): void
     {
-    Group::create(['id_course' => 1,'number' => 1]);
-    Group::create(['id_course' => 2,'number' => 1]);
-    Group::create(['id_course' => 3,'number' => 1]);
-    Group::create(['id_course' => 4,'number' => 1]);
-    Group::create(['id_course' => 5,'number' => 2]);
-    Group::create(['id_course' => 6,'number' => 2]);
-    Group::create(['id_course' => 7,'number' => 2]);
-    Group::create(['id_course' => 8,'number' => 3]);
+        // General Courses
+        Group::create(['courses_id' => 1, 'number' => 1]); // Humanities
+
+        // Computer Science's Courses
+        Group::create(['courses_id' => 2, 'number' => 1]); // Data Analysis
+        Group::create(['courses_id' => 3, 'number' => 1]); // Advanced Web Development
+
+        // Medicine's Courses
+        Group::create(['courses_id' => 4, 'number' => 1]); // Anatomy and Physiology
+        Group::create(['courses_id' => 5, 'number' => 1]); // Pathology
+
+        // Architecture's Courses
+        Group::create(['courses_id' => 6, 'number' => 1]); // Architectural Design
+        Group::create(['courses_id' => 7, 'number' => 1]); // History of Architecture
+
+        // Biology's Courses
+        Group::create(['courses_id' => 8, 'number' => 1]); // Molecular Biology
+        Group::create(['courses_id' => 9, 'number' => 1]); // Ecology and Environmental Biology
     }
 }
