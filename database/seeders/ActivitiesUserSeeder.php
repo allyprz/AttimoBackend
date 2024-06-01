@@ -13,9 +13,46 @@ class ActivitiesUserSeeder extends Seeder
      */
     public function run(): void
     {
-
-        //Associate administrator to their actividades 
-        //ActivitiesUser::create(['activities_id' => 28, 'users_id' => 1]); // University level activities - Welcome Ceremony
+        //Associate administrator John to all actividades 
+        //Humanities
+        ActivitiesUser::create(['activities_id' => 1, 'users_id' => 1]); // Humanities -Literature Review
+        ActivitiesUser::create(['activities_id' => 2, 'users_id' => 1]); // Humanities -Philosophy Debate
+        ActivitiesUser::create(['activities_id' => 3, 'users_id' => 1]); // Humanities - Art History Presentation
+        //Computer Science
+        ActivitiesUser::create(['activities_id' => 4, 'users_id' => 1]); // Data Analysis - Data Cleaning Workshop 
+        ActivitiesUser::create(['activities_id' => 5, 'users_id' => 1]); // Data Analysis - Data Visualization Project
+        ActivitiesUser::create(['activities_id' => 6, 'users_id' => 1]); // Data Analysis - Statistical Analysis Assignment
+        ActivitiesUser::create(['activities_id' => 7, 'users_id' => 1]); // Advanced Web Development - Server-Side Programming Lab
+        ActivitiesUser::create(['activities_id' => 8, 'users_id' => 1]); // Advanced Web Development - Client-Side Scripting Assignment
+        ActivitiesUser::create(['activities_id' => 9, 'users_id' => 1]); // Advanced Web Development - Database Integration Project
+        // Medicine
+        ActivitiesUser::create(['activities_id' => 10, 'users_id' => 1]); //Anatomy and Physiology - Dissection Lab
+        ActivitiesUser::create(['activities_id' => 11, 'users_id' => 1]); //Anatomy and Physiology - Physiology Report
+        ActivitiesUser::create(['activities_id' => 12, 'users_id' => 1]); //Anatomy and Physiology - Anatomy Quiz
+        ActivitiesUser::create(['activities_id' => 13, 'users_id' => 1]); //Pathology - Disease Case Study
+        ActivitiesUser::create(['activities_id' => 14, 'users_id' => 1]); //Pathology - Histopathology Lab
+        ActivitiesUser::create(['activities_id' => 15, 'users_id' => 1]); //Pathology - Pathology Seminar
+        // Architecture
+        ActivitiesUser::create(['activities_id' => 16, 'users_id' => 1]); //Architectural Design - Architectural Sketching Workshop
+        ActivitiesUser::create(['activities_id' => 17, 'users_id' => 1]); //Architectural Design - Building Design Project
+        ActivitiesUser::create(['activities_id' => 18, 'users_id' => 1]); //Architectural Design - Architectural Critique
+        ActivitiesUser::create(['activities_id' => 19, 'users_id' => 1]); //History of Architecture - Architectural Site Visit
+        ActivitiesUser::create(['activities_id' => 20, 'users_id' => 1]); //History of Architecture - Architectural Theory Essay
+        ActivitiesUser::create(['activities_id' => 21, 'users_id' => 1]); //History of Architecture - Architectural Timeline Project
+        // Biology
+        ActivitiesUser::create(['activities_id' => 22, 'users_id' => 1]); //Molecular Biology - DNA Extraction Lab
+        ActivitiesUser::create(['activities_id' => 23, 'users_id' => 1]); //Molecular Biology - Genetic Clone experiment
+        ActivitiesUser::create(['activities_id' => 24, 'users_id' => 1]); //Molecular Biology - Molecular Biology Seminar
+        ActivitiesUser::create(['activities_id' => 25, 'users_id' => 1]); //Ecology and Environmental Biology - Field Study Excursion
+        ActivitiesUser::create(['activities_id' => 26, 'users_id' => 1]); //Ecology and Environmental Biology - Environmental Impact Assessment
+        ActivitiesUser::create(['activities_id' => 27, 'users_id' => 1]); //Ecology and Environmental Biology - Biodiversity Conservation Workshop
+        // level activities
+        ActivitiesUser::create(['activities_id' => 28,'users_id' => 1]); // University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29,'users_id' => 1]); // University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30,'users_id' => 1]); // Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31,'users_id' => 1]); // Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 32,'users_id' => 1]); // Major level activities - Industry Guest Lecture
+        ActivitiesUser::create(['activities_id' => 33,'users_id' => 1]); // Major level activities - Major Networking Event
 
         //Professors
 
