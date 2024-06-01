@@ -22,7 +22,6 @@ class MajorsUserSeeder extends Seeder
         MajorsUser::create(['users_id' => 11, 'majors_id' => 2]); // Karl - Medicine
         MajorsUser::create(['users_id' => 13, 'majors_id' => 3]); // Peter - Architecture
         MajorsUser::create(['users_id' => 14, 'majors_id' => 4]); // Betta - Biology
-        //podriamos poner este profesor que de solo la humanidades para que no se repita bilogia
 
         // Estudiantes (users_type 1)
         MajorsUser::create(['users_id' => 2, 'majors_id' => 1]); // Peter - Computer Science
