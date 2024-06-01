@@ -179,7 +179,7 @@ class UserSeeder extends Seeder
             'username' => 'lewishamilton',
             'password' => 'password784r9',
             'image' => "image.jpg",
-            'users_types_id' => 2,
+            'users_types_id' => 1,
         ]);
     }
 }
