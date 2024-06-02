@@ -25,7 +25,9 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        $categories = CategoriesActivity::all();
+        $labels = LabelsActivity::all();
+        return view('activities.create', compact('categories', 'labels'));
     }
 
     /**
