@@ -3,11 +3,11 @@
 
 <section class="flex mt-6 mb-4 items-center justify-between text-clr-dark-blue">
     <h2 class="text-2xl font-semibold">Activities</h2>
-    <button class="p-2 border-2 duration-150 border-clr-blue font-medium rounded-md text-clr-blue hover:bg-clr-blue hover:text-clr-white">+ Add new activity</button>
+    <a href="{{ route('activities.create')}}" class="p-2 border-2 duration-150 border-clr-blue font-medium rounded-md text-clr-blue hover:bg-clr-blue hover:text-clr-white">+ Add new activity</a>
 </section>
 
 @if ($message = Session::get('success'))
-<div class="p-3 text-sm rounded-md mb-4 bg-gray-200 dark:bg-clr-light-gray/20 dark:text-clr-blue">
+<div class="p-3 text-sm rounded-md mb-4 bg-blue-200/65 text-clr-blue">
     <p>{{ $message }}</p>
 </div>
 @endif

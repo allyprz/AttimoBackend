@@ -15,7 +15,7 @@ class MajorsUserSeeder extends Seeder
     public function run(): void
     {
         // Administradores (users_type 3)
-        MajorsUser::create(['users_id' => 1, 'majors_id' => 1]);
+        MajorsUser::create(['users_id' => 1, 'majors_id' => 1]); // John - Computer Science
 
         // Profesores (users_type 2)
         MajorsUser::create(['users_id' => 12, 'majors_id' => 1]); // Pamm - Computer Science

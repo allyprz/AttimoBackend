@@ -19,7 +19,4 @@ Route::get('/', function () {
 });
 
 //Activities
-Route::resource('activities', ActivityController::class);
-
-//Nav routes
-Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
+Route::resource('activities', ActivityController::class); 
