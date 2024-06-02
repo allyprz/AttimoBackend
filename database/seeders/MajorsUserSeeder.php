@@ -16,6 +16,9 @@ class MajorsUserSeeder extends Seeder
     {
         // Administradores (users_type 3)
         MajorsUser::create(['users_id' => 1, 'majors_id' => 1]); // John - Computer Science
+        MajorsUser::create(['users_id' => 1, 'majors_id' => 2]); // John - Medicine
+        MajorsUser::create(['users_id' => 1, 'majors_id' => 3]); // John - Architecture
+        MajorsUser::create(['users_id' => 1, 'majors_id' => 4]); // John - Biology
 
         // Profesores (users_type 2)
         MajorsUser::create(['users_id' => 12, 'majors_id' => 1]); // Pamm - Computer Science
