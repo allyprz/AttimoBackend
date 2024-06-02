@@ -13,8 +13,8 @@ class LabelsActivitySeeder extends Seeder
      */
     public function run(): void
     {
-        LabelsActivity::create(['name' => 'event']);
-        LabelsActivity::create(['name' => 'homework']);
-        LabelsActivity::create(['name' => 'bulletin']);
+        LabelsActivity::create(['name' => 'Event']);
+        LabelsActivity::create(['name' => 'Homework']);
+        LabelsActivity::create(['name' => 'Bulletin']);
     }
 }

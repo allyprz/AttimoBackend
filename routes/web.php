@@ -1,7 +1,8 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 
+//Import Controllers
+use App\Http\Controllers\ActivityController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Activities
+Route::resource('activities', ActivityController::class);
+
+//Nav routes
+Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');

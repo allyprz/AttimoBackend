@@ -14,8 +14,8 @@ class UsersTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        UsersType::create(['name' => 'student']);
-        UsersType::create(['name' => 'professor']);
-        UsersType::create(['name' => 'admin']);
+        UsersType::create(['name' => 'Student']);
+        UsersType::create(['name' => 'Professor']);
+        UsersType::create(['name' => 'Admin']);
     }
 }
