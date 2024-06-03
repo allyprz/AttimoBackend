@@ -1,4 +1,4 @@
-@extends('activities.layout')
+@extends('layout')
 @section('content')
 
 <section class="flex mt-6 mb-4 items-center justify-between text-clr-dark-blue">
