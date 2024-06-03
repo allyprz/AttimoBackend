@@ -1,6 +1,6 @@
-@extends('activities.layout')
-
+@extends('layout')
 @section('content')
+
 <div class="grid max-w-[900px] gap-4 bg-white rounded-sm my-4 mx-auto p-6">
     <section>
         <a href="{{ route('activities.index') }}" class="cursor-pointer text-2xl mb-2 font-semibold text-clr-dark-third inline-block"><</a>

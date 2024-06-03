@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 
 //Import Controllers
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +21,4 @@ Route::get('/', function () {
 
 //Activities
 Route::resource('activities', ActivityController::class); 
+Route::resource('users', UserController::class);
