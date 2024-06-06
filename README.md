@@ -41,9 +41,7 @@ Ejecutar `npm run dev`.
 ### Contribuidores (Nombre/Usuarios de github)
 * Ashley Rojas Pérez, @allyprz
 * Benjamin Paniagua Rojas, @benjaminpaniagua
-* Ian, @PuzzledStone
 * Krisly, @krisarias
-
 
 ## Requerimientos
 
