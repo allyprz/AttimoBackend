@@ -25,27 +25,27 @@
     <tbody>
         @foreach ($results as $result)
         <tr class="border-b border-neutral-200 dark:border-white/10">
-            <td class="py-6">{{ $result->id }}</td>
-            <td class="py-6">{{ $result->name }}</td>
+            <td class="py-2">{{ $result->id }}</td>
+            <td class="py-2">{{ $result->name }}</td>
             @foreach ($categories as $category)
                 @if ($category->id == $result->categories_activities_id)
-                <td class="py-6">{{ $category->name }}</td>
+                <td class="py-2">{{ $category->name }}</td>
                 @endif
             @endforeach 
 
             @foreach ($labels as $label)
                 @if ($label->id == $result->labels_activities_id)
-                <td class="py-6">{{ $label->name }}</td>
+                <td class="py-2">{{ $label->name }}</td>
                 @endif
             @endforeach
             
-            <td class="py-6">
-                <form action="" method="POST">
-                    <a class="p-2 bg-blue-100 rounded-md font-regular text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="">Show</a>
+            <td class="py-2">
+                <form action="{{ route('activities.destroy', $result->id) }}" method="POST">
+                    <a class="p-2 bg-blue-100 rounded-md font-regular text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('activities.show',$result->id) }}">Show</a>
                     <a class="p-2 bg-gray-200 rounded-md font-regular text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="">Edit</a>
                     @csrf
                     @method('DELETE')
-                    <a class="p-2 bg-red-200 rounded-md font-regular text-red-800 me-2 my-2 hover:brightness-[.80] duration-100" href="">Delete</a>
+                    <button type="submit" class="p-2 bg-red-200 rounded-md font-regular text-red-800 me-2 my-2 hover:brightness-[.80] duration-100">Delete</button>
                 </form>
             </td>
         </tr>

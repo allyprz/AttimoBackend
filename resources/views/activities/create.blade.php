@@ -28,7 +28,7 @@
                 <div class="flex gap-4">
                     <div class="w-full">
                         <label class="text-clr-dark" for="name">Title</label>
-                        <input type="text" name="name" class="w-full p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Title">
+                        <input type="text" name="name" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Title">
                     </div>
                     <div class="w-full" id="percent-container" style="display: none;">
                         <label class="text-clr-dark" for="percent">Percent</label>
@@ -37,18 +37,18 @@
                 </div>
                 <div class="w-full">
                     <label class="text-clr-dark" for="date">Date</label>
-                    <input type="date" name="date" class="w-full p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Activity's name">
+                    <input type="date" name="date" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Activity's name">
                 </div>
                 <div class="w-full">
                     <label class="text-clr-dark" for="time">Starts at</label>
-                    <input type="time" name="time" class="w-full p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Activity's name">
+                    <input type="time" name="time" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Activity's name">
                 </div>
             </div>
         </div>
         <div class="grid gap-4">
             <div>
                 <label class="text-clr-dark" for="descripton">Description</label>
-                <textarea name="description" class="w-full resize-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2"></textarea>
+                <textarea name="description" class="w-full focus:outline-none resize-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2"></textarea>
             </div>
             <div class="flex gap-4">
                 <div class="w-full">
@@ -106,13 +106,13 @@
 
         categorySelect.addEventListener('change', function() {
             const selectedCategory = categorySelect.options[categorySelect.selectedIndex].getAttribute('data-category-id');
-            if (selectedCategory == '1') { // Assuming '1' is the ID for 'course' category
+            if (selectedCategory == '1') { // 1 == category course
                 groupSelectContainer.style.display = 'block';
             } else {
                 groupSelectContainer.style.display = 'none';
             }
 
-            if (selectedCategory == '4') { // Assuming '4' is the ID for 'major' category
+            if (selectedCategory == '4') { // 4 == category major
                 majorSelectContainer.style.display = 'block';
             } else {
                 majorSelectContainer.style.display = 'none';
@@ -121,7 +121,7 @@
 
         labelSelect.addEventListener('change', function() {
             const selectedLabel = labelSelect.options[labelSelect.selectedIndex].value;
-            if (selectedLabel == '2') { // Assuming '2' is the ID for 'homework' label
+            if (selectedLabel == '2') { // 2 == label homework
                 percentContainer.style.display = 'block';
             } else {
                 percentContainer.style.display = 'none';
