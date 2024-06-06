@@ -18,11 +18,10 @@
         <thead class="border-b border-clr-light-gray dark:border-white/10 dark:text-clr-blue">
             <tr>
                 <th scope="col" class="px-6 py-3 font-medium">No.</th>
-                <th scope="col" class="px-6 py-3 font-medium">User Type</th>
+                <th scope="col" class="px-6 py-3 font-medium">Role</th>
                 <th scope="col" class="px-6 py-3 font-medium">Name</th>
-                <th scope="col" class="px-6 py-3 font-medium">First Last Name</th>
-                <th scope="col" class="px-6 py-3 font-medium" width="280px">Second Last Name</th>
-                <th scope="col" class="px-6 py-3 font-medium" width="280px">Username</th>
+                <th scope="col" class="px-6 py-3 font-medium">Last Names</th>
+                <th scope="col" class="px-6 py-3 font-medium" width="280px">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,9 +34,7 @@
                         @endif
                     @endforeach
                     <td class="py-6">{{ $result->name }}</td>
-                    <td class="py-6">{{ $result->lastname1 }}</td>
-                    <td class="py-6">{{ $result->lastname2 }}</td>
-                    <td class="py-6">{{ $result->username }}</td>
+                    <td class="py-6">{{ $result->lastname1 }} {{ $result->lastname2 }}</td>
 
                     <td class="py-6">
                         <form action="" method="POST">
