@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Activity;
 use App\Models\CategoriesActivity;
 use App\Models\LabelsActivity;
+use App\Models\StatusActivity;
 use App\Models\User;
 use App\Models\ActivitiesUser;
 
@@ -33,7 +34,8 @@ class ActivityController extends Controller
         $results = Activity::all();
         $categories = CategoriesActivity::all();
         $labels = LabelsActivity::all();
-        return view('activities.index', compact('results', 'categories', 'labels'));
+        $status = StatusActivity::all();
+        return view('activities.index', compact('results', 'categories', 'labels', 'status'));
     }
 
     /**

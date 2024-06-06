@@ -19,7 +19,8 @@
             <th scope="col" class="px-6 py-3 font-medium">Title</th>
             <th scope="col" class="px-6 py-3 font-medium">Category</th>
             <th scope="col" class="px-6 py-3 font-medium">Label</th>
-            <th scope="col" class="px-6 py-3 font-medium" width="280px">Action</th>
+            <th scope="col" class="px-6 py-3 font-medium">Status</th>
+            <th scope="col" class="px-6 py-3 font-medium" width="280px">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +37,12 @@
             @foreach ($labels as $label)
                 @if ($label->id == $result->labels_activities_id)
                 <td class="py-2">{{ $label->name }}</td>
+                @endif
+            @endforeach
+
+            @foreach ($status as $statu)
+                @if ($statu->id == $result->status_activities_id)
+                <td class="py-2">{{ $statu->isActive==1 ? 'Active' : 'Inactive' }}</td>
                 @endif
             @endforeach
             
