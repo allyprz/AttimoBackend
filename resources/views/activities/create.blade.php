@@ -25,12 +25,12 @@
         <div class="flex gap-6 justify-stretch w-full">
             <div class="bg-gray-300 w-[50%] rounded-sm min-h-full"></div>
             <div class="grid gap-4 w-[50%]">
-                <div class="flex gap-4">
+                <div class="flex gap-4 items-center">
                     <div class="w-full">
                         <label class="text-clr-dark" for="name">Title</label>
                         <input type="text" name="name" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Title">
                     </div>
-                    <div class="w-full" id="percent-container" style="display: none;">
+                    <div class="grid" id="percent-container" style="display: none;">
                         <label class="text-clr-dark" for="percent">Percent</label>
                         <input type="number" name="percent" placeholder="0.0" min="0" max="100" class="w-full p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="0">
                     </div>

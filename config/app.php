@@ -70,7 +70,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    //Costa Rica timezone
+    'timezone' => 'America/Costa_Rica',
 
     /*
     |--------------------------------------------------------------------------

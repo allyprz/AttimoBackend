@@ -24,15 +24,15 @@
         <div class="flex gap-6 justify-stretch w-full">
             <div class="bg-gray-300 w-[50%] rounded-sm min-h-full"></div>
             <div class="grid gap-4 w-[50%]">
-                <div class="flex gap-4">
+                <div class="flex gap-4 items-center">
                     <div class="w-full">
                         <label class="text-clr-dark" for="name">Title</label>
                         <input type="text" name="name" readonly class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" value="{{ $activity->name }}">
                     </div>
                     @if ($activity->percent > 0)
-                    <div class="w-full" id="percent-container">
+                    <div class="grid" id="percent-container">
                         <label class="text-clr-dark" for="percent">Percent</label>
-                        <input type="number" name="percent" readonly placeholder="0.0" min="0" max="100" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" value="{{ $activity->percent }}">
+                        <input type="number" name="percent" readonly placeholder="0.0" min="0" max="100" class="focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" value="{{ $activity->percent }}">
                     </div>
                     @endif
                 </div>
@@ -67,8 +67,6 @@
                     <input type="text" readonly class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" value="{{ $groupDetails->course_name }} - {{ $groupDetails->group_number }}">
                 </div>
                 @endisset
-
-                
                 
                 @isset($major)
                 <div class="w-full" id="major-select-container">

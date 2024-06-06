@@ -174,55 +174,57 @@ class ActivityController extends Controller
      * Display the specified resource.
      */
     public function show($id)
-    {
-        //Look for the activity
-        $activity = Activity::select(
-            'activities.id',
-            'activities.name as name',
-            'activities.description',
-            'activities.image',
-            'activities.percent',
-            'activities.scheduled_at',
-            'categories_activities.name as category_name',
-            'labels_activities.name as label_name'
-        )
-        ->join('categories_activities', 'activities.categories_activities_id', '=', 'categories_activities.id')
-        ->join('labels_activities', 'activities.labels_activities_id', '=', 'labels_activities.id')
-        ->where('activities.id', $id)
-        ->first();
+{
+    //Look for the activity
+    $activity = Activity::select(
+        'activities.id',
+        'activities.name as name',
+        'activities.description',
+        'activities.image',
+        'activities.percent',
+        'activities.scheduled_at',
+        'activities.categories_activities_id',
+        'categories_activities.name as category_name',
+        'labels_activities.name as label_name'
+    )
+    ->join('categories_activities', 'activities.categories_activities_id', '=', 'categories_activities.id')
+    ->join('labels_activities', 'activities.labels_activities_id', '=', 'labels_activities.id')
+    ->where('activities.id', $id)
+    ->first();
 
-        switch ($activity->categories_activities_id) {
-                // Category 1 == course
-            case 1:
-                // Look for the group of the activity (ActivitiesGroup: matches activites_id) and the course's name with an inner join
-                $groupActivity = ActivitiesGroup::where('activities_id', $id)->first();
+    switch ($activity->categories_activities_id) {
+        // Category 1 == course
+        case 1:
+            // Look for the group of the activity (ActivitiesGroup: matches activites_id) and the course's name with an inner join
+            $groupActivity = ActivitiesGroup::where('activities_id', $id)->first();
 
-                // Inner join between groups and courses to obtain the course's name
-                $groupDetails = Group::select(
-                    'courses.name as course_name',
-                    'groups.number as group_number'
-                )
-                    ->join('courses', 'groups.courses_id', '=', 'courses.id')
-                    ->where('groups.id', $groupActivity->groups_id)
-                    ->first();
+            // Inner join between groups and courses to obtain the course's name
+            $groupDetails = Group::select(
+                'courses.name as course_name',
+                'groups.number as group_number'
+            )
+                ->join('courses', 'groups.courses_id', '=', 'courses.id')
+                ->where('groups.id', $groupActivity->groups_id)
+                ->first();
 
-                return view('activities.show', compact('activity', 'groupDetails'));
-                
-                // Category 4 == major
-            case 4:
-                //Look for the major of the activity (ActivitiesMajor: matches activites_id)
-                $majorActivity = ActivitiesMajor::where('activities_id', $id)->first();
+            return view('activities.show', compact('activity', 'groupDetails'));
 
-                // Look for the major's name
-                $major = Major::find($majorActivity->majors_id)->name;
+        // Category 4 == major
+        case 4:
+            //Look for the major of the activity (ActivitiesMajor: matches activites_id)
+            $majorActivity = ActivitiesMajor::where('activities_id', $id)->first();
 
-                return view('activities.show', compact('activity', 'major'));
+            // Look for the major's name
+            $major = Major::find($majorActivity->majors_id)->name;
 
-            default:    // Category 2 == university, Category 3 == students
-                return view('activities.show', compact('activity'));
-                break;
-        }
+            return view('activities.show', compact('activity', 'major'));
+
+        default:    // Category 2 == university, Category 3 == students
+            return view('activities.show', compact('activity'));
+            break;
     }
+}
+
 
     /**
      * Show the form for editing the specified resource.
