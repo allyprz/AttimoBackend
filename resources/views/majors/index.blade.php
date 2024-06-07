@@ -2,11 +2,11 @@
 @section('content')
 <section class="flex mt-6 mb-4 items-center justify-between text-clr-dark-blue">
     <h2 class="text-2xl font-semibold">Majors</h2>
-    <a href="" class="p-2 border-2 duration-150 border-clr-blue font-medium rounded-md text-clr-blue hover:bg-clr-blue hover:text-clr-white">+Add new major</a>
+    <a href="" class="p-2 border-2 duration-150 border-clr-blue font-medium rounded-md text-clr-blue hover:bg-clr-blue hover:text-clr-white">+ Add new major</a>
 </section>
 
 @if ($message = Session::get('success'))
-<div class="p-3 text-sm rounded-md mb-4 bg-blue-200/65 text-clr-blue">
+<div class="p-3 text-sm rounded-md mb-4 bg-[#D0DDEF] text-clr-blue">
     <span>{{ $message }}</span>
 </div>
 @endif
@@ -28,7 +28,7 @@
                 <td class="py-2">{{ $result->name }}</td>
                 <td class="py-2">{{ $result->code }}</td>
                 <td class="py-2">
-                    <form action="" method="POST">
+                    <form action="{{ route('majors.destroy', $result->id) }}" method="POST">
                         <a class="p-2 bg-blue-100 rounded-md text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="">Show</a>
                         <a class="p-2 bg-gray-200 rounded-md text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="">Edit</a>
                         @csrf
