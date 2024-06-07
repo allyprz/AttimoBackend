@@ -4,8 +4,8 @@
 <div class="grid max-w-[900px] gap-4 bg-white rounded-sm my-4 mx-auto p-6">
     <section>
         <a href="{{ url()->previous() }}" class="cursor-pointer text-2xl mb-2 font-semibold text-clr-dark-third inline-block"><</a>
-                <h2 class="text-2xl mb-2 font-semibold text-clr-dark-third inline-block">Edit activity</h2>
-                <p class="text-clr-dark-gray">Update the information of the activity by filling the form below.</p>
+        <h2 class="text-2xl mb-2 font-semibold text-clr-dark-third inline-block">Edit activity</h2>
+        <p class="text-clr-dark-gray">Update the information of the activity by filling the form below.</p>
     </section>
     <hr class="border-b-2 text-clr-dark-gray">
 
