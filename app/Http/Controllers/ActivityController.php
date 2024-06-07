@@ -37,7 +37,6 @@ class ActivityController extends Controller
         $labels = LabelsActivity::all();
         $status = StatusActivity::all();
         return view('activities.index', compact('results', 'categories', 'labels', 'status'));
-
     }
 
     /**
