@@ -31,11 +31,13 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $results = Activity::all();
+        // $results = Activity::all();
+        $results = Activity::paginate(10);
         $categories = CategoriesActivity::all();
         $labels = LabelsActivity::all();
         $status = StatusActivity::all();
         return view('activities.index', compact('results', 'categories', 'labels', 'status'));
+
     }
 
     /**
