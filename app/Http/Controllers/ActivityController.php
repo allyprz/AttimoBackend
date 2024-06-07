@@ -175,65 +175,106 @@ class ActivityController extends Controller
      * Display the specified resource.
      */
     public function show($id)
-{
-    //Look for the activity
-    $activity = Activity::select(
-        'activities.id',
-        'activities.name as name',
-        'activities.description',
-        'activities.image',
-        'activities.percent',
-        'activities.scheduled_at',
-        'activities.categories_activities_id',
-        'categories_activities.name as category_name',
-        'labels_activities.name as label_name'
-    )
-    ->join('categories_activities', 'activities.categories_activities_id', '=', 'categories_activities.id')
-    ->join('labels_activities', 'activities.labels_activities_id', '=', 'labels_activities.id')
-    ->where('activities.id', $id)
-    ->first();
+    {
+        //Look for the activity
+        $activity = Activity::select(
+            'activities.id',
+            'activities.name as name',
+            'activities.description',
+            'activities.image',
+            'activities.percent',
+            'activities.scheduled_at',
+            'activities.categories_activities_id',
+            'categories_activities.name as category_name',
+            'labels_activities.name as label_name'
+        )
+            ->join('categories_activities', 'activities.categories_activities_id', '=', 'categories_activities.id')
+            ->join('labels_activities', 'activities.labels_activities_id', '=', 'labels_activities.id')
+            ->where('activities.id', $id)
+            ->first();
 
-    switch ($activity->categories_activities_id) {
-        // Category 1 == course
-        case 1:
-            // Look for the group of the activity (ActivitiesGroup: matches activites_id) and the course's name with an inner join
-            $groupActivity = ActivitiesGroup::where('activities_id', $id)->first();
+        switch ($activity->categories_activities_id) {
+                // Category 1 == course
+            case 1:
+                // Look for the group of the activity (ActivitiesGroup: matches activites_id) and the course's name with an inner join
+                $groupActivity = ActivitiesGroup::where('activities_id', $id)->first();
 
-            // Inner join between groups and courses to obtain the course's name
-            $groupDetails = Group::select(
-                'courses.name as course_name',
-                'groups.number as group_number'
-            )
-                ->join('courses', 'groups.courses_id', '=', 'courses.id')
-                ->where('groups.id', $groupActivity->groups_id)
-                ->first();
+                // Inner join between groups and courses to obtain the course's name
+                $groupDetails = Group::select(
+                    'courses.name as course_name',
+                    'groups.number as group_number'
+                )
+                    ->join('courses', 'groups.courses_id', '=', 'courses.id')
+                    ->where('groups.id', $groupActivity->groups_id)
+                    ->first();
 
-            return view('activities.show', compact('activity', 'groupDetails'));
+                return view('activities.show', compact('activity', 'groupDetails'));
 
-        // Category 4 == major
-        case 4:
-            //Look for the major of the activity (ActivitiesMajor: matches activites_id)
-            $majorActivity = ActivitiesMajor::where('activities_id', $id)->first();
+                // Category 4 == major
+            case 4:
+                //Look for the major of the activity (ActivitiesMajor: matches activites_id)
+                $majorActivity = ActivitiesMajor::where('activities_id', $id)->first();
 
-            // Look for the major's name
-            $major = Major::find($majorActivity->majors_id)->name;
+                // Look for the major's name
+                $major = Major::find($majorActivity->majors_id)->name;
 
-            return view('activities.show', compact('activity', 'major'));
+                return view('activities.show', compact('activity', 'major'));
 
-        default:    // Category 2 == university, Category 3 == students
-            return view('activities.show', compact('activity'));
-            break;
+            default:    // Category 2 == university, Category 3 == students
+                return view('activities.show', compact('activity'));
+                break;
+        }
     }
-}
-
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        // Look for the activity
+        $activity = Activity::find($id);
+
+        // Look for the categories, labels, majors and groups
+        $categories = CategoriesActivity::all();
+        $labels = LabelsActivity::all();
+        $majors = Major::all();
+
+        $groups = Group::select(
+            'groups.id',
+            'courses.name as course_name',
+            'groups.number'
+        )
+            ->join('courses', 'groups.courses_id', '=', 'courses.id')
+            ->get();
+
+        $groupDetails = null;
+        $activityMajor = null;
+
+        switch ($activity->categories_activities_id) {
+            case 1: // Category 1 == course
+                $groupActivity = ActivitiesGroup::where('activities_id', $id)->first();
+                if ($groupActivity) {
+                    $groupDetails = Group::select(
+                        'groups.id',
+                        'groups.number as group_number',
+                        'courses.name as course_name'
+                    )
+                        ->join('courses', 'groups.courses_id', '=', 'courses.id')
+                        ->where('groups.id', $groupActivity->groups_id)
+                        ->first();
+                }
+                break;
+
+            case 4: // Category 4 == major
+                $majorActivity = ActivitiesMajor::where('activities_id', $id)->first();
+                $activityMajor = Major::find($majorActivity->majors_id);
+                break;
+        }
+
+        return view('activities.edit', compact('activity', 'categories', 'labels', 'groups', 'majors', 'groupDetails', 'activityMajor'));
     }
+
+
 
     /**
      * Update the specified resource in storage.
