@@ -4,8 +4,8 @@
 <div class="grid max-w-[900px] gap-4 bg-white rounded-sm my-4 mx-auto p-6">
     <section>
         <a href="{{ url()->previous() }}" class="cursor-pointer text-2xl mb-2 font-semibold text-clr-dark-third inline-block"><</a>
-        <h2 class="text-2xl mb-2 font-semibold text-clr-dark-third inline-block">New Major</h2>
-        <p class="text-clr-dark-gray">Complete all the data to create a new major.</p>
+            <h2 class="text-2xl mb-2 font-semibold text-clr-dark-third inline-block">New Group</h2>
+            <p class="text-clr-dark-gray">Complete all the data to create a new group.</p>
     </section>
     <hr class="border-b-2 text-clr-dark-gray">
 
@@ -20,28 +20,51 @@
     </div>
     @endif
 
-    <form action="{{ route('majors.store') }}" method="POST" class="grid gap-4 w-full">
+    <form action="{{ route('groups.store') }}" method="POST" class="grid gap-4 w-full">
         @csrf
         <div class="flex gap-6 justify-stretch w-full">
             <div class="grid gap-4 w-full">
                 <div class="flex gap-4 items-center">
                     <div class="w-full">
-                        <label class="text-clr-dark" for="name">Name</label>
-                        <input type="text" name="name" id="name" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Name">
-                    </div>
-                    <div class="w-full">
-                        <label class="text-clr-dark" for="coordinator">Coordinator</label>
-                        <select name="coordinator_id" id="coordinador" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2">
-                            @foreach ($users as $user)
-                            @if(($user->users_types_id == 2)||($user->users_types_id == 3))
-                            <option value="{{$user->id}}">{{$user->name}} {{$user->lastname1}} {{$user->lastname2}} - {{$user->users_types_name}}</option>
-                            @endif
+                        <label class="text-clr-dark" for="course_name">Course</label>
+                        <select class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" name="course_id" id="course">
+                            @foreach ($courses as $course)
+                            <option value="{{$course->id}}">{{$course->name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="w-full">
-                        <label class="text-clr-dark" for="code">Code</label>
-                        <input type="text" name="code" id="code" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Code">
+                        <label class="text-clr-dark" for="professor">Professor</label>
+                        <select name="professor_id" id="professor" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2">
+                            @foreach ($users as $user)
+                            @if(($user->users_types_id == 2))
+                            <option value="{{$user->id}}">{{$user->name}} {{$user->lastname1}} {{$user->lastname2}}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                    <div class="w-full">
+                        <label for="day-of-week">Consultations days</label>
+                        <select id="day-of-week" name="day-of-week" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2">
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+                    <div class="w-full">
+                        <label class="text-clr-dark" for="start_time">Starts at</label>
+                        <input type="time" name="start_time" required class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2">
+                    </div>
+                    <div class="w-full">
+                        <label class="text-clr-dark" for="ends_time">Ends at</label>
+                        <input type="time" name="ends_time" required class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2">
                     </div>
                 </div>
             </div>
@@ -50,12 +73,12 @@
         <div class="mt-8">
             <section class="flex justify-between items-center">
                 <h2>Users list</h2>
-                <span class="px-2 py-1 bg-clr-light-secondary-bg/40 border-clr-light-secondary-bg border-2 rounded-md mb-4 text-clr-blue">Members selected: <span>0</span></span>
+                <span class="px-2 py-1 bg-[#e6e8f0] rounded-md mb-4 text-clr-blue">Members selected: <span class="text-clr-blue font-medium">0</span></span>
             </section>
             <table class="table min-w-full text-center text-sm text-clr-dark-gray">
                 <thead class="border-b border-clr-light-gray dark:border-white/10 dark:text-clr-blue">
                     <tr>
-                        <th scope="col" class="px-6 py-3 font-medium"></th>
+                        <th scope="col" class="px-6 py-3 font-medium"><input type="checkbox" name="user_id" id="all_students"></th>
                         <th scope="col" class="px-6 py-3 font-medium">Picture</th>
                         <th scope="col" class="px-6 py-3 font-medium">Name</th>
                         <th scope="col" class="px-6 py-3 font-medium">Last names</th>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('courses_id')->constrained()->onDelete('cascade');
             $table->foreignId('users_id')->constrained();  // Professor id
             $table->integer('number');
+            $table ->string('consultations');
             $table->timestamps();
         });
     }

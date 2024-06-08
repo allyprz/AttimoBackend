@@ -17,7 +17,6 @@ return new class extends Migration
             $table ->text('description');
             $table ->string('acronyms');
             $table ->string('image');
-            $table ->string('consultations');
             $table->timestamps();
         });
     }

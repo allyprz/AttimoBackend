@@ -16,7 +16,6 @@ class MajorController extends Controller
     public function index()
     {
         $results = Major::paginate(10);
-        $cours
         return view('majors.index', compact('results'));
     }
 

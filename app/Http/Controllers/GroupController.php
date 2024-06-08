@@ -30,7 +30,12 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        $courses = Course::all();
+        $users = User::join('users_types', 'users_types.id', '=', 'users.users_types_id')
+            ->select('users.*', 'users_types.name as users_types_name')
+            ->get();
+            
+        return view('groups.create', compact('courses', 'users'));
     }
 
     /**
