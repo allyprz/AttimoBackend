@@ -20,7 +20,7 @@
         </div>
     @endif
 
-    <form action="{{ route('users.store') }}" method="POST" class="grid gap-4 w-full">
+    <form action="{{ route('users.store') }}" method="POST" id="form-create" class="grid gap-4 w-full">
         @csrf
         <div class="flex gap-6 justify-stretch w-full">
             <div class="drag-area border-2 relative border-gray-400/80 border-dashed w-[50%] rounded-sm h-72 flex flex-col justify-center items-center">
