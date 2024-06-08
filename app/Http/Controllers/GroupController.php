@@ -1,23 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 
-use App\Models\Major;
+use Illuminate\Http\Request;
+use App\Models\Group;
 use App\Models\Course;
 use App\Models\User;
-use App\Models\UsersType;
 
-class MajorController extends Controller
+class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $results = Major::paginate(10);
-        $cours
-        return view('majors.index', compact('results'));
+        //Inner join between majors, courses and users to obtain the name of the course and the user
+        $groups = Group::join('courses', 'courses.id', '=', 'groups.courses_id')
+            ->join('users', 'users.id', '=', 'groups.users_id')
+            ->select('groups.*', 'courses.name as course_name', 'users.name as professor_name')
+            ->paginate(10);
+
+        $courses = Course::all();
+        $users = User::all();
+        return view('groups.index', compact('groups', 'courses', 'users'));
     }
 
     /**
@@ -25,14 +30,7 @@ class MajorController extends Controller
      */
     public function create()
     {
-        $majors = Major::all();
-
-        //Inner join between users and users_types to obtain users_types name
-        $users = User::join('users_types', 'users_types.id', '=', 'users.users_types_id')
-            ->select('users.*', 'users_types.name as users_types_name')
-            ->get();
-
-        return view('majors.create', compact('majors', 'users'));
+        //
     }
 
     /**
@@ -70,14 +68,8 @@ class MajorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        //Look for the major
-        $major = Major::find($id);
-
-        //Delete the major
-        $major->delete();
-
-        return redirect()->route('majors.index')->with('success', 'Major deleted successfully.');
+        //
     }
 }
