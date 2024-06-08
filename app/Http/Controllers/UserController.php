@@ -23,7 +23,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        // return view('users.create');
+        $users_type = UsersType::all();
+
+        return view('users.create', compact('users_type'));
     }
 
     /**
@@ -31,20 +33,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => 'required|string|min:8',
-        // ]);
+        User::create([
+            'users_types_id' => $request->users_types_id,
+            'name' => $request->name,
+            'lastname1' => $request->lastname1,
+            'lastname2' => $request->lastname2,
+            'email' => $request->email,
+            'username' => $request->username,
+            'password' => $request->password,
+            'image' => "image.jpg",
+        ]);
 
-        // User::create([
-        //     'name' => $validated['name'],
-        //     'email' => $validated['email'],
-        //     'password' => bcrypt($validated['password']),
-        // ]);
-
-        // return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success','User registered successfully.');
     }
+
 
     /**
      * Display the specified resource.
@@ -85,9 +87,13 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        // $user->delete();
-        // return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        //Look for the user
+        $results = User::find($id);
+        //Delete the user
+        $results->delete();
+        
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }

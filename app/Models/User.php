@@ -10,7 +10,7 @@ class User extends Model
     use HasFactory;
 
     protected $fillable = [
-        'users_type_id',
+        'users_types_id',
         'name',
         'lastname1',
         'lastname2',
