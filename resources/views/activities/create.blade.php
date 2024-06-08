@@ -20,16 +20,18 @@
     </div>
     @endif
 
-    <form action="{{ route('activities.store') }}" method="POST" id="form-create" class="grid gap-4 w-full">
+    <form action="{{ route('activities.store') }}" method="POST" id="form-create" class="grid gap-4 w-full" enctype="multipart/form-data">
         @csrf
         <div class="flex gap-6 justify-stretch w-full">
             <div class="drag-area border-2 relative border-gray-400/80 border-dashed w-[50%] rounded-sm h-72 flex flex-col justify-center items-center">
-                <button type="button" id="close-img" style="display:none" class="p-1 flex justify-center items-center rounded-full bg-clr-light-gray/45 z-20 absolute right-2 top-2"><span class="icon-[material-symbols--close-rounded]"></span></button>
-                <div class="icon"><span class="icon-[material-symbols--cloud-upload] size-16 text-clr-blue/80"></span></div>
-                <span id="drag-text" class="text-clr-light-gray">Drag & Drop to Upload File</span>
-                <span class="text-clr-light-gray">OR</span>
-                <button type="button" id="browse-btn" class="px-2 py-1 mt-2 hover:brightness-90 bg-[#bbc0e1] text-clr-white rounded-sm">Browse File</button>
-                <input id="file-input" type="file" accept=".jpg, .jpeg, .png, .webp" hidden>
+                <img id="preview" class="object-cover w-full h-full" src="">
+                <div class="drag-content flex flex-col text-center items-center">
+                    <div class="icon"><span class="icon-[material-symbols--cloud-upload] size-16 text-clr-blue/80"></span></div>
+                    <span id="drag-text" class="text-clr-light-gray">Drag & Drop to Upload File</span>
+                    <span class="text-clr-light-gray">OR</span>
+                    <button type="button" id="browse-btn" class="px-2 py-1 mt-2 hover:brightness-90 bg-[#bbc0e1] text-clr-white rounded-sm">Browse File</button>
+                </div>
+                <input id="file-input" type="file" accept=".jpg, .jpeg, .png, .webp" name="image" hidden>
             </div>
             <div class="grid gap-4 w-[50%]">
                 <div class="flex gap-4 items-center">
@@ -98,6 +100,7 @@
     </form>
 </div>
 <script>
+
     document.addEventListener('DOMContentLoaded', function() {
         const categorySelect = document.getElementById('category-select');
         const groupSelectContainer = document.getElementById('group-select-container');
@@ -116,7 +119,6 @@
                     majorSelectContainer.style.display = 'block';
                     groupSelectContainer.style.display = 'none';
                     break;
-
                 default:
                     groupSelectContainer.style.display = 'none';
                     majorSelectContainer.style.display = 'none';
@@ -138,84 +140,92 @@
         categorySelect.addEventListener('change', handleCategoryChange);
         labelSelect.addEventListener('change', handleLabelChange);
 
-        //Drag and drop
+        // Drag and drop
         const dragArea = document.querySelector('.drag-area');
+        const img = document.getElementById('preview');
         const dragText = document.getElementById('drag-text');
         const fileInput = document.getElementById('file-input');
-        const browseBtn = document.getElementById('browse-btn');
-        const closeImgBtn = document.getElementById('close-img');
         const form = document.getElementById('form-create');
+        const browseBtn = document.getElementById('browse-btn');
+        const dragContent = document.querySelector('.drag-content');
 
+        // if user click on the button then the input also clicked
         browseBtn.onclick = () => {
-            fileInput.click(); //if user click on the button then the input also clicked
+            fileInput.click();
+        }
+        
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    img.setAttribute('src', e.target.result);
+                    img.style.display = 'block';
+                    dragContent.style.display = 'none';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Show the image only if a file is selected
+        function handleImageChange() {
+            if (fileInput.files.length > 0) {
+                img.style.display = 'block';
+                dragContent.style.display = 'none'; 
+                readURL(fileInput);  // Ensure image preview updates
+            } else {
+                img.style.display = 'none'; 
+                dragContent.style.display = 'flex'; 
+            }
         }
 
         fileInput.addEventListener("change", function() {
-            //getting user select file and [0] this means if user select multiple files then we'll select only the first one
-            file = this.files[0];
             dragArea.classList.add("active");
-            showFile(); //calling function
+            handleImageChange();
         });
 
-        //If user Drag File Over DropArea
+        // If user Drag File Over DropArea
         dragArea.addEventListener("dragover", (event) => {
-            event.preventDefault(); //preventing from default behaviour
+            event.preventDefault(); // preventing from default behaviour
             dragArea.classList.add("active");
             dragText.textContent = "Release to Upload File";
         });
 
-        //If user leave dragged File from DropArea
+        // If user leave dragged File from DropArea
         dragArea.addEventListener("dragleave", () => {
             dragArea.classList.remove("active");
             dragText.textContent = "Drag & Drop to Upload File";
         });
 
-        //If user drop File on DropArea
+        // If user drop File on DropArea
         dragArea.addEventListener("drop", (event) => {
-            event.preventDefault(); //preventing from default behaviour
-            //getting user select file and [0] this means if user select multiple files then we'll select only the first one
-            file = event.dataTransfer.files[0];
-            showFile(); //calling function
+            event.preventDefault(); // preventing from default behaviour
+            fileInput.files = event.dataTransfer.files;
+            handleImageChange();
         });
 
-        function showFile() {
-            let fileType = file.type; //getting selected file type
-            let validExtensions = ["image/jpeg", "image/jpg", "image/png", "image/webp"]; //adding some valid image extensions in array
-            if (validExtensions.includes(fileType)) { //if user selected file is an image file
-                let fileReader = new FileReader(); //creating new FileReader object
-                fileReader.onload = () => {
-                    let fileURL = fileReader.result; //passing user file source in fileURL variable
-                    let imgTag = `<img src="${fileURL}" alt="image" class="w-full h-full object-cover">`; //creating an img tag and passing user selected file source inside src attribute
-                    dragArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
-                    closeImgBtn.style.display = 'block'; // show the close button
-                }
-                fileReader.readAsDataURL(file);
-            } else {
-                alert("This is not an Image File!");
-                dragArea.classList.remove("active");
-                dragText.textContent = "Drag & Drop to Upload File";
+        // Control that only images (.jpg, .jpeg, .png, .webp) are uploaded
+        fileInput.addEventListener('change', function() {
+            const file = fileInput.files[0];
+            const validExtensions = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+            if (!validExtensions.includes(file.type)) {
+                alert('Please, select a valid image file (.jpg, .jpeg, .png, .webp).');
+                fileInput.value = '';
+                handleImageChange(); // Reset image preview
             }
-        }
-
-        closeImgBtn.addEventListener('click', function() {
-            // remove the image
-            dragArea.innerHTML = '';
-            // hide the close button
-            closeImgBtn.style.display = 'none';
-            // reset the drag text
-            dragText.textContent = "Drag & Drop to Upload File";
         });
 
+        // Prevent the form from being submitted if no file was selected
         form.addEventListener('submit', function(event) {
             if (!fileInput.files.length) {
                 alert('Please, select an image before sending the information.');
-                event.preventDefault(); // prevent the form from being submitted
+                event.preventDefault();
             }
         });
 
         // Initial check
         handleCategoryChange();
         handleLabelChange();
+        handleImageChange();
     });
 </script>
 @endsection

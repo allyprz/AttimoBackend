@@ -66,6 +66,7 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+
         // If the label is not "homework", the percent is 0
         if ($request->label_id != 2) {
             $request->merge(['percent' => 0]);
@@ -83,7 +84,7 @@ class ActivityController extends Controller
         // Create the activity
         $activity = Activity::create([
             'name' => $request->name,
-            'image' => "image.jpg",
+            'image' => "defaultImage.jpg",
             'description' => $request->description,
             'scheduled_at' => $scheduled_at,
             'percent' => $request->percent,
@@ -94,6 +95,16 @@ class ActivityController extends Controller
 
         // Retrieve the ID of the newly created activity
         $activity_id = $activity->id;
+
+        if ($request->hasFile('image')) {
+            //Store the image with the activity ID in the file name
+            $image = $request->file('image');
+            $filename = 'activity_' . $activity_id . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'),$filename);
+
+            // Update the activity with the image name
+            $activity->update(['image' => $filename]);
+        }
 
         switch ($request->category_id) {
                 // Category 1 == course
