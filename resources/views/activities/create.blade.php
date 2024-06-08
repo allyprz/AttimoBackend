@@ -4,8 +4,8 @@
 <div class="grid max-w-[900px] gap-4 bg-white rounded-sm my-4 mx-auto p-6">
     <section>
         <a href="{{ url()->previous() }}" class="cursor-pointer text-2xl mb-2 font-semibold text-clr-dark-third inline-block"><</a>
-        <h2 class="text-2xl mb-2 font-semibold text-clr-dark-third inline-block">New activity</h2>
-        <p class="text-clr-dark-gray">Complete all the data to create a new activity.</p>
+            <h2 class="text-2xl mb-2 font-semibold text-clr-dark-third inline-block">New activity</h2>
+            <p class="text-clr-dark-gray">Complete all the data to create a new activity.</p>
     </section>
     <hr class="border-b-[1.5px] text-clr-dark-gray">
 
@@ -99,133 +99,6 @@
         <button type="submit" class="w-full p-2 bg-clr-blue text-white rounded-sm hover:brightness-[.85] duration-150">Create activity</button>
     </form>
 </div>
-<script>
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const categorySelect = document.getElementById('category-select');
-        const groupSelectContainer = document.getElementById('group-select-container');
-        const majorSelectContainer = document.getElementById('major-select-container');
-        const labelSelect = document.getElementById('label-select');
-        const percentContainer = document.getElementById('percent-container');
-
-        function handleCategoryChange() {
-            let selectedCategory = categorySelect.value;
-            switch (selectedCategory) {
-                case '1': // 1 == category course
-                    groupSelectContainer.style.display = 'block';
-                    majorSelectContainer.style.display = 'none';
-                    break;
-                case '4': // 4 == category major
-                    majorSelectContainer.style.display = 'block';
-                    groupSelectContainer.style.display = 'none';
-                    break;
-                default:
-                    groupSelectContainer.style.display = 'none';
-                    majorSelectContainer.style.display = 'none';
-            }
-        }
-
-        function handleLabelChange() {
-            const selectedLabel = labelSelect.value;
-            const percentInput = document.querySelector('input[name="percent"]');
-            if (selectedLabel == '2') { // 2 == label homework
-                percentContainer.style.display = 'block';
-                percentInput.required = true; // Add required attribute
-            } else {
-                percentContainer.style.display = 'none';
-                percentInput.required = false; // Remove required attribute
-            }
-        }
-
-        categorySelect.addEventListener('change', handleCategoryChange);
-        labelSelect.addEventListener('change', handleLabelChange);
-
-        // Drag and drop
-        const dragArea = document.querySelector('.drag-area');
-        const img = document.getElementById('preview');
-        const dragText = document.getElementById('drag-text');
-        const fileInput = document.getElementById('file-input');
-        const form = document.getElementById('form-create');
-        const browseBtn = document.getElementById('browse-btn');
-        const dragContent = document.querySelector('.drag-content');
-
-        // if user click on the button then the input also clicked
-        browseBtn.onclick = () => {
-            fileInput.click();
-        }
-        
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    img.setAttribute('src', e.target.result);
-                    img.style.display = 'block';
-                    dragContent.style.display = 'none';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // Show the image only if a file is selected
-        function handleImageChange() {
-            if (fileInput.files.length > 0) {
-                img.style.display = 'block';
-                dragContent.style.display = 'none'; 
-                readURL(fileInput);  // Ensure image preview updates
-            } else {
-                img.style.display = 'none'; 
-                dragContent.style.display = 'flex'; 
-            }
-        }
-
-        fileInput.addEventListener("change", function() {
-            dragArea.classList.add("active");
-            handleImageChange();
-        });
-
-        // If user Drag File Over DropArea
-        dragArea.addEventListener("dragover", (event) => {
-            event.preventDefault(); // preventing from default behaviour
-            dragArea.classList.add("active");
-            dragText.textContent = "Release to Upload File";
-        });
-
-        // If user leave dragged File from DropArea
-        dragArea.addEventListener("dragleave", () => {
-            dragArea.classList.remove("active");
-            dragText.textContent = "Drag & Drop to Upload File";
-        });
-
-        // If user drop File on DropArea
-        dragArea.addEventListener("drop", (event) => {
-            event.preventDefault(); // preventing from default behaviour
-            fileInput.files = event.dataTransfer.files;
-            handleImageChange();
-        });
-
-        // Control that only images (.jpg, .jpeg, .png, .webp) are uploaded
-        fileInput.addEventListener('change', function() {
-            const file = fileInput.files[0];
-            const validExtensions = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-            if (!validExtensions.includes(file.type)) {
-                alert('Please, select a valid image file (.jpg, .jpeg, .png, .webp).');
-                fileInput.value = '';
-                handleImageChange(); // Reset image preview
-            }
-        });
-
-        // Prevent the form from being submitted if no file was selected
-        form.addEventListener('submit', function(event) {
-            if (!fileInput.files.length) {
-                alert('Please, select an image before sending the information.');
-                event.preventDefault();
-            }
-        });
-
-        // Initial check
-        handleCategoryChange();
-        handleLabelChange();
-        handleImageChange();
-    });
-</script>
+@vite('resources/js/drag-drop.js')
+@vite('resources/js/input-visibility.js')
 @endsection

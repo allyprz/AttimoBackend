@@ -66,7 +66,6 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-
         // If the label is not "homework", the percent is 0
         if ($request->label_id != 2) {
             $request->merge(['percent' => 0]);
