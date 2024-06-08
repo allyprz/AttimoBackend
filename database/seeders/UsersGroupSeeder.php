@@ -13,7 +13,7 @@ class UsersGroupSeeder extends Seeder
      */
     public function run(): void
     { {
-            //admin (John Dow)
+            //Admin (John Doe)
             UsersGroup::create(['users_id' => 1, 'groups_id' => 1]);
             UsersGroup::create(['users_id' => 1, 'groups_id' => 2]);
             UsersGroup::create(['users_id' => 1, 'groups_id' => 3]);
@@ -80,7 +80,7 @@ class UsersGroupSeeder extends Seeder
             UsersGroup::create(['users_id' => 15, 'groups_id' => 8]);
             UsersGroup::create(['users_id' => 15, 'groups_id' => 9]);
 
-            //professor (Lewis 14)
+            //professor (Betta 14)
             UsersGroup::create(['users_id' => 14, 'groups_id' => 8]);
             UsersGroup::create(['users_id' => 14, 'groups_id' => 9]);
 

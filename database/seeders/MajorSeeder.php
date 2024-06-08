@@ -13,9 +13,10 @@ class MajorSeeder extends Seeder
      */
     public function run(): void
     {
-        Major::create(['name' => 'Computer Science', 'code' => 'CS']);
-        Major::create(['name' => 'Medicine', 'code' => 'MED']);
-        Major::create(['name' => 'Architecture', 'code' => 'ARC']);
-        Major::create(['name' => 'Biology', 'code' => 'BIO']);
+        // John is the administrator/coordinator of all majors
+        Major::create(['name' => 'Computer Science', 'code' => 'CS', 'users_id' => 1]);
+        Major::create(['name' => 'Medicine', 'code' => 'MED', 'users_id' => 1]);
+        Major::create(['name' => 'Architecture', 'code' => 'ARC', 'users_id' => 1]);
+        Major::create(['name' => 'Biology', 'code' => 'BIO', 'users_id' => 1]);
     }
 }

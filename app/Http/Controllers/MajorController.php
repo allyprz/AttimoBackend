@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Major;
+use App\Models\Course;
+use App\Models\User;
+use App\Models\UsersType;
 
 class MajorController extends Controller
 {
@@ -21,7 +24,14 @@ class MajorController extends Controller
      */
     public function create()
     {
-        //
+        $majors = Major::all();
+
+        //Inner join between users and users_types to obtain users_types name
+        $users = User::join('users_types', 'users_types.id', '=', 'users.users_types_id')
+            ->select('users.*', 'users_types.name as users_types_name')
+            ->get();
+
+        return view('majors.create', compact('majors', 'users'));
     }
 
     /**

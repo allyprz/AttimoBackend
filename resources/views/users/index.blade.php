@@ -27,16 +27,16 @@
             <tbody>
                 @foreach ($results as $result)
                     <tr class="border-b border-neutral-200 dark:border-white/10">
-                        <td class="py-6">{{ $result->id }}</td>
+                        <td class="py-2">{{ $result->id }}</td>
                         @foreach ($users as $user)
                             @if ($user->id == $result->users_types_id)
-                                <td class="py-6">{{ $user->name }}</td>
+                                <td class="py-2">{{ $user->name }}</td>
                             @endif
                         @endforeach
-                        <td class="py-6">{{ $result->name }}</td>
-                        <td class="py-6">{{ $result->lastname1 }} {{ $result->lastname2 }}</td>
+                        <td class="py-2">{{ $result->name }}</td>
+                        <td class="py-2">{{ $result->lastname1 }} {{ $result->lastname2 }}</td>
 
-                        <td class="py-6">
+                        <td class="py-2">
                             <form action="{{ route('users.destroy', $result->id) }}" method="POST">
                                 <a class="p-2 bg-blue-100 rounded-md text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('users.show', $result->id) }}">Show</a>
                                 <a class="p-2 bg-gray-200 rounded-md text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('users.edit', $result->id) }}">Edit</a>
