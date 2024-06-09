@@ -33,7 +33,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
+        // dd($request->all());
+        // Create the user
+        $user = User::create([
             'users_types_id' => $request->users_types_id,
             'name' => $request->name,
             'lastname1' => $request->lastname1,
@@ -41,11 +43,24 @@ class UserController extends Controller
             'email' => $request->email,
             'username' => $request->username,
             'password' => $request->password,
-            'image' => "image.jpg",
+            'image' => "defaultImage",
         ]);
 
-        return redirect()->route('users.index')->with('success','User registered successfully.');
+        // Retrieve the ID of the newly created user
+        $user_id = $user->id;
+
+        if ($request->hasFile('image')) {
+            //Store the image with the user ID in the file name
+            $image = $request->file('image');
+            $filename = 'user_' . $user_id . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename);
+            // Update the user with the image name
+            $user->update(['image' => $filename]);
+        }
+
+        return redirect()->route('users.index')->with('success', 'User registered successfully.');
     }
+
 
 
     /**
@@ -53,47 +68,60 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        // return view('users.show', compact('user'));
+        // Obtener el tipo de usuario del usuario
+        $userType = UsersType::find($user->users_types_id);
+
+        return view('users.show', compact('user', 'userType'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        // return view('users.edit', compact('user'));
-    }
+        // Look for the user
+        $user = User::find($id);
+        // Look for the usersTypes
+        $users = UsersType::all();
 
+        return view('users.edit', compact('users', 'user'));
+    }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, User $user)
     {
-        // $validated = $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        //     'password' => 'nullable|string|min:8',
-        // ]);
+        $data = [
+            'name' => $request->name,
+            'username' => $request->username,
+            'lastname1' => $request->lastname1,
+            'lastname2' => $request->lastname2,
+            'email' => $request->email,
+            'users_types_id' => $request->users_types_id,
+        ];
 
-        // $user->update([
-        //     'name' => $validated['name'],
-        //     'email' => $validated['email'],
-        //     'password' => $validated['password'] ? bcrypt($validated['password']) : $user->password,
-        // ]);
+        // Check if password is provided and not empty
+        if ($request->filled('password')) {
+            $data['password'] = $request->password; // Assign password directly without bcrypt
+        }
 
-        // return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        $user->update($data);
+
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-        //Look for the user
+        // Look for the user
         $results = User::find($id);
-        //Delete the user
+        // Delete the user
         $results->delete();
-        
+
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }
