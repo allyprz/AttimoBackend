@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UsersType;
@@ -112,9 +112,16 @@ class UserController extends Controller
     public function destroy($id)
     {
         // Look for the user
-        $results = User::find($id);
+        $user = User::find($id);
+
+        // Check if the user has an existing image and delete it
+        $image_to_remove = 'images/' . $user->image;
+        if (File::exists($image_to_remove)) {
+            File::delete($image_to_remove);
+        }
+
         // Delete the user
-        $results->delete();
+        $user->delete();
 
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }

@@ -485,6 +485,12 @@ class ActivityController extends Controller
         //Look for the activity
         $activity = Activity::find($id);
 
+        // Check if the activity has an existing image and delete it
+        $image_to_remove = 'images/' . $activity->image;
+        if (File::exists($image_to_remove)) {
+            File::delete($image_to_remove);
+        }
+
         //Delete the activity
         $activity->delete();
 
