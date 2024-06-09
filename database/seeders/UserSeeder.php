@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Administradores (users_type 3)
+        // Admins (users_type 3)
         User::create([
             'name' => 'John',
             'lastname1' => 'Doe',
@@ -22,11 +22,11 @@ class UserSeeder extends Seeder
             'email' => 'john@example.com',
             'username' => 'johndoe',
             'password' => 'qwerty123',
-            'image' => "image.jpg",
+            'image' => "user_1.jpg",
             'users_types_id' => 3,
         ]);
 
-        // Estudiantes (users_type 1)
+        // Students (users_type 1)
         User::create([
             'name' => 'Peter',
             'lastname1' => 'Williams',
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'email' => 'peter@example.com',
             'username' => 'peterwilliams',
             'password' => 'abc123',
-            'image' => "image.jpg",
+            'image' => "user_2.jpg",
             'users_types_id' => 1,
         ]);
 
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             'email' => 'mary@example.com',
             'username' => 'maryjohnson',
             'password' => 'password123',
-            'image' => "image.jpg",
+            'image' => "user_3.jpg",
             'users_types_id' => 1,
         ]);
 
@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
             'email' => 'anna@example.com',
             'username' => 'annadavis',
             'password' => 'xyz456',
-            'image' => "image.jpg",
+            'image' => "user_4.jpg",
             'users_types_id' => 1,
         ]);
 
@@ -67,7 +67,7 @@ class UserSeeder extends Seeder
             'email' => 'charles@example.com',
             'username' => 'charlesgarcia',
             'password' => 'password789',
-            'image' => "image.jpg",
+            'image' => "user_5.jpg",
             'users_types_id' => 1,
         ]);
 
@@ -78,7 +78,7 @@ class UserSeeder extends Seeder
             'email' => 'laura@example.com',
             'username' => 'lauralopez',
             'password' => 'pass123',
-            'image' => "image.jpg",
+            'image' => "user_6.jpg",
             'users_types_id' => 1,
         ]);
 
@@ -89,7 +89,7 @@ class UserSeeder extends Seeder
             'email' => 'george@example.com',
             'username' => 'georgeclark',
             'password' => 'password123',
-            'image' => "image.jpg",
+            'image' => "user_7.jpg",
             'users_types_id' => 1,
         ]);
 
@@ -100,7 +100,7 @@ class UserSeeder extends Seeder
             'email' => 'elena@example.com',
             'username' => 'elenaroberts',
             'password' => 'abc456',
-            'image' => "image.jpg",
+            'image' => "user_8.jpg",
             'users_types_id' => 1,
         ]);
 
@@ -111,7 +111,7 @@ class UserSeeder extends Seeder
             'email' => 'paul@example.com',
             'username' => 'paulharris',
             'password' => 'xyz789',
-            'image' => "image.jpg",
+            'image' => "user_9.jpg",
             'users_types_id' => 1,
         ]);
 
@@ -122,11 +122,11 @@ class UserSeeder extends Seeder
             'email' => 'sophia@example.com',
             'username' => 'sophiaking',
             'password' => 'password789',
-            'image' => "image.jpg",
+            'image' => "user_10.jpg",
             'users_types_id' => 1,
         ]);
 
-        // Profesores (users_type 2)
+        // Professors (users_type 2)
         User::create([
             'name' => 'Karl',
             'lastname1' => 'Jinn',
@@ -134,7 +134,7 @@ class UserSeeder extends Seeder
             'email' => 'Karl@example.com',
             'username' => 'karljinn',
             'password' => 'password709',
-            'image' => "image.jpg",
+            'image' => "user_11.jpg",
             'users_types_id' => 2,
         ]);
 
@@ -145,7 +145,7 @@ class UserSeeder extends Seeder
             'email' => 'pamm@example.com',
             'username' => 'pammkirsh',
             'password' => 'passwor7d789',
-            'image' => "image.jpg",
+            'image' => "user_12.jpg",
             'users_types_id' => 2,
         ]);
 
@@ -156,7 +156,7 @@ class UserSeeder extends Seeder
             'email' => 'peter@example.com',
             'username' => 'peteryuaqa',
             'password' => 'pas1ssword789',
-            'image' => "image.jpg",
+            'image' => "user_13.jpg",
             'users_types_id' => 2,
         ]);
 
@@ -167,10 +167,11 @@ class UserSeeder extends Seeder
             'email' => 'justin@example.com',
             'username' => 'justinlummens',
             'password' => 'password7as89',
-            'image' => "image.jpg",
+            'image' => "user_14.jpg",
             'users_types_id' => 2,
         ]);
 
+        // Student (users_type 1)
         User::create([
             'name' => 'Lewis',
             'lastname1' => 'Hamilton',
@@ -178,7 +179,7 @@ class UserSeeder extends Seeder
             'email' => 'lewis@example.com',
             'username' => 'lewishamilton',
             'password' => 'password784r9',
-            'image' => "image.jpg",
+            'image' => "user_15.jpg",
             'users_types_id' => 1,
         ]);
     }

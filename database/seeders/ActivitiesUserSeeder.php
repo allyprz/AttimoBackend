@@ -55,7 +55,6 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 33,'users_id' => 1]); // Major level activities - Major Networking Event
 
         //Professors
-
         // Associate Professor Pamm to their activities in Computer Science 
         ActivitiesUser::create(['activities_id' => 28, 'users_id' => 12]); // University level activities - Welcome Ceremony
         ActivitiesUser::create(['activities_id' => 29, 'users_id' => 12]); // University level activities - Student Council Elections
