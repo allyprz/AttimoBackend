@@ -1,10 +1,10 @@
 @extends('layout')
 @section('content')
     <section class="flex mt-6 mb-4 items-center justify-between text-clr-dark-blue">
-        <h2 class="text-2xl font-semibold">Users</h2>
+        <h2 class="text-2xl font-semibold">Groups</h2>
         <a href="{{ route('groups.create') }}"
             class="p-2 border-2 duration-150 border-clr-blue font-medium rounded-md text-clr-blue hover:bg-clr-blue hover:text-clr-white">+
-            Add new user</a>
+            Add new group</a>
     </section>
 
     @if ($message = Session::get('success'))

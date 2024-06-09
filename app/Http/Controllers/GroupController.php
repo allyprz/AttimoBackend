@@ -19,7 +19,7 @@ class GroupController extends Controller
             ->join('users', 'users.id', '=', 'groups.users_id')
             ->select('groups.*', 'courses.name as course_name', 'users.name as professor_name')
             ->paginate(10);
-
+        
         $courses = Course::all();
         $users = User::all();
         return view('groups.index', compact('groups', 'courses', 'users'));
@@ -34,7 +34,7 @@ class GroupController extends Controller
         $users = User::join('users_types', 'users_types.id', '=', 'users.users_types_id')
             ->select('users.*', 'users_types.name as users_types_name')
             ->get();
-            
+
         return view('groups.create', compact('courses', 'users'));
     }
 

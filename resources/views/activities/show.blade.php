@@ -22,7 +22,10 @@
 
     <div class="grid gap-4 w-full">
         <div class="flex gap-6 justify-stretch w-full">
-            <div class="bg-gray-300 w-[50%] rounded-sm min-h-full"></div>
+            <div class="drag-area border-2 relative border-gray-400/80 border-dashed w-[50%] overflow-hidden rounded-sm h-72 flex flex-col justify-center items-center">
+                <img id="preview" src="{{ asset('images/' . $activity->image) }}" class="object-cover w-full h-full">
+                <input id="file-input" type="file" accept=".jpg, .jpeg, .png, .webp" name="image" hidden>
+            </div>
             <div class="grid gap-4 w-[50%]">
                 <div class="flex gap-4 items-center">
                     <div class="w-full">
@@ -61,19 +64,19 @@
                     <input type="text" readonly class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" id="label-select" value="{{ $activity->label_name }}">
                 </div>
 
-                @isset($groupDetails)
+                @if ($groupDetails)
                 <div class="w-full" id="group-select-container">
                     <label class="text-clr-dark" for="group">Group</label>
                     <input type="text" readonly class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" value="{{ $groupDetails->course_name }} - {{ $groupDetails->group_number }}">
                 </div>
-                @endisset
+                @endif
                 
-                @isset($major)
+                @if ($major)
                 <div class="w-full" id="major-select-container">
                     <label class="text-clr-dark" for="major">Major</label>
-                    <input type="text" readonly class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" value="{{ $major ? $major : '' }}">
+                    <input type="text" readonly class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" value="{{ $major }}">
                 </div>
-                @endisset
+                @endif
             </div>
         </div>
     </div>
