@@ -33,8 +33,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // Create the user
         $user = User::create([
             'users_types_id' => $request->users_types_id,
             'name' => $request->name,
@@ -57,18 +55,15 @@ class UserController extends Controller
             // Update the user with the image name
             $user->update(['image' => $filename]);
         }
-
         return redirect()->route('users.index')->with('success', 'User registered successfully.');
     }
-
-
 
     /**
      * Display the specified resource.
      */
     public function show(User $user)
     {
-        // Obtener el tipo de usuario del usuario
+        // Obtain the user type
         $userType = UsersType::find($user->users_types_id);
 
         return view('users.show', compact('user', 'userType'));
@@ -106,7 +101,6 @@ class UserController extends Controller
         }
 
         $user->update($data);
-
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 

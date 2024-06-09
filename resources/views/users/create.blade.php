@@ -27,7 +27,7 @@
         </div>
     @endif
 
-    <form action="{{ route('users.store') }}" method="POST" id="form-create" class="grid gap-4 w-full">
+    <form action="{{ route('users.store') }}" method="POST" id="form-create" class="grid gap-4 w-full" enctype="multipart/form-data">
         @csrf
         <div class="flex gap-6 justify-stretch w-full">
             <!-- Left section: Drag & Drop area -->
