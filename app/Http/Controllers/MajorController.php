@@ -17,6 +17,7 @@ class MajorController extends Controller
     public function index()
     {
         $results = Major::paginate(10);
+        $users = User::all(); 
         return view('majors.index', compact('results'));
     }
 
@@ -81,6 +82,7 @@ class MajorController extends Controller
      */
     public function show(string $id)
     {
+        $major = Major::with('students')->find($id);
         $major = Major::select(
             'majors.id as major_id',
             'majors.name as major_name',
@@ -97,7 +99,6 @@ class MajorController extends Controller
         if (!$major) {
             return redirect()->route('majors.index')->with('error', 'Major not found.');
         }
-    
         $students = User::join('majors_users', 'users.id', '=', 'majors_users.users_id')
         ->join('users_types', 'users_types.id', '=', 'users.users_types_id')
         ->where('majors_users.majors_id', $id)
@@ -112,6 +113,7 @@ class MajorController extends Controller
      */
     public function edit(string $id)
     {
+        $major = Major::with('students')->find($id);
         $major = Major::find($id);
         if (!$major) {
             return redirect()->route('majors.index')->with('error', 'Major not found.');
