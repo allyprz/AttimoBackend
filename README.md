@@ -9,36 +9,32 @@ Segunda parte del proyecto final para el curso TM-5100 (Desarrollo de Aplicacion
 
 # Instrucciones
 
-### Paso 1: Clonar el repositorio
+### Paso 1: Clonar el repositorio.
 git clone `https://github.com/allyprz/AttimoBackend.git`
 cd `attimoBackend`
 
-### Paso 2: Crear el archivo .env
-Crear una copia del archivo .env.example y renombarla a .env con el comando `cp .env.example .env`.
-
-### Paso 3 (Opcional): Crear la base de datos.
-Crear una base de datos llamada `attimoBackend` en su servidor local (HeidiSQL en el caso de este proyecto). Si no se crea manualmente en el paso 
-
-### Paso 4: Modificar el archivo .env.
-Editar el archivo .env para configurar la conexión a la base de datos local. Asegúrese de que los detalles de la base de datos son correctos:
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=attimoBackend
-
-### Paso 5: Generar una clave de aplicación.
-Ejecutar `php artisan key:generate`
-
-### Paso 6: Migrar la base de datos.
-Ejecutar `php artisan migrate`
-
-### Paso 7: Instalar dependencias.
-Ejecutar:
+### Paso 2: Instalar dependencias.
+Ejecutar los siguientes comandos:
 `npm install`
 `composer install`
-`composer update`
 
-### Paso 9: Cargar los Seeders.
+### Paso 3: Crear el archivo .env
+Crear una copia del archivo .env.example y renombarla a .env con el comando `cp .env.example .env`.
+
+### Paso 4 (Opcional): Crear la base de datos.
+Crear una base de datos llamada `attimoBackend` en su servidor local (HeidiSQL en el caso de este proyecto).
+
+### Paso 5: Modificar el archivo .env.
+Editar el archivo .env para configurar la conexión a la base de datos local. Asegúrese de que los detalles de la base de datos son correctos y coinciden con el nombre del proyecto:
+DB_DATABASE=attimoBackend
+
+### Paso 6: Generar una clave de aplicación.
+Ejecutar `php artisan key:generate`. En caso de fallar actualice composer con el comando `composer update`.
+
+### Paso 7: Ejecutar las migraciones de la base de datos.
+Ejecutar `php artisan migrate`
+
+### Paso 8: Cargar los Seeders.
 Pegar el siguiente bloque de texto en la terminal:
 `php artisan db:seed --class=CourseSeeder`
 `php artisan db:seed --class=UsersTypeSeeder`
