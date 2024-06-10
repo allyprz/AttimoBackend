@@ -38,7 +38,6 @@
                 <input type="hidden" name="old_label_id" value="{{ $activity->labels_activities_id }}">
                 <input type="hidden" name="old_group_id" value="{{ $groupDetails ? $groupDetails->id : null }}">
                 <input type="hidden" name="old_major_id" value="{{ $activityMajor ? $activityMajor->id : null }}">
-
             </div>
             <div class="grid gap-4 w-[50%]">
                 <div class="flex gap-4 items-center">
@@ -121,7 +120,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="w-full p-2 bg-clr-blue text-white rounded-sm hover:brightness-[.85] duration-150">Update information</button>
+        <button type="submit" class="w-full p-2 bg-[#4958a3] text-white rounded-sm hover:brightness-[.85] duration-150">Update information</button>
     </form>
 </div>
 @vite('resources/js/drag-drop.js')

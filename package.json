@@ -17,6 +17,8 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
-        "@iconify/icons-mdi": "^1.2.48"
+        "@iconify/icons-mdi": "^1.2.48",
+        "jquery": "^3.7.1",
+        "select2": "^4.1.0-rc.0"
     }
 }

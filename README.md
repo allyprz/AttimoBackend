@@ -5,19 +5,19 @@
 
 # Attimo - Backend
 
-Segunda parte del proyecto final para el curso TM-5100 consistente en la implementación del backend de una página web para la organización académica. 
+Segunda parte del proyecto final para el curso TM-5100 (Desarrollo de Aplicaciones Interactivas II), el cual consistente en la implementación del backend de una página web para la organización académica con laravel. 
 
 # Instrucciones
 
 ### Paso 1: Clonar el repositorio
-git clone <URL_DEL_REPOSITORIO>
-cd <NOMBRE_DEL_PROYECTO>
+git clone `https://github.com/allyprz/AttimoBackend.git`
+cd `attimoBackend`
 
 ### Paso 2: Crear el archivo .env
 Crear una copia del archivo .env.example y renombarla a .env con el comando `cp .env.example .env`.
 
-### Paso 3: Crear la base de datos.
-Crear una base de datos llamada `attimoBackend` en su servidor local (HeidiSQL en el caso de este proyecto)
+### Paso 3 (Opcional): Crear la base de datos.
+Crear una base de datos llamada `attimoBackend` en su servidor local (HeidiSQL en el caso de este proyecto). Si no se crea manualmente en el paso 
 
 ### Paso 4: Modificar el archivo .env.
 Editar el archivo .env para configurar la conexión a la base de datos local. Asegúrese de que los detalles de la base de datos son correctos:
@@ -59,7 +59,9 @@ Pegar el siguiente bloque de texto en la terminal:
 `php artisan db:seed --class=ActivitiesUserSeeder`
 `php artisan db:seed --class=ActivitiesMajorSeeder`
 
-<!-- Copiar:
+Si no se creó la base de datos manualmente en el paso 3 se le indicará que no existe una base de datos con dicho nombre y se le preguntará si desea crearla, se debe confirmar escribiendo 'yes'.
+
+<!-- Copiar y pegar en la terminal:
 php artisan db:seed --class=CourseSeeder
 php artisan db:seed --class=UsersTypeSeeder
 php artisan db:seed --class=UserSeeder
@@ -83,7 +85,7 @@ php artisan db:seed --class=ActivitiesMajorSeeder
 ### Paso 9: Ejecutar el servidor de desarrollo.
 Ejecutar `npm run dev`.
 
-### Contribuidores (Nombre/Usuarios de github)
+### Contribuidores (Nombre completo/Usuarios de github)
 * Ashley Rojas Pérez, @allyprz
 * Benjamin Paniagua Rojas, @benjaminpaniagua
 * Krisly Arias Hidalgo, @krisarias

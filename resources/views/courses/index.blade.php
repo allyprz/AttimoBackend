@@ -25,16 +25,16 @@
         <tbody>
             @foreach ($courses as $course)
             <tr class="border-b border-neutral-200 dark:border-white/10">
-                <td class="py-6">{{ $course->id }}</td>
-                <td class="py-6">{{ $course->name }}</td>
-                <td class="py-6">{{ $course->acronyms }}</td>
-                <td class="py-6">
-                    <form action="" method="POST">
-                        <a class="p-2 bg-blue-100 rounded-md font-regular text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="">Show</a>
-                        <a class="p-2 bg-gray-200 rounded-md font-regular text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="">Edit</a>
+                <td class="py-2">{{ $course->id }}</td>
+                <td class="py-2">{{ $course->name }}</td>
+                <td class="py-2">{{ $course->acronyms }}</td>
+                <td class="py-2">
+                    <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
+                        <a class="p-2 bg-blue-100 rounded-md font-regular text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('courses.show', $course->id) }}">Show</a>
+                        <a class="p-2 bg-gray-200 rounded-md font-regular text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('courses.edit', $course->id)}}">Edit</a>
                         @csrf
                         @method('DELETE')
-                        <a class="p-2 bg-red-200 rounded-md font-regular text-red-800 me-2 my-2 hover:brightness-[.80] duration-100" href="">Delete</a>
+                        <button type="submit" class="p-2 bg-red-200 rounded-md font-regular text-red-800 me-2 my-2 hover:brightness-[.80] duration-100">Delete</button>
                     </form>
                 </td>
             </tr>

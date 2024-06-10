@@ -41,7 +41,7 @@ class UserController extends Controller
             'email' => $request->email,
             'username' => $request->username,
             'password' => $request->password,
-            'image' => "defaultImage",
+            'image' => "defaultImage.jpg",
         ]);
 
         // Retrieve the ID of the newly created user
