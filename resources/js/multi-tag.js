@@ -12,11 +12,3 @@ $(document).ready(function() {
         }
     )
 });
-
-// $(document).ready(function() {
-//     $('#majors').select2({
-//         placeholder: 'Select majors',
-//         allowClear: true,
-//         multiple: true
-//     });
-// });

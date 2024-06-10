@@ -152,7 +152,7 @@ class MajorController extends Controller
             $major->students()->detach();
             $major->students()->attach($validatedData['student_ids']);
         }
-        return redirect()->route('majors.edit', $major->id)->with('success', 'Major updated successfully.');
+        return redirect()->route('majors.index')->with('success', 'Major updated successfully.');
     }
 
     /**

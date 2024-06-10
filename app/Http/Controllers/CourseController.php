@@ -69,7 +69,6 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //Look for the course
         $course = Course::find($id);
 
         if ($course) {
@@ -148,7 +147,6 @@ class CourseController extends Controller
                 }
             }
 
-            //Update the course
             $course->update([
                 'name' => $request->name,
                 'description' => $request->description,
@@ -167,11 +165,10 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //Look for the course
         $course = Course::find($id);
 
         if ($course) {
-            //Delete the course from the pivot table
+            //Delete the relationship between the course and the major(s)
             MajorsCourse::where('courses_id', $id)->delete();
 
             //Delete the image

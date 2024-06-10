@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="student_ids[]"]'); // Asegúrate de que el atributo name coincida con el de tus checkboxes
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="student_ids[]"]'); 
     const selectedCountSpan = document.getElementById('selectedCount');
 
     function updateSelectedCount() {
@@ -11,6 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
         checkbox.addEventListener('change', updateSelectedCount);
     });
 
-    // Llama a updateSelectedCount inmediatamente para establecer el conteo inicial
+    // Initial count
     updateSelectedCount();
 });

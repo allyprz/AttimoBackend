@@ -97,12 +97,7 @@
                 </select>
             </div>
         </div>
-
-        <!-- Submit button -->
-        <button type="submit"
-            class="w-full p-2 bg-clr-blue text-white rounded-sm hover:brightness-[.85] duration-150 mt-4">
-            Create user
-        </button>
+        <button type="submit"class="w-full p-2 bg-[#4958a3] text-white rounded-sm hover:brightness-[.85] duration-150 mt-4">Create user</button>
     </form>
 </div>
 

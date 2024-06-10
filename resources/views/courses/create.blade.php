@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="w-full p-2 bg-clr-blue text-white rounded-sm hover:brightness-[.85] duration-150">Create course</button>
+        <button type="submit" class="w-full p-2 bg-[#4958a3] text-white rounded-sm hover:brightness-[.85] duration-150">Create course</button>
     </form>
 </div>
 @vite('resources/js/drag-drop.js')
