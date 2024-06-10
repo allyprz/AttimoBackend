@@ -160,10 +160,7 @@ class MajorController extends Controller
      */
     public function destroy($id)
     {
-        //Look for the major
         $major = Major::find($id);
-
-        //Delete the major
         $major->delete();
 
         return redirect()->route('majors.index')->with('success', 'Major deleted successfully.');
