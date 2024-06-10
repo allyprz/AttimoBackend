@@ -36,24 +36,24 @@ Ejecutar `php artisan migrate`
 
 ### Paso 8: Cargar los Seeders.
 Pegar el siguiente bloque de texto en la terminal:
-`php artisan db:seed --class=CourseSeeder`
-`php artisan db:seed --class=UsersTypeSeeder`
-`php artisan db:seed --class=UserSeeder`
-`php artisan db:seed --class=MajorSeeder`
-`php artisan db:seed --class=MajorsUserSeeder`
-`php artisan db:seed --class=QuestionSeeder`
-`php artisan db:seed --class=AnswerSeeder`
-`php artisan db:seed --class=QuestionsAnswerSeeder`
-`php artisan db:seed --class=GroupSeeder`
-`php artisan db:seed --class=MajorsCourseSeeder`
-`php artisan db:seed --class=UsersGroupSeeder`
-`php artisan db:seed --class=LabelsActivitySeeder`
-`php artisan db:seed --class=StatusActivitySeeder`
-`php artisan db:seed --class=CategoriesActivitySeeder`
-`php artisan db:seed --class=ActivitySeeder`
-`php artisan db:seed --class=ActivitiesGroupSeeder`
-`php artisan db:seed --class=ActivitiesUserSeeder`
-`php artisan db:seed --class=ActivitiesMajorSeeder`
+- `php artisan db:seed --class=CourseSeeder`
+- `php artisan db:seed --class=UsersTypeSeeder`
+- `php artisan db:seed --class=UserSeeder`
+- `php artisan db:seed --class=MajorSeeder`
+- `php artisan db:seed --class=MajorsUserSeeder`
+- `php artisan db:seed --class=QuestionSeeder`
+- `php artisan db:seed --class=AnswerSeeder`
+- `php artisan db:seed --class=QuestionsAnswerSeeder`
+- `php artisan db:seed --class=GroupSeeder`
+- `php artisan db:seed --class=MajorsCourseSeeder`
+- `php artisan db:seed --class=UsersGroupSeeder`
+- `php artisan db:seed --class=LabelsActivitySeeder`
+- `php artisan db:seed --class=StatusActivitySeeder`
+- `php artisan db:seed --class=CategoriesActivitySeeder`
+- `php artisan db:seed --class=ActivitySeeder`
+- `php artisan db:seed --class=ActivitiesGroupSeeder`
+- `php artisan db:seed --class=ActivitiesUserSeeder`
+- `php artisan db:seed --class=ActivitiesMajorSeeder`
 
 Si no se creó la base de datos manualmente en el paso 3 se le indicará que no existe una base de datos con dicho nombre y se le preguntará si desea crearla, se debe confirmar escribiendo 'yes'.
 
@@ -89,3 +89,4 @@ Ejecutar `npm run dev`.
 ## Requerimientos
 
 ...
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>

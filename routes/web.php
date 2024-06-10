@@ -11,6 +11,9 @@ use App\Http\Controllers\GroupController;
 //Main route to activities/index
 Route::get('/', [ActivityController::class, 'index']);
 
+Route::get('/major/{id}', [MajorController::class, 'show'])->name('major.show');
+Route::get('/major/{id}/edit', [MajorController::class, 'edit'])->name('major.edit');
+
 //Controller resources
 Route::resource('activities', ActivityController::class); 
 Route::resource('users', UserController::class);

@@ -10,6 +10,7 @@ export default defineConfig({
                 "resources/js/drag-drop.js",
                 "resources/js/input-visibility.js",
                 "resources/js/multi-tag.js",
+                "resources/js/user-count.js", 
             ],
             refresh: true,
         }),
