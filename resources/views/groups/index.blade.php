@@ -40,9 +40,9 @@
                         @endforeach
 
                         <td class="py-2">
-                            <form action="{{ route('groups.destroy', $group->id) }}" method="POST">
+                            <form action="{{ route('groups.destroy', $group->id) }}" method="POST">                                         
                                 <a class="p-2 bg-blue-100 rounded-md text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('groups.show', $group->id) }}">Show</a>
-                                <a class="p-2 bg-gray-200 rounded-md text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('groups.edit', $group->id) }}">Edit</a>
+                                <a class="p-2 bg-gray-200 rounded-md text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('groups.edit',  $group->id) }}">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="p-2 bg-red-200 rounded-md text-red-800 me-2 my-2 hover:brightness-[.80] duration-100">Delete</button>

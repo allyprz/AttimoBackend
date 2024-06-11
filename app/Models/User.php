@@ -19,4 +19,8 @@ class User extends Model
         'password',
         'image',
     ];
+    public function groups()
+    {
+        return $this->hasMany(Group::class, 'users_id');
+    }
 }

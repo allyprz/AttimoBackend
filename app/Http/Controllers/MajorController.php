@@ -8,6 +8,8 @@ use App\Models\Course;
 use App\Models\MajorsUser;
 use App\Models\User;
 use App\Models\UsersType;
+use App\Models\Activity;
+use App\Models\ActivitiesMajor;
 
 class MajorController extends Controller
 {
@@ -158,11 +160,23 @@ class MajorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy($id)
     {
         $major = Major::find($id);
-        $major->delete();
+        if ($major) {
 
-        return redirect()->route('majors.index')->with('success', 'Major deleted successfully.');
+            // Delete all activities associated with the major
+            $activityIds = ActivitiesMajor::where('majors_id', $id)->pluck('activities_id')->toArray();
+            Activity::whereIn('id', $activityIds)->delete();
+            ActivitiesMajor::where('majors_id', $id)->delete(); 
+
+            // Delete the major
+            $major->delete();
+            return redirect()->route('majors.index')->with('success', 'Major and associated activities deleted successfully.');
+             
+        }else{
+            return redirect()->route('majors.index')->with('error', 'Major not found.');
+        }
     }
 }

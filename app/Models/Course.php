@@ -16,4 +16,8 @@ class Course extends Model
         'image',
         'consultations',
     ];
+    public function groups()
+    {
+        return $this->hasMany(Group::class, 'courses_id');
+    }
 }
