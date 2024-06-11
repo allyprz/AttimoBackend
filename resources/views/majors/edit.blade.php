@@ -35,7 +35,7 @@
                         <select name="users_id" id="coordinator" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2">
                             @foreach ($users as $user)
                             @if ($user->users_types_id == 2)
-                            <option value="{{ $user->id }}" {{ $user->id == $major->users_id ? 'selected' : '' }}>{{ $user->name }} {{ $user->lastname1 }} {{ $user->lastname2 }} - {{ $user->users_types_name }}</option>
+                            <option value="{{ $user->id }}" {{ $user->id == $major->users_id ? 'selected' : '' }}>{{ $user->name }} {{ $user->lastname1 }} {{ $user->lastname2 }}</option>
                             @endif
                             @endforeach
                         </select>
@@ -70,7 +70,7 @@
                     @if ($user->users_types_id != 3)
                     <tr class="border-b border-neutral-200 dark:border-white/10">
                         <td class="py-2"><input type="checkbox" name="student_ids[]" value="{{ $user->id }}" id="student_{{ $user->id }}" {{ $major->students->contains($user->id) ? 'checked' : '' }}></td>
-                        <td class="py-2"> <img src="https://i.pinimg.com/564x/07/21/38/072138a5acc89f7dd25ede025365bba7.jpg" class="size-10 mx-auto object-cover rounded-full"></td>
+                        <td class="py-2"> <img src="{{ asset('images/' . $user->image) }}" class="size-10 mx-auto object-cover rounded-full"></td>
                         <td class="py-2"> {{ $user->name }}</td>
                         <td class="py-2">{{ $user->lastname1 }} {{ $user->lastname2 }}</td>
                         <td class="py-2">{{ $user->users_types_name }}</td>

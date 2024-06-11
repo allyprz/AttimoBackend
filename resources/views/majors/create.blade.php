@@ -27,21 +27,21 @@
                 <div class="flex gap-4 items-center">
                     <div class="w-full">
                         <label class="text-clr-dark" for="name">Name</label>
-                        <input type="text" name="name" id="name" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Name">
+                        <input type="text" name="name" id="name" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Major's name here">
                     </div>
                     <div class="w-full">
                         <label class="text-clr-dark" for="coordinator">Coordinator</label>
                         <select name="users_id" id="coordinador" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2">
                             @foreach ($users as $user)
                             @if(($user->users_types_id == 2))
-                            <option value="{{$user->id}}">{{$user->name}} {{$user->lastname1}} {{$user->lastname2}} - {{$user->users_types_name}}</option>
+                            <option value="{{$user->id}}">{{$user->name}} {{$user->lastname1}} {{$user->lastname2}}</option>
                             @endif
                             @endforeach
                         </select>
                     </div>
                     <div class="w-full">
                         <label class="text-clr-dark" for="code">Code</label>
-                        <input type="text" name="code" id="code" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Code">
+                        <input type="text" name="code" id="code" class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" placeholder="Major's code here">
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                         @if ($user->users_types_id != 3)
                             <tr class="border-b border-neutral-200 dark:border-white/10">
                                 <td class="py-2"><input type="checkbox" name="student_ids[]" value="{{$user->id}}" id="student_{{$user->id}}"></td>
-                                <td class="py-2"> <img src="https://i.pinimg.com/564x/07/21/38/072138a5acc89f7dd25ede025365bba7.jpg" class="size-10 mx-auto object-cover rounded-full"></img></td>
+                                <td class="py-2"> <img src="{{ asset('images/' . $user->image) }}" class="size-10 mx-auto object-cover rounded-full"></img></td>
                                 <td class="py-2"> {{ $user->name }}</td>
                                 <td class="py-2">{{$user->lastname1}} {{$user->lastname2}}</td>
                                 <td class="py-2">{{$user->users_types_name}}</td>

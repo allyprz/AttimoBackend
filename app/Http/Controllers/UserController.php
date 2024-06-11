@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -86,6 +87,23 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        // The user is already being injected, no need to find it
+        // Check if image was uploaded
+        if ($request->hasFile('image')) {
+            // Check if the old image exists and delete it
+            $image_to_remove = 'images/' . $user->image;
+            if (File::exists($image_to_remove)) {
+                File::delete($image_to_remove);
+            }
+
+            // Store the new image with the user ID in the file name
+            $image = $request->file('image');
+            $filename = 'user_' . $user->id . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename);
+        } else {
+            $filename = $request->old_image;
+        }
+
         $data = [
             'name' => $request->name,
             'username' => $request->username,
@@ -93,16 +111,18 @@ class UserController extends Controller
             'lastname2' => $request->lastname2,
             'email' => $request->email,
             'users_types_id' => $request->users_types_id,
+            'image' => $filename,
         ];
 
         // Check if password is provided and not empty
         if ($request->filled('password')) {
-            $data['password'] = $request->password; // Assign password directly without bcrypt
+            $data['password'] = bcrypt($request->password); // Encrypt the password
         }
 
         $user->update($data);
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
+
 
 
 
