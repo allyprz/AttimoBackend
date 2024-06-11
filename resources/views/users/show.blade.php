@@ -3,20 +3,10 @@
 
     <div class="grid max-w-[900px] gap-4 bg-white rounded-sm my-4 mx-auto p-6">
         <section>
-            <div class="flex justify-between items-center text-center">
-                <h2 class="text-2xl mb-2 font-semibold text-clr-dark-third inline-block">User's details</h2>
-                <a href="{{ url()->previous() }}"
-                    class="cursor-pointer text-2xl mb-2 font-semibold text-clr-dark-third inline-block">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-circle-chevron-right">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="m10 8 4 4-4 4" />
-                    </svg>
-                </a>
-            </div>
-            <p class="text-clr-dark-gray">Here you can see the details of the user.</p>
-        </section>
+            <a href="{{ url()->previous() }}" class="cursor-pointer text-2xl mb-2 font-semibold text-clr-dark-third inline-block"><</a>
+            <h2 class="text-2xl mb-2 font-semibold text-clr-dark-third inline-block">Edit user</h2>
+            <p class="text-clr-dark-gray">Update the information of the user by filling the form below.</p>
+        </section>    
         <hr class="border-b-2 text-clr-dark-gray">
 
         @if ($errors->any())
