@@ -75,9 +75,41 @@
             </div>
         </div>
 
+        <div class="mt-8">
+        <section class="flex justify-between items-center">
+            <h2>Students list</h2>
+            <span class="px-2 py-1 bg-clr-light-secondary-bg/40 border-clr-light-secondary-bg border-2 rounded-md mb-4 text-clr-blue">Members selected: 
+                <span id="selectedCount">0</span>
+            </span>
+        </section>
+        <table class="table min-w-full text-center text-sm text-clr-dark-gray">
+            <thead class="border-b border-clr-light-gray dark:border-white/10 dark:text-clr-blue">
+                <tr>
+                    <th scope="col" class="px-6 py-3 font-medium">Select</th>
+                    <th scope="col" class="px-6 py-3 font-medium">Picture</th>
+                    <th scope="col" class="px-6 py-3 font-medium">Name</th>
+                    <th scope="col" class="px-6 py-3 font-medium">Last names</th>
+                    <th scope="col" class="px-6 py-3 font-medium">Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                <tr class="border-b border-neutral-200 dark:border-white/10">
+                    <td class="py-2"><input type="checkbox" name="student_ids[]" value="{{ $user->id }}" {{ in_array($user->id, $groupStudents) ? 'checked' : '' }}></td>
+                    <td class="py-2"> <img src="{{ asset('images/' . $user->image) }}" class="size-10 mx-auto object-cover rounded-full"></img></td>
+                    <td class="py-2"> {{ $user->name }}</td>
+                    <td class="py-2">{{$user->lastname1}} {{$user->lastname2}}</td>
+                    <td class="py-2">{{$user->users_types_name}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
         <button type="submit" class="w-full p-2 bg-clr-blue text-white rounded-sm hover:brightness-[.85] duration-150">
             Update Group
         </button>
     </form>
 </div>
+@vite('resources/js/user-count.js')
 @endsection

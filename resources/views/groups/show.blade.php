@@ -20,26 +20,23 @@
         </div>
     @endif
 
-    <form action="{{ route('groups.update', $group->id) }}" method="POST" class="grid gap-4 w-full">
-        @csrf
-        @method('PUT')
+    <form class="grid gap-4 w-full">
         <div class="flex gap-6 justify-stretch w-full">
             <div class="grid gap-4 w-full">
-                
-            <div class="flex gap-4 items-center">
-                <div class="w-full">
-                    <label class="text-clr-dark" for="course_name">Course</label>
-                    <p class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" id="course_name">
-                        {{ $group->course->name ?? 'Not Assigned' }}
-                    </p>
+                <div class="flex gap-4 items-center">
+                    <div class="w-full">
+                        <label class="text-clr-dark" for="course_name">Course</label>
+                        <p class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" id="course_name">
+                            {{ $group->course->name ?? 'Not Assigned' }}
+                        </p>
+                    </div>
+                    <div class="w-full">
+                        <label class="text-clr-dark" for="professor_name">Professor</label>
+                        <p class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" id="professor_name">
+                            {{ $group->user->name ?? 'Not Assigned' }} {{ $group->user->lastname1 ?? '' }} {{ $group->user->lastname2 ?? '' }}
+                        </p>
+                    </div>
                 </div>
-                <div class="w-full">
-                    <label class="text-clr-dark" for="professor_name">Professor</label>
-                    <p class="w-full focus:outline-none p-2 border-2 border-clr-light-gray/40 rounded-md mt-2" id="professor_name">
-                        {{ $group->user->name ?? 'Not Assigned' }} {{ $group->user->lastname1 ?? '' }} {{ $group->user->lastname2 ?? '' }}
-                    </p>
-                </div>
-            </div>
 
                 <div class="flex gap-4 items-center">
                     <div class="w-full">
@@ -59,6 +56,32 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="mt-8">
+            <section class="flex justify-between items-center">
+                <h2>Students list</h2>
+            </section>
+            <table class="table min-w-full text-center text-sm text-clr-dark-gray">
+                <thead class="border-b border-clr-light-gray dark:border-white/10 dark:text-clr-blue">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 font-medium">Picture</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Name</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Last names</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($students as $student)
+                    <tr class="border-b border-neutral-200 dark:border-white/10">
+                        <td class="py-2"><img src="{{ asset('images/' . $student->image) }}" class="size-10 mx-auto object-cover rounded-full"></img></td>
+                        <td class="py-2">{{ $student->name }}</td>
+                        <td class="py-2">{{ $student->lastname1 }} {{ $student->lastname2 }}</td>
+                        <td class="py-2">{{ $student->users_types_name }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </form>
 </div>

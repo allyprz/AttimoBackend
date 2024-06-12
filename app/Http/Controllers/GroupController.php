@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\UsersGroup;
 use App\Models\Group;
 use App\Models\Course;
 use App\Models\User;
@@ -44,15 +45,17 @@ class GroupController extends Controller
     */
     public function store(Request $request)
     {
+        // Validar datos del formulario...
         $validatedData = $request->validate([
             'courses_id' => 'required|integer|exists:courses,id',
             'day_of_week' => 'required|string',
             'start_time' => 'required',
             'end_time' => 'required',
-            'users_id' => 'required|integer|exists:users,id', 
+            'users_id' => 'required|integer|exists:users,id',
+            'student_ids' => 'nullable|array', // Asegura que sea un array
+            'student_ids.*' => 'integer|exists:users,id', // Asegura que cada ID sea válido
         ]);
 
-        // Consultations
         $consultations = $validatedData['day_of_week'] . ' ' . $validatedData['start_time'] . ' - ' . $validatedData['end_time'];
 
         // Group number
@@ -66,6 +69,16 @@ class GroupController extends Controller
         $group->users_id = $validatedData['users_id'];
         $group->save();
 
+        // Students
+        if (isset($validatedData['student_ids'])) {
+            foreach ($validatedData['student_ids'] as $studentId) {
+                $userGroup = new UsersGroup();
+                $userGroup->users_id = $studentId;
+                $userGroup->groups_id = $group->id;
+                $userGroup->save();
+            }
+        }
+
         return redirect()->route('groups.index')->with('success', 'Group registered successfully.');
     }
      
@@ -75,70 +88,79 @@ class GroupController extends Controller
     public function show($id)
     {
         $group = Group::find($id);
-       
+        
         if (!$group) {
             return redirect()->route('groups.index')->with('error', 'Group not found.');
         }
+
         $courses = Course::all();
-        $users = User::join('users_types', 'users_types.id', '=', 'users.users_types_id')
+
+        // Obtener solo los usuarios que están en el grupo
+        $students = $group->students()
+            ->join('users_types', 'users_types.id', '=', 'users.users_types_id')
             ->select('users.*', 'users_types.name as users_types_name')
             ->get();
         
-        return view('groups.show', compact('group', 'users', 'courses'));
+        return view('groups.show', compact('group', 'students', 'courses'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
         $group = Group::find($id);
-       
-        $courses = Course::all();
+        
         if (!$group) {
             return redirect()->route('groups.index')->with('error', 'Group not found.');
-        }else{
-            $users = User::join('users_types', 'users_types.id', '=', 'users.users_types_id')
-                ->select('users.*', 'users_types.name as users_types_name')
-                ->get();
         }
+
+        $courses = Course::all();
+        $users = User::join('users_types', 'users_types.id', '=', 'users.users_types_id')
+            ->select('users.*', 'users_types.name as users_types_name')
+            ->get();
+
+        $groupStudents = $group->students->pluck('id')->toArray(); // Obtener los IDs de los estudiantes del grupo
         
-        return view('groups.edit', compact('group', 'users','courses'));
+        return view('groups.edit', compact('group', 'users', 'courses', 'groupStudents'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
     {
-        // Validar los datos del formulario
         $request->validate([
             'courses_id' => 'required|exists:courses,id',
             'users_id' => 'required|exists:users,id',
             'day_of_week' => 'required|string',
             'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
+            'end_time' => 'required|date_format:H:i',
+            'student_ids' => 'array',
+            'student_ids.*' => 'exists:users,id'
         ]);
-    
-        // Buscar el grupo a actualizar
+
         $group = Group::find($id);
+
         if (!$group) {
             return redirect()->route('groups.index')->with('error', 'Group not found.');
         }
-    
-        // Procesar los datos del formulario
+
         $consultations = $request->input('day_of_week') . ' ' . $request->input('start_time') . ' - ' . $request->input('end_time');
-    
-        // Actualizar el grupo en la base de datos
         $group->courses_id = $request->input('courses_id');
         $group->users_id = $request->input('users_id');
         $group->consultations = $consultations;
         $group->save();
-    
-        // Redireccionar a la vista de índice con un mensaje de éxito
+
+        $group->students()->sync($request->student_ids);
+
         return redirect()->route('groups.index')->with('success', 'Group updated successfully.');
     }
+
+
     
+
 
 
     /**

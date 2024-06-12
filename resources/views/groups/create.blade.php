@@ -72,7 +72,7 @@
 
         <div class="mt-8">
             <section class="flex justify-between items-center">
-                <h2>Users list</h2>
+                <h2>Students list</h2>
                 <span class="px-2 py-1 bg-clr-light-secondary-bg/40 border-clr-light-secondary-bg border-2 rounded-md mb-4 text-clr-blue">Members selected: 
                     <span id="selectedCount">0</span>
                 </span>
@@ -90,7 +90,7 @@
                     @foreach ($users as $user)
                     <tr class="border-b border-neutral-200 dark:border-white/10">
                         <td class="py-2"><input type="checkbox" name="student_ids[]" value="{{ $user->id }}"></td>
-                        <td class="py-2"> <img src="https://i.pinimg.com/564x/07/21/38/072138a5acc89f7dd25ede025365bba7.jpg" class="size-10 mx-auto object-cover rounded-full"></img></td>
+                        <td class="py-2"> <img src="{{ asset('images/' . $user->image) }}" class="size-10 mx-auto object-cover rounded-full"></img></td>
                         <td class="py-2"> {{ $user->name }}</td>
                         <td class="py-2">{{$user->lastname1}} {{$user->lastname2}}</td>
                         <td class="py-2">{{$user->users_types_name}}</td>
