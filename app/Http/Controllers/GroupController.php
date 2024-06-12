@@ -7,7 +7,6 @@ use App\Models\UsersGroup;
 use App\Models\Group;
 use App\Models\Course;
 use App\Models\User;
-use App\Models\Activity; 
 
 class GroupController extends Controller
 {
@@ -22,7 +21,7 @@ class GroupController extends Controller
             ->select('groups.*', 'courses.name as course_name', 'users.name as professor_name')
             ->orderBy('groups.courses_id', 'asc') // Order by courses_id
             ->paginate(10);
-        
+
         $courses = Course::all();
         $users = User::all();
         return view('groups.index', compact('groups', 'courses', 'users'));
@@ -37,12 +36,12 @@ class GroupController extends Controller
         $users = User::join('users_types', 'users_types.id', '=', 'users.users_types_id')
             ->select('users.*', 'users_types.name as users_types_name')
             ->get();
-    
+
         return view('groups.create', compact('courses', 'users'));
     }
     /**
-    * Store a newly created resource in storage.
-    */
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         // Validar datos del formulario...
@@ -81,14 +80,14 @@ class GroupController extends Controller
 
         return redirect()->route('groups.index')->with('success', 'Group registered successfully.');
     }
-     
+
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
         $group = Group::find($id);
-        
+
         if (!$group) {
             return redirect()->route('groups.index')->with('error', 'Group not found.');
         }
@@ -100,7 +99,7 @@ class GroupController extends Controller
             ->join('users_types', 'users_types.id', '=', 'users.users_types_id')
             ->select('users.*', 'users_types.name as users_types_name')
             ->get();
-        
+
         return view('groups.show', compact('group', 'students', 'courses'));
     }
 
@@ -110,7 +109,7 @@ class GroupController extends Controller
     public function edit($id)
     {
         $group = Group::find($id);
-        
+
         if (!$group) {
             return redirect()->route('groups.index')->with('error', 'Group not found.');
         }
@@ -121,7 +120,7 @@ class GroupController extends Controller
             ->get();
 
         $groupStudents = $group->students->pluck('id')->toArray(); // Obtener los IDs de los estudiantes del grupo
-        
+
         return view('groups.edit', compact('group', 'users', 'courses', 'groupStudents'));
     }
 
@@ -159,7 +158,7 @@ class GroupController extends Controller
     }
 
 
-    
+
 
 
 
@@ -171,7 +170,7 @@ class GroupController extends Controller
         $group = Group::find($id);
         if (!$group) {
             return redirect()->route('groups.index')->with('error', 'Group not found.');
-        }else{
+        } else {
             $group->delete();
             return redirect()->route('groups.index')->with('success', 'Group deleted successfully.');
         }
