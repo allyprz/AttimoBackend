@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisteredActivityController;
 use App\Http\Controllers\RegisteredGroupController;
+use App\Http\Controllers\RegisteredCategoryController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -23,3 +24,6 @@ Route::get('/group/{id}', [RegisteredGroupController::class, 'show']);
 
 //Get all activities by group
 Route::get('/activities/group/{id}', [RegisteredActivityController::class, 'showByGroup']);
+
+//Get all categories
+Route::get('/categories/all', [RegisteredCategoryController::class, 'index']);
