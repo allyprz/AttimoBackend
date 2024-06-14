@@ -94,7 +94,7 @@ class ActivitySeeder extends Seeder
         ]);
 
         Activity::create([
-            'name' => 'Client-Side Scripting Assignment',
+            'name' => 'Client-Side Scripting Task',
             'description' => 'Develop a dynamic web application using JavaScript frameworks like React.',
             'image' => 'activity_8.jpg',
             'percent' => 30,
@@ -298,7 +298,7 @@ class ActivitySeeder extends Seeder
         ]);
 
         Activity::create([
-            'name' => 'Environmental Impact Assessment',
+            'name' => 'Environmental Impact Study',
             'description' => 'Conduct an assessment of the environmental impact of a proposed development project.',
             'image' => 'activity_26.jpg',
             'percent' => 30,
