@@ -35,6 +35,7 @@ class RegisteredActivityController extends Controller
 
         //Change the status to Active or Inactive instead of 1 or 0
         foreach ($activities as $activity) {
+            $activity->image = "http://AttimoBackend.test/images/" . $activity->image;
             $activity->status = $activity->status == 1 ? 'Active' : 'Inactive';
         }
 
@@ -94,9 +95,9 @@ class RegisteredActivityController extends Controller
 
         //Change the status to Active or Inactive instead of 1 or 0
         foreach ($activity as $act) {
+            $act->image = "http://AttimoBackend.test/public/images/" . $act->image;
             $act->status = $act->status == 1 ? 'Active' : 'Inactive';
         }
-
         //Change the format of the scheduled_at in date and time
         foreach ($activity as $act) {
             $act->date = date('F d, Y', strtotime($act->scheduled_at));
