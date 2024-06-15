@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisteredActivityController;
 use App\Http\Controllers\RegisteredGroupController;
 use App\Http\Controllers\RegisteredCategoryController;
+use App\Http\Controllers\RegisteredUserController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -27,3 +28,6 @@ Route::get('/activities/group/{id}', [RegisteredActivityController::class, 'show
 
 //Get all categories
 Route::get('/categories/all', [RegisteredCategoryController::class, 'index']);
+
+//Register a new user
+Route::post('/user/add', [RegisteredUserController::class, 'store']);

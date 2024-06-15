@@ -70,8 +70,10 @@ class RegisteredGroupController extends Controller
             'courses.image as image',
             'courses.name as name',
             'courses.acronyms as acronym',
-            'users.name as professor_name',
-            'users.email as professor_email',
+            'users.name as teacher_name',
+            'users.lastname1 as teacher_lastname1',
+            'users.lastname2 as teacher_lastname2',
+            'users.email as teacher_email',
         )
             ->join('courses', 'groups.courses_id', '=', 'courses.id')
             ->join('users', 'groups.users_id', '=', 'users.id')
@@ -81,7 +83,7 @@ class RegisteredGroupController extends Controller
             foreach ($group as $gro) {
                 $gro->image = "http://AttimoBackend.test/images/" . $gro->image;
             }
-
+                
         if ($group) {
             return $group;
         } else {

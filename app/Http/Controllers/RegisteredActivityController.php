@@ -135,6 +135,7 @@ class RegisteredActivityController extends Controller
 
         //Change the status to Active or Inactive instead of 1 or 0
         foreach ($activities as $activity) {
+            $activity->image = "http://AttimoBackend.test/images/" . $activity->image;
             $activity->status = $activity->status == 1 ? 'Active' : 'Inactive';
         }
 
