@@ -46,11 +46,12 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 25, 'users_id' => 1]); //Ecology and Environmental Biology - Field Study Excursion
         ActivitiesUser::create(['activities_id' => 26, 'users_id' => 1]); //Ecology and Environmental Biology - Environmental Impact Assessment
         ActivitiesUser::create(['activities_id' => 27, 'users_id' => 1]); //Ecology and Environmental Biology - Biodiversity Conservation Workshop
+        
         // level activities
         ActivitiesUser::create(['activities_id' => 28,'users_id' => 1]); // University level activities - Welcome Ceremony
         ActivitiesUser::create(['activities_id' => 29,'users_id' => 1]); // University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 1]); // Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 1]); // Student level activities - Career Fair
+        // ActivitiesUser::create(['activities_id' => 30,'users_id' => 1]); // Student level activities - Study Group Session
+        // ActivitiesUser::create(['activities_id' => 31,'users_id' => 1]); // Student level activities - Career Fair
         ActivitiesUser::create(['activities_id' => 32,'users_id' => 1]); // Major level activities - Industry Guest Lecture
         ActivitiesUser::create(['activities_id' => 33,'users_id' => 1]); // Major level activities - Major Networking Event
 

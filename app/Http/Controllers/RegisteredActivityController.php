@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 //Import models
 use App\Models\Activity;
-
+use App\Models\ActivitiesUser;
 use App\Models\ActivitiesGroup;
 
 class RegisteredActivityController extends Controller
@@ -109,6 +109,47 @@ class RegisteredActivityController extends Controller
         } else {
             return "Activity not found";
         }
+    }
+
+    public function showByUser($id){
+        //Get all activities by user
+        $activities = ActivitiesUser::select(
+            'activities.id',
+            'activities.name',
+            'activities.description',
+            'activities.image',
+            'activities.percent',
+            'activities.scheduled_at',
+            'labels_activities.name as label',
+            'categories_activities.name as category',
+            'status_activities.isActive as status'
+        )
+            ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
+            ->join('labels_activities', 'activities.labels_activities_id', '=', 'labels_activities.id')
+            ->join('categories_activities', 'activities.categories_activities_id', '=', 'categories_activities.id')
+            ->join('status_activities', 'activities.status_activities_id', '=', 'status_activities.id')
+            ->where('activities_users.users_id', $id)
+            ->orderBy('activities.scheduled_at', 'asc')
+            ->get();
+
+        //Change the status to Active or Inactive instead of 1 or 0
+        foreach ($activities as $activity) {
+            $activity->image = "http://AttimoBackend.test/images/" . $activity->image;
+            $activity->status = $activity->status == 1 ? 'Active' : 'Inactive';
+        }
+
+        //Change the format of the scheduled_at in date and time
+        foreach ($activities as $activity) {
+            $activity->date = date('F d, Y', strtotime($activity->scheduled_at));
+            $activity->time = date('h:i A', strtotime($activity->scheduled_at));
+        }
+
+        //Remove the scheduled_at from the response
+        foreach ($activities as $activity) {
+            unset($activity->scheduled_at);
+        }
+
+        return $activities;
     }
 
     public function showByGroup($id)
