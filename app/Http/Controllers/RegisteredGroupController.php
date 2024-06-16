@@ -35,7 +35,7 @@ class RegisteredGroupController extends Controller
 
             $activities = ActivitiesGroup::where('groups_id', $group->id)->pluck('activities_id')->toArray();
             $totalPercent = Activity::whereIn('id', $activities)->sum('percent');
-            $group->progress = min($totalPercent, 100); // Ensure progress does not exceed 100%
+            $group->progress = (int)min($totalPercent, 100); // Ensure progress does not exceed 100%
         }
 
         return $groups;
@@ -62,7 +62,7 @@ class RegisteredGroupController extends Controller
 
             $activities = ActivitiesGroup::where('groups_id', $group->id)->pluck('activities_id')->toArray();
             $totalPercent = Activity::whereIn('id', $activities)->sum('percent');
-            $group->progress = min($totalPercent, 100); // Ensure progress does not exceed 100%
+            $group->progress = (int)min($totalPercent, 100); // Ensure progress does not exceed 100%
         }
 
         return $groups;

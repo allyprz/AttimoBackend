@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Activity;
 use App\Models\ActivitiesUser;
 use App\Models\ActivitiesGroup;
+use App\Models\Course;
+use App\Models\Group;
+use App\Models\UsersGroup;
 
 class RegisteredActivityController extends Controller
 {
@@ -111,7 +114,8 @@ class RegisteredActivityController extends Controller
         }
     }
 
-    public function showByUser($id){
+    public function showByUser($id)
+    {
         //Get all activities by user
         $activities = ActivitiesUser::select(
             'activities.id',
@@ -192,6 +196,54 @@ class RegisteredActivityController extends Controller
         }
 
         return $activities;
+    }
+
+    public function countByGroup($idUser)
+    {
+        // Obtain the groups of the user
+        $groups = UsersGroup::select('groups_id')
+            ->where('users_id', $idUser)
+            ->get();
+
+        // Obtain the number of the group and the name of the course related to it
+        foreach ($groups as $group) {
+            $group->group = Group::select('groups.id', 'groups.number', 'courses.name as course')
+                ->join('courses', 'groups.courses_id', '=', 'courses.id')
+                ->where('groups.id', $group->groups_id)
+                ->get();
+        }
+
+        // Obtain the number of activities per group
+        $activitiesCount = [];
+
+        foreach ($groups as $group) {
+            $count = ActivitiesGroup::select('groups_id')
+                ->where('groups_id', $group->groups_id)
+                ->count();
+
+            $activitiesCount[] = [
+                'group_id' => $group->groups_id,
+                'label' => $group->group[0]->course . ' - ' . $group->group[0]->number,
+                'number_activities' => $count
+            ];
+        }
+
+        // Obtain the number of activities not related to any group (ActivitiesUsers in which users_id = $idUser and activities_id not in ActivitiesGroups)
+        $count = ActivitiesUser::select('activities_id')
+            ->where('users_id', $idUser)
+            ->whereNotIn('activities_id', function ($query) {
+                $query->select('activities_id')
+                    ->from('activities_groups');
+            })
+            ->count();
+
+        $activitiesCount[] = [
+            'group_id' => 0,
+            'label' => 'Others',
+            'number_activities' => $count
+        ];
+
+        return $activitiesCount;
     }
 
     /**

@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
             'lastname2' => $request->lastname2,
             'email' => $request->email,
             'username' => $request->username,
-            'password' => $request->password,
+            'password' =>  bcrypt($request->password),
             'image' => "user_default.jpg",
         ]);
 
@@ -51,7 +51,8 @@ class RegisteredUserController extends Controller
             $user->update(['image' => $filename]);
         }
 
-        return "User registered successfully";
+        // Si se registró retornar un "registrado", sino un "no registrado"
+        return $user ? 'Registered' : 'Not registered';
     }
 
     /**
