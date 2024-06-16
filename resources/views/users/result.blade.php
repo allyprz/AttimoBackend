@@ -1,44 +1,18 @@
 @extends('layout')
-@section('content')
-<section class="flex mt-6 mb-4 items-center justify-between text-clr-dark-blue">
-    <h2 class="text-2xl font-semibold">Users</h2>
-    <a href="{{ route('users.create') }}" class="p-2 border-2 duration-150 border-clr-blue font-medium rounded-md text-clr-blue hover:bg-clr-blue hover:text-clr-white">+
-        Add new user</a>
-</section>
-
-@if ($message = Session::get('success'))
-<div class="p-3 text-sm rounded-md mb-4 bg-[#D0DDEF] text-clr-blue">
-    <p>{{ $message }}</p>
-</div>
-@endif
-<form action="{{ route('users.search') }}" method="GET" class="p-4 border-b border-clr-light-gray dark:border-white/10">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-            <div>
-                <label for="role" class="block text-sm font-medium text-gray-700">Role:</label>
-                <select id="role" name="role" class="mt-1 block w-60 rounded-md shadow-sm border-gray-300 border-2 focus:ring-clr-blue focus:ring-opacity-30 bg-white">
-                    <option value="">All</option>
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
-                <input type="text" id="name" name="name" class="mt-1 block w-60 rounded-md shadow-sm border-gray-300 border-2 focus:ring-clr-blue focus:ring-opacity-30">
-            </div>
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div>
-                        <label for="lastname" class="block text-sm font-medium text-gray-700">Lastname:</label>
-                        <input type="text" id="lastname" name="lastname" class="mt-1 block w-60 rounded-md shadow-sm border-gray-300 border-2 focus:ring-clr-blue focus:ring-opacity-30">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="p-2 bg-gray-200 rounded-md text-clr-gray-300 me-2 my-2 hover:brightness-[.80] duration-100">Search</button>
+<section class="mt-6 mb-4 text-clr-dark-blue">
+    <h2 class="text-2xl font-semibold mb-4">Search Results:</h2>
+    <p class="min-w-full text-clr-dark-gray mb-4">Total results found: {{ $total }}</p>
+    <div class="mb-4">
+        <a href="{{ route('users.index') }}" class="p-2 bg-gray-200 rounded-md text-clr-dark-gray hover:brightness-[.80] duration-100">
+            Go Back
+        </a>
     </div>
-</form>
+    @if ($message = Session::get('success'))
+        <div class="p-3 text-sm rounded-md bg-[#D0DDEF] text-clr-blue">
+            <span>{{ $message }}</span>
+        </div>
+    @endif
+</section>
 
 <div class="bg-white rounded-md my-4">
     <table class="table min-w-full text-center text-sm text-clr-dark-gray">

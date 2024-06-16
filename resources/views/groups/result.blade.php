@@ -1,9 +1,19 @@
 @extends('layout')
 @section('content')
 
-<section class="flex mt-6 mb-4 items-center justify-between text-clr-dark-blue">
-    <h2 class="text-2xl font-semibold">Groups</h2>
-    <a href="{{ route('groups.create') }}" class="p-2 border-2 duration-150 border-clr-blue font-medium rounded-md text-clr-blue hover:bg-clr-blue hover:text-clr-white">+ Add new group</a>
+<section class="mt-6 mb-4 text-clr-dark-blue">
+    <h2 class="text-2xl font-semibold mb-4">Search Results:</h2>
+    <p class="min-w-full text-clr-dark-gray mb-4">Total results found: {{ $total }}</p>
+    <div class="mb-4">
+        <a href="{{ route('groups.index') }}" class="p-2 bg-gray-200 rounded-md text-clr-dark-gray hover:brightness-[.80] duration-100">
+            Go Back
+        </a>
+    </div>
+    @if ($message = Session::get('success'))
+        <div class="p-3 text-sm rounded-md bg-[#D0DDEF] text-clr-blue">
+            <span>{{ $message }}</span>
+        </div>
+    @endif
 </section>
 
 @if ($message = Session::get('success'))
@@ -12,30 +22,6 @@
 </div>
 @endif
 
-<form action="{{ route('groups.search') }}" method="GET" class="p-4 border-b border-clr-light-gray dark:border-white/10">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-            <div>
-                <label for="group_number" class="block text-sm font-medium text-gray-700">Group No.:</label>
-                <input type="text" id="group_number" name="group_number" class="mt-1 block w-60 rounded-md shadow-sm border-gray-300 border-2 focus:ring-clr-blue focus:ring-opacity-30">
-            </div>
-            <div>
-                <label for="course_name" class="block text-sm font-medium text-gray-700">Course Name:</label>
-                <input type="text" id="course_name" name="course_name" class="mt-1 block w-60 rounded-md shadow-sm border-gray-300 border-2 focus:ring-clr-blue focus:ring-opacity-30">
-            </div>
-            <div>
-                <label for="professor_name" class="block text-sm font-medium text-gray-700">Professor Name:</label>
-                <select id="professor_name" name="professor_name" class="mt-1 block w-60 rounded-md shadow-sm border-gray-300 border-2 focus:ring-clr-blue focus:ring-opacity-30 bg-white">
-                    <option value="">All</option>
-                    @foreach ($professors as $professor)
-                        <option value="{{ $professor->id }}">{{ $professor->name }} {{ $professor->lastname1 }} {{ $professor->lastname2 }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <button type="submit" class="p-2 bg-gray-200 rounded-md text-clr-gray-300 me-2 my-2 hover:brightness-[.80] duration-100">Search</button>
-    </div>
-</form>
 
 <div class="bg-white rounded-md my-4">
     <table class="table min-w-full text-center text-sm text-clr-dark-gray">
@@ -104,8 +90,14 @@
             @else
             <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md cursor-not-allowed" disabled>Next</button>
             @endif
+
+            {{-- Last page button --}}
+            @if ($groups->hasMorePages())
+            <a href="{{ $groups->url($groups->lastPage()) }}" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:brightness-[.90]">Last</a>
+            @else
+            <button class="px-4 py-2 bg-gray-400/70 text-gray-800 rounded-md cursor-not-allowed" disabled>Last</button>
+            @endif
         </div>
     </div>
 </div>
-
 @endsection

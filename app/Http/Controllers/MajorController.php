@@ -24,6 +24,24 @@ class MajorController extends Controller
     }
 
     /**
+     * Search for a specific major.
+     */
+    public function search(Request $request)
+    {
+        $majors = Major::select('id', 'name', 'code');
+        if ($request->filled('name')) {
+            $majors->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+        if ($request->filled('code')) {
+            $majors->where('code', 'LIKE', '%' . $request->code . '%');
+        }
+        $majors->orderBy('name');
+        $results = $majors->paginate(10);
+        $total = $results->total();
+        return view('majors.result', compact('results', 'total'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

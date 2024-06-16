@@ -1,9 +1,19 @@
 @extends('layout')
 @section('content')
 
-<section class="flex mt-6 mb-4 items-center justify-between text-clr-dark-blue">
-    <h2 class="text-2xl font-semibold">Courses</h2>
-    <a href="{{ route('courses.create') }}" class="p-2 border-2 duration-150 border-clr-blue font-medium rounded-md text-clr-blue hover:bg-clr-blue hover:text-clr-white">+ Add new course</a>
+<section class="mt-6 mb-4 text-clr-dark-blue">
+    <h2 class="text-2xl font-semibold mb-4">Search Results:</h2>
+    <p class="min-w-full text-clr-dark-gray mb-4">Total results found: {{ $total }}</p>
+    <div class="mb-4">
+        <a href="{{ route('courses.index') }}" class="p-2 bg-gray-200 rounded-md text-clr-dark-gray hover:brightness-[.80] duration-100">
+            Go Back
+        </a>
+    </div>
+    @if ($message = Session::get('success'))
+        <div class="p-3 text-sm rounded-md bg-[#D0DDEF] text-clr-blue">
+            <span>{{ $message }}</span>
+        </div>
+    @endif
 </section>
 
 @if ($message = Session::get('success'))
@@ -11,21 +21,6 @@
     <p>{{ $message }}</p>
 </div>
 @endif
-<form action="{{ route('courses.search') }}" method="GET" class="p-4 border-b border-clr-light-gray dark:border-white/10">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-            <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
-                <input type="text" id="name" name="name" class="mt-1 block w-60 rounded-md shadow-sm border-gray-300 border-2 focus:ring-clr-blue focus:ring-opacity-30">
-            </div>
-            <div>
-                <label for="acronyms" class="block text-sm font-medium text-gray-700">Acronyms:</label>
-                <input type="text" id="acronyms" name="acronyms" class="mt-1 block w-48 rounded-md shadow-sm border-gray-300 focus:border-clr-blue focus:ring focus:ring-clr-blue focus:ring-opacity-50">
-            </div>
-        </div>
-        <button type="submit" class="p-2 bg-gray-200 rounded-md text-clr-gray-300 me-2 my-2 hover:brightness-[.80] duration-100">Search</button>
-    </div>
-</form>
 
 <div class="bg-white rounded-md my-4">
     <table class="table min-w-full text-center text-sm text-clr-dark-gray">
@@ -46,7 +41,7 @@
                 <td class="py-2">
                     <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
                         <a class="p-2 bg-blue-100 rounded-md font-regular text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('courses.show', $course->id) }}">Show</a>
-                        <a class="p-2 bg-gray-200 rounded-md font-regular text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('courses.edit', $course->id)}}">Edit</a>
+                        <a class="p-2 bg-gray-200 rounded-md font-regular text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('courses.edit', $course->id) }}">Edit</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="p-2 bg-red-200 rounded-md font-regular text-red-800 me-2 my-2 hover:brightness-[.80] duration-100">Delete</button>

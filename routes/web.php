@@ -14,6 +14,12 @@ Route::get('/', [ActivityController::class, 'index']);
 Route::get('/major/{id}', [MajorController::class, 'show'])->name('major.show');
 Route::get('/major/{id}/edit', [MajorController::class, 'edit'])->name('major.edit');
 
+Route::get('/activities/search/activity', [ActivityController::class, 'search'])->name('activities.search');
+Route::get('/majors/search/major', [MajorController::class, 'search'])->name('majors.search');
+Route::get('courses/search/course', [CourseController::class, 'search'])->name('courses.search');
+Route::get('groups/search/group', [GroupController::class, 'search'])->name('groups.search');
+Route::get('users/search/user', [UserController::class, 'search'])->name('users.search');
+
 //Controller resources
 Route::resource('activities', ActivityController::class); 
 Route::resource('users', UserController::class);

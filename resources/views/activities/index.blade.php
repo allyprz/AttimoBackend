@@ -10,6 +10,35 @@
     <span>{{ $message }}</span>
 </div>
 @endif
+<form action="{{ route('activities.search') }}" method="GET" class="p-4 border-b border-clr-light-gray dark:border-white/10">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700">Title:</label>
+                    <input type="text" id="title" name="title" class="mt-1 block w-60 rounded-md shadow-sm border-gray-300 border-2  focus:border-clr-blue  focus:ring-clr-blue focus:ring-opacity-50">
+                </div>
+                <div>
+                    <label for="category" class="block text-sm font-medium text-gray-700">Category:</label>
+                    <select name="category" id="category" class="mt-1 block w-48 rounded-md shadow-sm border-gray-300 focus:border-clr-blue focus:ring focus:ring-clr-blue focus:ring-opacity-50 bg-white">
+                        <option value="">All</option>
+                        @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <label for="label" class="block text-sm font-medium text-gray-700">Label:</label>
+                    <select name="label" id="label" class="mt-1 block w-48 rounded-md shadow-sm border-gray-300 focus:border-clr-blue focus:ring focus:ring-clr-blue focus:ring-opacity-50 bg-white">
+                        <option value="">All</option>
+                        @foreach($labels as $label)
+                        <option class="text-gray-700" value="{{ $label->id }}">{{ $label->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="p-2 bg-gray-200 rounded-md text-clr-gray-300 me-2 my-2 hover:brightness-[.80] duration-100">Search</button>
+        </div>
+    </form>
 
 <div class="bg-white rounded-md my-4">
     <table class="table min-w-full text-center text-sm text-clr-dark-gray">

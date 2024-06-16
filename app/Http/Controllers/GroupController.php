@@ -15,18 +15,44 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //Inner join between majors, courses and users to obtain the name of the course and the user
         $groups = Group::join('courses', 'courses.id', '=', 'groups.courses_id')
             ->join('users', 'users.id', '=', 'groups.users_id')
-            ->select('groups.*', 'courses.name as course_name', 'users.name as professor_name')
+            ->select('groups.*', 'courses.name as course_name', 'users.name as professor_name', 'users.lastname1', 'users.lastname2')
             ->orderBy('groups.courses_id', 'asc') // Order by courses_id
             ->paginate(10);
 
         $courses = Course::all();
         $users = User::all();
-        return view('groups.index', compact('groups', 'courses', 'users'));
+        $professors = User::where('users_types_id', 2)->get();
+
+        return view('groups.index', compact('groups', 'courses', 'users', 'professors'));
     }
 
+    /**
+     * Search for a specific group.
+     */
+    public function search(Request $request)
+    {
+        $groupNumber = $request->input('group_number');
+        $courseName = $request->input('course_name');
+        $professorId = $request->input('professor_name');
+        $query = Group::join('courses', 'courses.id', '=', 'groups.courses_id')
+                      ->join('users', 'users.id', '=', 'groups.users_id')
+                      ->select('groups.*', 'courses.name as course_name', 'users.name as professor_name', 'users.lastname1', 'users.lastname2');
+        if ($groupNumber) {
+            $query->where('groups.number', 'LIKE', "%{$groupNumber}%");
+        }
+        if ($courseName) {
+            $query->where('courses.name', 'LIKE', "%{$courseName}%");
+        }
+        if ($professorId) {
+            $query->where('users.id', $professorId);
+        }
+        $groups = $query->paginate(10);
+        $professors = User::where('users_types_id', 2)->get(); // Asumiendo que el tipo de usuario profesor tiene el ID 2
+        $total = $groups->total();
+        return view('groups.result', compact('groups', 'professors', 'total'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -156,11 +182,6 @@ class GroupController extends Controller
 
         return redirect()->route('groups.index')->with('success', 'Group updated successfully.');
     }
-
-
-
-
-
 
     /**
      * Remove the specified resource from storage.

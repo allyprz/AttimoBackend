@@ -20,6 +20,34 @@ class UserController extends Controller
     }
 
     /**
+     * Search for a specific user.
+     */
+    public function search(Request $request)
+    {
+        $role = $request->input('role');
+        $name = $request->input('name');
+        $lastname = $request->input('lastname');
+        $query = User::query();
+        if ($role) {
+            $query->where('users_types_id', $role);
+        }
+        if ($name) {
+            $query->where('name', 'LIKE', '%' . $name . '%');
+        }
+        if ($lastname) {
+            // Buscar tanto en lastname1 como en lastname2
+            $query->where(function ($query) use ($lastname) {
+                $query->where('lastname1', 'LIKE', '%' . $lastname . '%')
+                    ->orWhere('lastname2', 'LIKE', '%' . $lastname . '%');
+            });
+        }
+        $results = $query->paginate(10);
+        $users = UsersType::all();
+        $total = $results->total();
+        return view('users.index', compact('results', 'users'));
+    }
+    
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -122,9 +150,6 @@ class UserController extends Controller
         $user->update($data);
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
-
-
-
 
     /**
      * Remove the specified resource from storage.

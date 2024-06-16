@@ -38,6 +38,51 @@ class ActivityController extends Controller
         $status = StatusActivity::all();
         return view('activities.index', compact('results', 'categories', 'labels', 'status'));
     }
+    
+    /**
+     * Search for activities based on the search criteria.
+     */
+    public function search(Request $request)
+    {
+        $activities = Activity::select(
+            'activities.id',
+            'activities.name as title',
+            'categories_activities.id as category_id',
+            'categories_activities.name as category',
+            'labels_activities.id as label_id',
+            'labels_activities.name as label'
+        )->join('categories_activities', 'activities.categories_activities_id', '=', 'categories_activities.id')
+         ->join('labels_activities', 'activities.labels_activities_id', '=', 'labels_activities.id');
+            
+        if ($request->filled('title')) {
+            $activities->where(function($query) use ($request) {
+                $query->where('activities.name', 'LIKE', '%' . $request->title . '%');
+            });
+        }
+        if ($request->filled('category')) {
+            $activities->where('activities.categories_activities_id', $request->category);
+        }
+        if ($request->filled('label')) {
+            $activities->where('activities.labels_activities_id', $request->label);
+        }
+        // Order by status=2(active) first, then by id
+        $activities->orderByRaw('CASE WHEN status_activities_id = 2 THEN 0 ELSE 1 END, activities.id');
+        $results = $activities->paginate(10);
+        $total = $results->total();
+        return view('activities.result', compact('results', 'total'));
+    }
+
+    /**
+     * Show dates in calendar with an activity asigned
+     */
+    public function getHighlightedDays()
+    {
+        $dates = DB::table('activities')->pluck('scheduled_at');
+        $highlightedDays = $dates->map(function ($date) {
+            return \Carbon\Carbon::parse($date)->format('Y-m-d');
+        });
+        return response()->json($highlightedDays);
+    }
 
     /**
      * Show the form for creating a new resource.

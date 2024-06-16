@@ -1,39 +1,24 @@
 @extends('layout')
 @section('content')
-<section class="flex mt-6 mb-4 items-center justify-between text-clr-dark-blue">
-    <h2 class="text-2xl font-semibold">Majors</h2>
-    <a href="{{ route('majors.create') }}" class="p-2 border-2 duration-150 border-clr-blue font-medium rounded-md text-clr-blue hover:bg-clr-blue hover:text-clr-white">+ Add new major</a>
-</section>
-
-@if ($message = Session::get('success'))
-<div class="p-3 text-sm rounded-md mb-4 bg-[#D0DDEF] text-clr-blue">
-    <span>{{ $message }}</span>
-</div>
-@endif
-
-<form action="{{ route('majors.search') }}" method="GET" class="p-4 border-b border-clr-light-gray dark:border-white/10">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-            <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
-                <input type="text" id="name" name="name" class="mt-1 block w-60 rounded-md shadow-sm border-gray-300 border-2 focus:ring-clr-blue focus:ring-opacity-30">
-            </div>
-            <div>
-                <label for="code" class="block text-sm font-medium text-gray-700">Code:</label>
-                <input type="text" id="code" name="code" class="mt-1 block w-48 rounded-md shadow-sm border-gray-300 focus:border-clr-blue focus:ring focus:ring-clr-blue focus:ring-opacity-50">
-            </div>
+<div class="grid max-w-[900px] gap-4 bg-white rounded-sm my-4 mx-auto p-6">
+    <h2 class="text-2xl font-semibold mb-4">Search Results:</h2>
+    <p class="table min-w-full text-clr-dark-gray">Total results found: {{ $total }}</p>
+        <div class="mb-4 mt-2">
+            <a href="{{ route('activities.index') }}" class="p-2 bg-gray-200 rounded-md text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100">
+                Go Back
+            </a>
         </div>
-        <button type="submit" class="p-2 bg-gray-200 rounded-md text-clr-gray-300 me-2 my-2 hover:brightness-[.80] duration-100">Search</button>
-    </div>
-</form>
-
-<div class="bg-white rounded-md my-4">
+    @if ($results->isEmpty())
+    <p>No activities found.</p>
+    @else
     <table class="table min-w-full text-center text-sm text-clr-dark-gray">
         <thead class="border-b border-clr-light-gray dark:border-white/10 dark:text-clr-blue">
             <tr>
                 <th scope="col" class="px-6 py-3 font-medium">No.</th>
-                <th scope="col" class="px-6 py-3 font-medium">Name</th>
-                <th scope="col" class="px-6 py-3 font-medium">Code</th>
+                <th scope="col" class="px-6 py-3 font-medium">Title</th>
+                <th scope="col" class="px-6 py-3 font-medium">Category</th>
+                <th scope="col" class="px-6 py-3 font-medium">Label</th>
+                <th scope="col" class="px-6 py-3 font-medium">Status</th>
                 <th scope="col" class="px-6 py-3 font-medium" width="280px">Actions</th>
             </tr>
         </thead>
@@ -41,12 +26,14 @@
             @foreach ($results as $result)
             <tr class="border-b border-neutral-200 dark:border-white/10">
                 <td class="py-2">{{ $result->id }}</td>
-                <td class="py-2">{{ $result->name }}</td>
-                <td class="py-2">{{ $result->code }}</td>
+                <td class="py-2">{{ $result->title }}</td>
+                <td class="py-2">{{ $result->category }}</td>
+                <td class="py-2">{{ $result->label}}</td>
+                <td class="py-2">{{ $result->isActive ? 'Active' : 'Inactive' }}</td>
                 <td class="py-2">
-                    <form action="{{ route('majors.destroy', $result->id) }}" method="POST">
-                        <a class="p-2 bg-blue-100 rounded-md text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('major.show', $result->id) }}">Show</a>
-                        <a class="p-2 bg-gray-200 rounded-md text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('major.edit', $result->id) }}">Edit</a>
+                    <a class="p-2 bg-blue-100 rounded-md text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('activities.show', $result->id) }}">Show</a>
+                    <a class="p-2 bg-gray-200 rounded-md text-clr-dark-gray me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('activities.edit', $result->id) }}">Edit</a>
+                    <form method="POST" action="{{ route('activities.destroy', $result->id) }}" style="display: inline-block;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="p-2 bg-red-200 rounded-md text-red-800 me-2 my-2 hover:brightness-[.80] duration-100">Delete</button>
@@ -56,7 +43,6 @@
             @endforeach
         </tbody>
     </table>
-
     <div class="p-4 flex items-center justify-between">
         <div>
             {{-- First page button --}}
@@ -100,5 +86,6 @@
             @endif
         </div>
     </div>
+    @endif
 </div>
 @endsection
