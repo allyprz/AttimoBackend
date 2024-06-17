@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class RegisteredUserController extends Controller
@@ -10,9 +11,19 @@ class RegisteredUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Valida los datos de entrada del usuario
+        $credentials = $request->only('username', 'password');
+
+        // Intenta autenticar al usuario
+        if (Auth::attempt($credentials)) {
+            // Si el usuario está autenticado, redirige a la página de inicio o envía una respuesta de éxito
+            return response()->json(['message' => 'Login successful'], 200);
+        } else {
+            // Si la autenticación falla, envía una respuesta de error
+            return response()->json(['message' => 'Invalid username or password'], 401);
+        }
     }
 
     /**
@@ -21,6 +32,14 @@ class RegisteredUserController extends Controller
     public function create()
     {
         //
+    }
+
+
+    public function logout()
+    {
+        Auth::logout();
+        // Redirige a la página de inicio de sesión o envía una respuesta de éxito
+        return response()->json(['message' => 'Logout successful'], 200);
     }
 
     /**
