@@ -26,3 +26,7 @@ Route::resource('users', UserController::class);
 Route::resource('majors', MajorController::class);
 Route::resource('courses', CourseController::class);
 Route::resource('groups', GroupController::class);
+
+//Login routes
+Route::post('/check', [UserController::class, 'check'])->name('check');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');

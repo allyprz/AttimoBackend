@@ -13,19 +13,32 @@ class RegisteredUserController extends Controller
      */
     public function index(Request $request)
     {
-        // Valida los datos de entrada del usuario
+        // Validate the request data
         $credentials = $request->only('username', 'password');
-
-        // Intenta autenticar al usuario
+    
+        // Attempt to authenticate the user
         if (Auth::attempt($credentials)) {
-            // Si el usuario está autenticado, redirige a la página de inicio o envía una respuesta de éxito
-            return response()->json(['message' => 'Login successful'], 200);
+            // If the authentication is successful, get the authenticated user
+            $user = Auth::user();
+            // Return a JSON response with the user data
+            return response()->json([
+                'message' => 'Login successful',
+                'user' => [
+                    'id' => $user->id,
+                    'image' => "http://AttimoBackend.test/images/".$user->image,
+                    'name' => $user->name,
+                    'lastname1' => $user->lastname1,
+                    'lastname2' => $user->lastname2,
+                    'email' => $user->email,
+                    'username' => $user->username, 
+                ]
+            ], 200);
         } else {
-            // Si la autenticación falla, envía una respuesta de error
+            // If the authentication is not successful, return a JSON response with an error message
             return response()->json(['message' => 'Invalid username or password'], 401);
         }
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
