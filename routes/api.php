@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisteredGroupController;
 use App\Http\Controllers\RegisteredCategoryController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\QuestionsAnswerController;
+use App\Http\Controllers\ActivityController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -30,6 +31,8 @@ Route::get('/activities/group/count/{idUser}', [RegisteredActivityController::cl
 //Get dates of activities for calendar component
 Route::get('/activities/highlighted', [ActivityController::class, 'getHighlightedDays']);
 
+
+
 //Get all groups
 Route::get('/groups/all', [RegisteredGroupController::class, 'index']);
 
@@ -46,6 +49,9 @@ Route::get('/categories/all', [RegisteredCategoryController::class, 'index']);
 
 //Register a new user
 Route::post('/user/add', [RegisteredUserController::class, 'store']);
+
+//Edit a user
+Route::put('/user/edit/{id}', [RegisteredUserController::class, 'update']);
 
 //Login a user
 Route::post('/user/login', [RegisteredUserController::class, 'index']);

@@ -19,35 +19,6 @@ class UserController extends Controller
         return view('users.index', compact('results', 'users'));
     }
 
-    public function check(Request $request)
-    {
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required'
-        ]);
-
-        $user = User::where('username', '=', $request->username)->first();
-
-        if ($user) {
-            if (password_verify($request->password, $user->password)) {
-                $request->session()->put('user', $user);
-                return redirect()->route('users.index');
-            } else {
-                return back()->with('fail', 'Invalid username or password.'); // Incorrect password
-            }
-        } else {
-            return back()->with('fail', 'Invalid username or password.'); // No account found for this username
-        }
-    }
-
-    public function logout()
-    {
-        if (session()->has('user')) {
-            session()->pull('user');
-        }
-        return redirect()->route('users.login');
-    }
-
     /**
      * Search for a specific user.
      */
