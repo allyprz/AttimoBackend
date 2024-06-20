@@ -77,8 +77,10 @@ php artisan db:seed --class=ActivitiesGroupSeeder
 php artisan db:seed --class=ActivitiesUserSeeder
 php artisan db:seed --class=ActivitiesMajorSeeder
  -->
+### Paso 9: Encriptar las contraseñas de los usuarios.
+Ejecutar `php artisan migrate:refresh --step=1 --path=/database/migrations/2024_06_16_234743_encrypt_existing_passwords.php`.
 
-### Paso 9: Ejecutar el servidor de desarrollo.
+### Paso 10: Ejecutar el servidor de desarrollo.
 Ejecutar `npm run dev`.
 
 ### Contribuidores (Nombre completo/Usuarios de github)
@@ -86,6 +88,10 @@ Ejecutar `npm run dev`.
 * Benjamin Paniagua Rojas, @benjaminpaniagua
 * Krisly Arias Hidalgo, @krisarias
 
-## Requerimientos
+## Consideraciones
+### Requerimientos de funcionalidad con attimo (front).
+Mantener ambos proyecos corriendo con el `npm run dev`.
 
+### Actualizar el estado de las actividades.
+Ejecutar el comando `php artisan schedule:work` o `php artisan schedule:run`.
 ...
