@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Major;
-use App\Models\Course;
 use App\Models\MajorsUser;
 use App\Models\User;
-use App\Models\UsersType;
 use App\Models\Activity;
 use App\Models\ActivitiesMajor;
+use App\Models\ActivitiesUser;
 
 class MajorController extends Controller
 {
@@ -21,6 +20,22 @@ class MajorController extends Controller
         $results = Major::paginate(10);
         $users = User::all(); 
         return view('majors.index', compact('results'));
+    }
+
+    private function associateActivitiesToUsers(Major $major, array $studentIds = [])
+    {
+        // Obtener las actividades asociadas a la carrera
+        $activitiesIds = ActivitiesMajor::where('majors_id', $major->id)->pluck('activities_id')->toArray();
+
+        // Associate the activities to the students
+        foreach ($activitiesIds as $activityId) {
+            foreach ($studentIds as $studentId) {
+                ActivitiesUser::create([
+                    'users_id' => $studentId,
+                    'activities_id' => $activityId,
+                ]);
+            }
+        }
     }
 
     /**
@@ -94,6 +109,9 @@ class MajorController extends Controller
             }
         }
 
+        // Associate activities related to the major to students
+        $this->associateActivitiesToUsers($major, $validatedData['student_ids']);
+
         return redirect()->route('majors.index')->with('success', 'Major registered successfully.');
     }
 
@@ -119,6 +137,7 @@ class MajorController extends Controller
         if (!$major) {
             return redirect()->route('majors.index')->with('error', 'Major not found.');
         }
+
         $students = User::join('majors_users', 'users.id', '=', 'majors_users.users_id')
         ->join('users_types', 'users_types.id', '=', 'users.users_types_id')
         ->where('majors_users.majors_id', $id)
@@ -172,6 +191,10 @@ class MajorController extends Controller
             $major->students()->detach();
             $major->students()->attach($validatedData['student_ids']);
         }
+
+        // Associate activities related to the major to students
+        $this->associateActivitiesToUsers($major, $validatedData['student_ids']);
+        
         return redirect()->route('majors.index')->with('success', 'Major updated successfully.');
     }
 

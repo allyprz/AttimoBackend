@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Activity;
+use App\Models\ActivitiesUser;
 
 class RegisteredUserController extends Controller
 {
@@ -60,6 +62,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        // Crate a new user
         $user = User::create([
             'users_types_id' => $request->users_types_id,
             'name' => $request->name,
@@ -67,26 +70,37 @@ class RegisteredUserController extends Controller
             'lastname2' => $request->lastname2,
             'email' => $request->email,
             'username' => $request->username,
-            'password' =>  bcrypt($request->password),
+            'password' => bcrypt($request->password),
             'image' => "user_default.jpg",
         ]);
 
-        // Retrieve the ID of the newly created user
+        // Get the ID of the new user
         $user_id = $user->id;
 
+        // Store the image with the user ID in the file name
         if ($request->hasFile('image')) {
-            //Store the image with the user ID in the file name
             $image = $request->file('image');
             $filename = 'user_' . $user_id . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $filename);
-            // Update the user with the image name
             $user->update(['image' => $filename]);
         }
 
-        // Return a JSON response with a success message and the user data
+        // Obtain the IDs of the activities that belong to the category "Student"
+        $activities = Activity::join('categories_activities', 'activities.categories_activities_id', '=', 'categories_activities.id')
+            ->where('categories_activities.id', 3)
+            ->pluck('activities.id'); // Only ids
+
+        // Asociate the user with the activities
+        foreach ($activities as $activity_id) {
+            ActivitiesUser::create([
+                'users_id' => $user_id,
+                'activities_id' => $activity_id,
+            ]);
+        }
+
+        // Return a JSON response with a success message
         return response()->json([
-            'message' => 'User created
-            successfully',
+            'message' => 'User created successfully',
             'user' => [
                 'id' => $user->id,
                 'image' => "http://AttimoBackend.test/images/" . $user->image,
@@ -98,6 +112,7 @@ class RegisteredUserController extends Controller
             ]
         ], 201);
     }
+
 
     /**
      * Display the specified resource.
