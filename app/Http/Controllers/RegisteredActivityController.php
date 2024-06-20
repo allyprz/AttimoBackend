@@ -218,12 +218,14 @@ class RegisteredActivityController extends Controller
 
         foreach ($groups as $group) {
             $count = ActivitiesGroup::select('groups_id')
+                ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
                 ->where('groups_id', $group->groups_id)
+                ->where('activities.status_activities_id', 1)
                 ->count();
 
             $activitiesCount[] = [
                 'group_id' => $group->groups_id,
-                'label' => $group->group[0]->course . ' - ' . $group->group[0]->number,
+                'label' => $group->group[0]->course, //Add the number of the group:  . ' - ' . $group->group[0]->number
                 'number_activities' => $count
             ];
         }
