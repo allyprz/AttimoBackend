@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 //Import models
@@ -198,12 +198,13 @@ class RegisteredActivityController extends Controller
         return $activities;
     }
 
-    public function countByGroup($idUser)
+
+    public function countByGroup($idUser, $selectedOption)
     {
         // Obtain the groups of the user
         $groups = UsersGroup::select('groups_id')
-            ->where('users_id', $idUser)
-            ->get();
+        ->where('users_id', $idUser)
+        ->get();
 
         // Obtain the number of the group and the name of the course related to it
         foreach ($groups as $group) {
@@ -213,40 +214,113 @@ class RegisteredActivityController extends Controller
                 ->get();
         }
 
-        // Obtain the number of activities per group
+        // Initialize activitiesCount array and othersCount variable
         $activitiesCount = [];
+        $othersCount = 0;
 
-        foreach ($groups as $group) {
-            $count = ActivitiesGroup::select('groups_id')
-                ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
-                ->where('groups_id', $group->groups_id)
-                ->where('activities.status_activities_id', 1)
-                ->count();
+        // Fetch count of activities for each group based on selectedOption
+        switch ($selectedOption) {
+            case 0: // All time
+                foreach ($groups as $group) {
+                    $count = ActivitiesGroup::select('groups_id')
+                        ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
+                        ->where('groups_id', $group->groups_id)
+                        ->where('activities.status_activities_id', 1)
+                        ->count();
 
-            $activitiesCount[] = [
-                'group_id' => $group->groups_id,
-                'label' => $group->group[0]->course, //Add the number of the group:  . ' - ' . $group->group[0]->number
-                'number_activities' => $count
-            ];
+                    $activitiesCount[] = [
+                        'group_id' => $group->groups_id,
+                        'label' => $group->group[0]->course,
+                        'number_activities' => $count
+                    ];
+                }
+
+                // Count activities not related to any group (Others) for all time
+                $othersCount = ActivitiesUser::select('activities.id')
+                    ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
+                    ->where('activities_users.users_id', $idUser)
+                    ->whereNotIn('activities.id', function ($query) {
+                        $query->select('activities_id')
+                            ->from('activities_groups');
+                    })
+                    ->count();
+                break;
+
+            case 1: // This week
+                $startOfWeek = Carbon::now()->startOfWeek();
+                $endOfWeek = Carbon::now()->endOfWeek();
+
+                foreach ($groups as $group) {
+                    $count = ActivitiesGroup::select('groups_id')
+                        ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
+                        ->where('groups_id', $group->groups_id)
+                        ->where('activities.status_activities_id', 1)
+                        ->whereBetween('activities.scheduled_at', [$startOfWeek, $endOfWeek])
+                        ->count();
+
+                    $activitiesCount[] = [
+                        'group_id' => $group->groups_id,
+                        'label' => $group->group[0]->course,
+                        'number_activities' => $count
+                    ];
+                }
+
+                // Count activities not related to any group (Others) for this week
+                $othersCount = ActivitiesUser::select('activities.id')
+                    ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
+                    ->where('activities_users.users_id', $idUser)
+                    ->whereNotIn('activities.id', function ($query) {
+                        $query->select('activities_id')
+                            ->from('activities_groups');
+                    })
+                    ->whereBetween('activities.scheduled_at', [$startOfWeek, $endOfWeek])
+                    ->count();
+                break;
+
+            case 2: // Today
+                $today = Carbon::now()->toDateString();
+
+                foreach ($groups as $group) {
+                    $count = ActivitiesGroup::select('groups_id')
+                        ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
+                        ->where('groups_id', $group->groups_id)
+                        ->where('activities.status_activities_id', 1)
+                        ->whereDate('activities.scheduled_at', $today)
+                        ->count();
+
+                    $activitiesCount[] = [
+                        'group_id' => $group->groups_id,
+                        'label' => $group->group[0]->course,
+                        'number_activities' => $count
+                    ];
+                }
+
+                // Count activities not related to any group (Others) for today
+                $othersCount = ActivitiesUser::select('activities.id')
+                    ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
+                    ->where('activities_users.users_id', $idUser)
+                    ->whereNotIn('activities.id', function ($query) {
+                        $query->select('activities_id')
+                            ->from('activities_groups');
+                    })
+                    ->whereDate('activities.scheduled_at', $today)
+                    ->count();
+                break;
+
+            default:
+                break;
         }
 
-        // Obtain the number of activities not related to any group (ActivitiesUsers in which users_id = $idUser and activities_id not in ActivitiesGroups)
-        $count = ActivitiesUser::select('activities_id')
-            ->where('users_id', $idUser)
-            ->whereNotIn('activities_id', function ($query) {
-                $query->select('activities_id')
-                    ->from('activities_groups');
-            })
-            ->count();
-
+        // Add Others count to activitiesCount array
         $activitiesCount[] = [
             'group_id' => 0,
             'label' => 'Others',
-            'number_activities' => $count
+            'number_activities' => $othersCount
         ];
 
         return $activitiesCount;
     }
+
 
     /**
      * Show the form for editing the specified resource.

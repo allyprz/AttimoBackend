@@ -31,7 +31,7 @@ class CourseSeeder extends Seeder
         ]); // id 2
         
         Course::create([
-            'name' => 'Advanced Web Development',
+            'name' => 'Web Development',
             'description' => 'This course delves into advanced topics in web development, covering the latest technologies and frameworks used in building dynamic, responsive websites. Students will learn about server-side programming, client-side scripting, database integration, and security practices, preparing them to create robust web applications.',
             'acronyms' => 'AWD',
             'image' => 'course_3.jpg',

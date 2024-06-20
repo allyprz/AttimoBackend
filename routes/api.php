@@ -25,13 +25,11 @@ Route::get('/activities/group/{id}', [RegisteredActivityController::class, 'show
 //Get all activities by user
 Route::get('/activities/user/{id}', [RegisteredActivityController::class, 'showByUser']);
 
-//Get the number of activities per group
-Route::get('/activities/groups/count/{idUser}', [RegisteredActivityController::class, 'countByGroup']);
+//Get the number of activities per group -------------------------------------
+Route::get('/activities/groups/count/{idUser}/{selectedOption}', [RegisteredActivityController::class, 'countByGroup']);
 
 //Get dates of activities for calendar component
 Route::get('/activities/highlighted', [ActivityController::class, 'getHighlightedDays']);
-
-
 
 //Get all groups
 Route::get('/groups/all', [RegisteredGroupController::class, 'index']);
