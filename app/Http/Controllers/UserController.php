@@ -159,10 +159,15 @@ class UserController extends Controller
         // Look for the user
         $user = User::find($id);
 
-        // Check if the user has an existing image and delete it
-        $image_to_remove = 'images/' . $user->image;
-        if (File::exists($image_to_remove)) {
-            File::delete($image_to_remove);
+        // Check if the user's image should be deleted
+        if ($user->image != 'user_default.jpg') {
+            // Build the path to the image
+            $imagePath = public_path('images/' . $user->image);
+
+            // Check if the image exists and delete it
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
         }
 
         // Delete the user
