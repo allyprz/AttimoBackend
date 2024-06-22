@@ -80,6 +80,7 @@
             <table class="table min-w-full text-center text-sm text-clr-dark-gray">
                 <thead class="border-b border-clr-light-gray dark:border-white/10 dark:text-clr-blue">
                     <tr>
+                        <th scope="col" class="px-6 py-3 font-medium"></th>
                         <th scope="col" class="px-6 py-3 font-medium">Picture</th>
                         <th scope="col" class="px-6 py-3 font-medium">Name</th>
                         <th scope="col" class="px-6 py-3 font-medium">Last names</th>

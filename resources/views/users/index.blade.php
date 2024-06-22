@@ -45,9 +45,10 @@
         <thead class="border-b border-clr-light-gray dark:border-white/10 dark:text-clr-blue">
             <tr>
                 <th scope="col" class="px-6 py-3 font-medium">No.</th>
+                <th scope="col" class="px-6 py-3 font-medium">Picture</th>
+                <th scope="col" class="px-6 py-3 font-medium">Fullname</th>
+                <th scope="col" class="px-6 py-3 font-medium">Email</th>
                 <th scope="col" class="px-6 py-3 font-medium">Role</th>
-                <th scope="col" class="px-6 py-3 font-medium">Name</th>
-                <th scope="col" class="px-6 py-3 font-medium">Last Names</th>
                 <th scope="col" class="px-6 py-3 font-medium" width="280px">Actions</th>
             </tr>
         </thead>
@@ -55,14 +56,14 @@
             @foreach ($results as $result)
             <tr class="border-b border-neutral-200 dark:border-white/10">
                 <td class="py-2">{{ $result->id }}</td>
+                <td class="py-2"> <img src="{{ asset('images/' . $result->image) }}" class="size-10 mx-auto object-cover rounded-full"></img></td> 
+                <td class="py-2">{{ $result->name }} {{ $result->lastname1 }} {{ $result->lastname2 }}</td>
+                <td class="py-2">{{ $result->email }}</td>
                 @foreach ($users as $user)
-                @if ($user->id == $result->users_types_id)
-                <td class="py-2">{{ $user->name }}</td>
-                @endif
+                    @if ($user->id == $result->users_types_id)
+                    <td class="py-2">{{ $user->name }}</td>
+                    @endif
                 @endforeach
-                <td class="py-2">{{ $result->name }}</td>
-                <td class="py-2">{{ $result->lastname1 }} {{ $result->lastname2 }}</td>
-
                 <td class="py-2">
                     <form action="{{ route('users.destroy', $result->id) }}" method="POST">
                         <a class="p-2 bg-blue-100 rounded-md text-clr-blue me-2 my-2 hover:brightness-[.80] duration-100" href="{{ route('users.show', $result->id) }}">Show</a>
@@ -71,7 +72,6 @@
                         @method('DELETE')
                         <button type="submit" class="p-2 bg-red-200 rounded-md text-red-800 me-2 my-2 hover:brightness-[.80] duration-100">Delete</button>
                     </form>
-
                 </td>
             </tr>
             @endforeach

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Psy\Readline\Hoa\Console;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -52,7 +51,7 @@ class ActivityController extends Controller
             'labels_activities.id as label_id',
             'labels_activities.name as label'
         )->join('categories_activities', 'activities.categories_activities_id', '=', 'categories_activities.id')
-         ->join('labels_activities', 'activities.labels_activities_id', '=', 'labels_activities.id');
+        ->join('labels_activities', 'activities.labels_activities_id', '=', 'labels_activities.id');
             
         if ($request->filled('title')) {
             $activities->where(function($query) use ($request) {
