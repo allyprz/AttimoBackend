@@ -19,7 +19,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Review and analyze a piece of literature from the Renaissance period.',
             'image' => 'activity_1.jpg',
             'percent' => 20,
-            'scheduled_at' => '2024-06-18 10:00:00',
+            'scheduled_at' => '2024-03-02 10:30:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -30,7 +30,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Participate in a debate on philosophical ideas from the Enlightenment era.',
             'image' => 'activity_2.jpg',
             'percent' => 0,
-            'scheduled_at' => '2024-06-22 14:00:00',
+            'scheduled_at' => '2024-07-22 14:00:00',
             'labels_activities_id' => 1, // event
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -41,7 +41,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Create and present a project on the impact of the Impressionist movement in art.',
             'image' => 'activity_3.jpg',
             'percent' => 25,
-            'scheduled_at' => '2024-06-17 09:30:00',
+            'scheduled_at' => '2024-07-17 09:30:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -53,7 +53,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Workshop on techniques for cleaning and preprocessing data using Python.',
             'image' => 'activity_4.jpg',
             'percent' => 0,
-            'scheduled_at' => '2024-06-18 13:00:00',
+            'scheduled_at' => '2024-07-18 13:00:00',
             'labels_activities_id' => 1, // event
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -64,7 +64,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Create visualizations using a dataset and tools like Matplotlib or Tableau.',
             'image' => 'activity_5.jpg',
             'percent' => 25,
-            'scheduled_at' => 'r2 10:30:00',
+            'scheduled_at' => '2024-07-18 13:00:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
