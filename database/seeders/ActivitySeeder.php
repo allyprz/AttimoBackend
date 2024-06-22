@@ -64,7 +64,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Create visualizations using a dataset and tools like Matplotlib or Tableau.',
             'image' => 'activity_5.jpg',
             'percent' => 25,
-            'scheduled_at' => '2024-07-12 10:30:00',
+            'scheduled_at' => 'r2 10:30:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -75,7 +75,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Perform statistical analysis on a given dataset using R.',
             'image' => 'activity_6.jpg',
             'percent' => 30,
-            'scheduled_at' => '2024-07-22 11:00:00',
+            'scheduled_at' => '2024-06-22 11:00:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -87,7 +87,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Lab session focusing on server-side programming with Node.js.',
             'image' => 'activity_7.jpg',
             'percent' => 0,
-            'scheduled_at' => '2024-07-03 15:00:00',
+            'scheduled_at' => '2024-06-27 15:00:00',
             'labels_activities_id' => 1, // event
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -98,7 +98,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Develop a dynamic web application using JavaScript frameworks like React.',
             'image' => 'activity_8.jpg',
             'percent' => 30,
-            'scheduled_at' => '2024-07-13 09:00:00',
+            'scheduled_at' => '2024-06-27 09:00:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -109,7 +109,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Integrate a MySQL database with a web application and demonstrate CRUD operations.',
             'image' => 'activity_9.jpg',
             'percent' => 35,
-            'scheduled_at' => '2024-07-23 12:30:00',
+            'scheduled_at' => '2024-06-23 12:30:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -121,7 +121,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Hands-on dissection lab focusing on the musculoskeletal system.',
             'image' => 'activity_10.jpg',
             'percent' => 0,
-            'scheduled_at' => '2024-07-04 09:00:00',
+            'scheduled_at' => '2024-06-04 09:00:00',
             'labels_activities_id' => 1, // event
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -132,7 +132,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Write a detailed report on the cardiovascular system’s function.',
             'image' => 'activity_11.jpg',
             'percent' => 30,
-            'scheduled_at' => '2024-07-14 14:45:00',
+            'scheduled_at' => '2024-06-14 14:45:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -143,7 +143,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Quiz covering the major organ systems and their functions.',
             'image' => 'activity_12.jpg',
             'percent' => 20,
-            'scheduled_at' => '2024-07-24 11:15:00',
+            'scheduled_at' => '2024-06-24 11:15:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -155,7 +155,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Conduct a case study on a specific disease, including its etiology, pathology, and clinical manifestations.',
             'image' => 'activity_13.jpg',
             'percent' => 25,
-            'scheduled_at' => '2024-07-05 10:30:00',
+            'scheduled_at' => '2024-06-05 10:30:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -166,7 +166,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Lab session on histopathological techniques and examination of tissue samples.',
             'image' => 'activity_14.jpg',
             'percent' => 0,
-            'scheduled_at' => '2024-07-15 13:00:00',
+            'scheduled_at' => '2024-06-15 13:00:00',
             'labels_activities_id' => 1, // event
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -177,7 +177,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Participate in a seminar discussing recent advancements in the field of pathology.',
             'image' => 'activity_15.jpg',
             'percent' => 0,
-            'scheduled_at' => '2024-07-25 15:30:00',
+            'scheduled_at' => '2024-06-25 15:30:00',
             'labels_activities_id' => 1, // event
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -189,7 +189,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Workshop focusing on sketching techniques for architectural design concepts.',
             'image' => 'activity_16.jpg',
             'percent' => 0,
-            'scheduled_at' => '2024-07-06 14:00:00',
+            'scheduled_at' => '2024-06-30 14:00:00',
             'labels_activities_id' => 1, // event
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -200,7 +200,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Design a sustainable building project incorporating environmental principles.',
             'image' => 'activity_17.jpg',
             'percent' => 35,
-            'scheduled_at' => '2024-07-16 09:30:00',
+            'scheduled_at' => '2024-06-16 09:30:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -211,7 +211,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Participate in a critique session to provide feedback on peers\' design projects.',
             'image' => 'activity_18.jpg',
             'percent' => 0,
-            'scheduled_at' => '2024-07-26 11:00:00',
+            'scheduled_at' => '2024-06-26 11:00:00',
             'labels_activities_id' => 1, // event
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -223,7 +223,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Visit historical architectural sites and analyze their design and cultural significance.',
             'image' => 'activity_19.jpg',
             'percent' => 0,
-            'scheduled_at' => '2024-07-07 10:00:00',
+            'scheduled_at' => '2024-06-27 10:00:00',
             'labels_activities_id' => 1, // event
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -234,7 +234,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Write an essay on a prominent architectural theory and its impact on design practice.',
             'image' => 'activity_20.jpg',
             'percent' => 30,
-            'scheduled_at' => '2024-07-17 12:00:00',
+            'scheduled_at' => '2024-06-17 12:00:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -245,7 +245,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Create a timeline highlighting key architectural movements and styles throughout history.',
             'image' => 'activity_21.jpg',
             'percent' => 25,
-            'scheduled_at' => '2024-07-27 14:00:00',
+            'scheduled_at' => '2024-06-27 14:00:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -257,7 +257,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Lab session demonstrating DNA extraction techniques from various biological samples.',
             'image' => 'activity_22.jpg',
             'percent' => 0,
-            'scheduled_at' => '2024-07-08 11:00:00',
+            'scheduled_at' => '2024-06-08 11:00:00',
             'labels_activities_id' => 1, // event
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active
@@ -268,7 +268,7 @@ class ActivitySeeder extends Seeder
             'description' => 'Conduct a gene cloning experiment to amplify and manipulate DNA sequences.',
             'image' => 'activity_23.jpg',
             'percent' => 35,
-            'scheduled_at' => '2024-07-18 09:00:00',
+            'scheduled_at' => '2024-06-18 09:00:00',
             'labels_activities_id' => 2, // homework
             'categories_activities_id' => 1, // course
             'status_activities_id' => 1, // active

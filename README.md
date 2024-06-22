@@ -83,11 +83,6 @@ Ejecutar `php artisan migrate:refresh --step=1 --path=/database/migrations/2024_
 ### Paso 10: Ejecutar el servidor de desarrollo.
 Ejecutar `npm run dev`.
 
-### Contribuidores (Nombre completo/Usuarios de github)
-* Ashley Rojas Pérez, @allyprz
-* Benjamin Paniagua Rojas, @benjaminpaniagua
-* Krisly Arias Hidalgo, @krisarias
-
 ## Consideraciones
 ### Requerimientos de funcionalidad con attimo (front).
 Mantener ambos proyecos corriendo con el `npm run dev`.
@@ -95,3 +90,8 @@ Mantener ambos proyecos corriendo con el `npm run dev`.
 ### Actualizar el estado de las actividades.
 Ejecutar el comando `php artisan schedule:work` o `php artisan schedule:run`.
 ...
+
+### Contribuidores (Nombre completo/Usuarios de github)
+* Ashley Rojas Pérez, @allyprz
+* Benjamin Paniagua Rojas, @benjaminpaniagua
+* Krisly Arias Hidalgo, @krisarias

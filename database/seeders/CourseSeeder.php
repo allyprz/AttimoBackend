@@ -40,14 +40,14 @@ class CourseSeeder extends Seeder
 
         //Medicine's Courses
         Course::create([
-            'name' => 'Anatomy and Physiology',
+            'name' => 'Physiology Basics',
             'description' => 'This course provides an in-depth study of the human body, focusing on the structure and function of the various organ systems. Students will explore the intricate workings of the body through lectures, lab work, and practical applications, gaining a comprehensive understanding of human physiology.',
             'acronyms' => 'AP',
             'image' => 'course_4.jpg',
         ]); // id 4
         
         Course::create([
-            'name' => 'Pathology',
+            'name' => 'Pathology Basics',
             'description' => 'Pathology is the study of diseases, their causes, processes, development, and consequences. This course covers the fundamental concepts of pathology, including cellular injury, inflammation, and neoplasia. Students will learn to diagnose diseases through various laboratory techniques and clinical methods.',
             'acronyms' => 'PATH',
             'image' => 'course_5.jpg',
@@ -78,7 +78,7 @@ class CourseSeeder extends Seeder
         ]); // id 8
         
         Course::create([
-            'name' => 'Ecology and Environmental Biology',
+            'name' => 'Environmental Biology',
             'description' => 'This course examines the relationships between organisms and their environments. Topics include ecosystem dynamics, population biology, conservation, and biodiversity. Students will participate in field studies and research projects to gain practical experience in ecological analysis and environmental management.',
             'acronyms' => 'EEB',
             'image' => 'course_9.jpg',
