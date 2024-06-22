@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,7 +63,19 @@ class RegisteredUserController extends Controller
      */
     public function recoverPassword(Request $request)
     {
-        
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8', 
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if($user) {
+            $user->update(['password' => Hash::make($request->password)]);
+            return response()->json(['message' => 'Password updated successfully'], 200);
+        } else {
+            return response()->json(['message' => 'User not found'], 404);
+        }
     }
     /**
      * Store a newly created resource in storage.
@@ -146,50 +159,39 @@ class RegisteredUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Get the user to update
         $user = User::find($id);
 
-        //Verifies if the user exists
-        if ($user) {
-            //Verifies which fields are being updated (compares the new value with the old value)
-            if ($request->name != $user->name) {
-                $user->name = $request->name;
-            }
-            if ($request->lastname1 != $user->lastname1) {
-                $user->lastname1 = $request->lastname1;
-            }
-
-            if ($request->lastname2 != $user->lastname2) {
-                $user->lastname2 = $request->lastname2;
-            }
-
-            if ($request->email != $user->email) {
-                $user->email = $request->email;
-            }
-
-            if ($request->username != $user->username) {
-                $user->username = $request->username;
-            }
-
-            if ($request->hasFile('image')) {
-                //Store the image with the user ID in the file name
-                $image = $request->file('image');
-                $filename = 'user_' . $id . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('images'), $filename);
-                // Update the user with the image name
-                $user->update(['image' => $filename]);
-            }
-
-            //Save the updated user
-            $user->save();
-
-            //Return a JSON response with a success message
-            // return response()->json(['message' => 'User updated'], 200);
-
-        } else {
-            //Return a JSON response with an error message
+        if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
+
+        $user->name = $request->input('name', $user->name);
+        $user->lastname1 = $request->input('lastname1', $user->lastname1);
+        $user->lastname2 = $request->input('lastname2', $user->lastname2);
+        $user->email = $request->input('email', $user->email);
+        $user->username = $request->input('username', $user->username);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = 'user_' . $id . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename);
+            $user->image = $filename;
+        }
+        $user->save();
+
+        // Return a JSON response with the updated user data
+        return response()->json([
+            'message' => 'User updated successfully',
+            'user' => [
+                'id' => $user->id,
+                'image' => "http://AttimoBackend.test/images/" . $user->image,
+                'name' => $user->name,
+                'lastname1' => $user->lastname1,
+                'lastname2' => $user->lastname2,
+                'email' => $user->email,
+                'username' => $user->username,
+            ]
+        ], 200);
     }
 
     /**
