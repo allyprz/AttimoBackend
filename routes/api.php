@@ -46,9 +46,10 @@ Route::get('/categories/all', [RegisteredCategoryController::class, 'index']);
 //Register a new user
 Route::post('/user/add', [RegisteredUserController::class, 'store']);
 
+// Recover password
 Route::post('/user/recover', [RegisteredUserController::class, 'recoverPassword']);
 
-//Edit a user
+//Edit a user's data
 Route::put('/user/edit/{id}', [RegisteredUserController::class, 'update']);
 
 //Login a user
