@@ -40,13 +40,13 @@ Route::get('/group/{id}', [RegisteredGroupController::class, 'show']);
 //Get all groups by a user
 Route::get('/groups/user/{id}', [RegisteredGroupController::class, 'showByUser']);
 
-
 //Get all categories
 Route::get('/categories/all', [RegisteredCategoryController::class, 'index']);
 
-
 //Register a new user
 Route::post('/user/add', [RegisteredUserController::class, 'store']);
+
+Route::post('/user/recover', [RegisteredUserController::class, 'recoverPassword']);
 
 //Edit a user
 Route::put('/user/edit/{id}', [RegisteredUserController::class, 'update']);

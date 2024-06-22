@@ -49,7 +49,6 @@ class RegisteredUserController extends Controller
         //
     }
 
-
     public function logout()
     {
         Auth::logout();
@@ -57,12 +56,26 @@ class RegisteredUserController extends Controller
         return response()->json(['message' => 'Logout successful'], 200);
     }
 
+
+    /**
+     * Recover password based on email.
+     */
+    public function recoverPassword(Request $request)
+    {
+        
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // Crate a new user
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'username' => 'required|unique:users,username',
+            'password' => 'required',
+        ]);
+
+        // Create a new user
         $user = User::create([
             'users_types_id' => $request->users_types_id,
             'name' => $request->name,
@@ -90,7 +103,7 @@ class RegisteredUserController extends Controller
             ->where('categories_activities.id', 3)
             ->pluck('activities.id'); // Only ids
 
-        // Asociate the user with the activities
+        // Associate the user with the activities
         foreach ($activities as $activity_id) {
             ActivitiesUser::create([
                 'users_id' => $user_id,
@@ -98,7 +111,6 @@ class RegisteredUserController extends Controller
             ]);
         }
 
-        // Return a JSON response with a success message
         return response()->json([
             'message' => 'User created successfully',
             'user' => [
@@ -112,7 +124,6 @@ class RegisteredUserController extends Controller
             ]
         ], 201);
     }
-
 
     /**
      * Display the specified resource.
