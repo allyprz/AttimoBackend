@@ -76,10 +76,15 @@ class ActivityController extends Controller
      */
     public function getHighlightedDays()
     {
-        $dates = DB::table('activities')->pluck('scheduled_at');
+        $dates = DB::table('activities')
+                    ->select('scheduled_at')
+                    ->orderBy('scheduled_at', 'asc') // Ordena por fecha programada de manera ascendente
+                    ->pluck('scheduled_at');
+    
         $highlightedDays = $dates->map(function ($date) {
             return \Carbon\Carbon::parse($date)->format('Y-m-d');
         });
+    
         return response()->json($highlightedDays);
     }
 
