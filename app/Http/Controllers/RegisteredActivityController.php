@@ -152,7 +152,6 @@ class RegisteredActivityController extends Controller
         foreach ($activities as $activity) {
             unset($activity->scheduled_at);
         }
-
         return $activities;
     }
 
@@ -194,7 +193,6 @@ class RegisteredActivityController extends Controller
         foreach ($activities as $activity) {
             unset($activity->scheduled_at);
         }
-
         return $activities;
     }
 
@@ -223,185 +221,23 @@ class RegisteredActivityController extends Controller
 
         // Fetch count of activities for each group based on selectedOption
         switch ($selectedOption) {
-            case 0: // All time
-                foreach ($groups as $group) {
-                    $count = ActivitiesGroup::select('groups_id')
-                        ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
-                        ->where('groups_id', $group->groups_id)
-                        // ->where('activities.status_activities_id', 1) // Remove this line to include all activities
-                        ->count();
-
-                    $activeCount = ActivitiesGroup::select('groups_id')
-                        ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
-                        ->where('groups_id', $group->groups_id)
-                        ->where('activities.status_activities_id', 1)
-                        ->count();
-
-                    $inactiveCount = $count - $activeCount;
-
-                    $activitiesCount[] = [
-                        'group_id' => $group->groups_id,
-                        'label' => $group->group[0]->course,
-                        'number_activities' => $count
-                    ];
-
-                    $totalActivities += $count;
-                    $activeActivities += $activeCount;
-                    $inactiveActivities += $inactiveCount;
-                }
-
-                // Count activities not related to any group (Others) for all time
-                $othersCount = ActivitiesUser::select('activities.id')
-                    ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
-                    ->where('activities_users.users_id', $idUser)
-                    ->whereNotIn('activities.id', function ($query) {
-                        $query->select('activities_id')
-                            ->from('activities_groups');
-                    })
-                    // ->where('activities.status_activities_id', 1) // Remove this line to include all activities
-                    ->count();
-
-                $activeOthersCount = ActivitiesUser::select('activities.id')
-                    ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
-                    ->where('activities_users.users_id', $idUser)
-                    ->whereNotIn('activities.id', function ($query) {
-                        $query->select('activities_id')
-                            ->from('activities_groups');
-                    })
-                    ->where('activities.status_activities_id', 1)
-                    ->count();
-
-                $inactiveOthersCount = $othersCount - $activeOthersCount;
-
-                $totalActivities += $othersCount;
-                $activeActivities += $activeOthersCount;
-                $inactiveActivities += $inactiveOthersCount;
-
+            case 0: // All time (Semester)
+                $this->fetchActivitiesCount($groups, $idUser, null, null, $activitiesCount, $totalActivities, $activeActivities, $inactiveActivities);
+                $this->fetchOthersCount($idUser, null, null, $othersCount, $activeActivities, $inactiveActivities);
                 break;
 
             case 1: // This week
                 $startOfWeek = Carbon::now()->startOfWeek();
                 $endOfWeek = Carbon::now()->endOfWeek();
-
-                foreach ($groups as $group) {
-                    $count = ActivitiesGroup::select('groups_id')
-                        ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
-                        ->where('groups_id', $group->groups_id)
-                        // ->where('activities.status_activities_id', 1) // Remove this line to include all activities
-                        ->whereBetween('activities.scheduled_at', [$startOfWeek, $endOfWeek])
-                        ->count();
-
-                    $activeCount = ActivitiesGroup::select('groups_id')
-                        ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
-                        ->where('groups_id', $group->groups_id)
-                        ->where('activities.status_activities_id', 1)
-                        ->whereBetween('activities.scheduled_at', [$startOfWeek, $endOfWeek])
-                        ->count();
-
-                    $inactiveCount = $count - $activeCount;
-
-                    $activitiesCount[] = [
-                        'group_id' => $group->groups_id,
-                        'label' => $group->group[0]->course,
-                        'number_activities' => $count
-                    ];
-
-                    $totalActivities += $count;
-                    $activeActivities += $activeCount;
-                    $inactiveActivities += $inactiveCount;
-                }
-
-                // Count activities not related to any group (Others) for this week
-                $othersCount = ActivitiesUser::select('activities.id')
-                    ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
-                    ->where('activities_users.users_id', $idUser)
-                    ->whereNotIn('activities.id', function ($query) {
-                        $query->select('activities_id')
-                            ->from('activities_groups');
-                    })
-                    // ->where('activities.status_activities_id', 1) // Remove this line to include all activities
-                    ->whereBetween('activities.scheduled_at', [$startOfWeek, $endOfWeek])
-                    ->count();
-
-                $activeOthersCount = ActivitiesUser::select('activities.id')
-                    ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
-                    ->where('activities_users.users_id', $idUser)
-                    ->whereNotIn('activities.id', function ($query) {
-                        $query->select('activities_id')
-                            ->from('activities_groups');
-                    })
-                    ->where('activities.status_activities_id', 1)
-                    ->whereBetween('activities.scheduled_at', [$startOfWeek, $endOfWeek])
-                    ->count();
-
-                $inactiveOthersCount = $othersCount - $activeOthersCount;
-
-                $totalActivities += $othersCount;
-                $activeActivities += $activeOthersCount;
-                $inactiveActivities += $inactiveOthersCount;
-
+                $this->fetchActivitiesCount($groups, $idUser, $startOfWeek, $endOfWeek, $activitiesCount, $totalActivities, $activeActivities, $inactiveActivities);
+                $this->fetchOthersCount($idUser, $startOfWeek, $endOfWeek, $othersCount, $activeActivities, $inactiveActivities);
                 break;
 
             case 2: // Today
-                $today = Carbon::now()->toDateString();
-
-                foreach ($groups as $group) {
-                    $count = ActivitiesGroup::select('groups_id')
-                        ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
-                        ->where('groups_id', $group->groups_id)
-                        // ->where('activities.status_activities_id', 1) // Remove this line to include all activities
-                        ->whereDate('activities.scheduled_at', $today)
-                        ->count();
-
-                    $activeCount = ActivitiesGroup::select('groups_id')
-                        ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
-                        ->where('groups_id', $group->groups_id)
-                        ->where('activities.status_activities_id', 1)
-                        ->whereDate('activities.scheduled_at', $today)
-                        ->count();
-
-                    $inactiveCount = $count - $activeCount;
-
-                    $activitiesCount[] = [
-                        'group_id' => $group->groups_id,
-                        'label' => $group->group[0]->course,
-                        'number_activities' => $count
-                    ];
-
-                    $totalActivities += $count;
-                    $activeActivities += $activeCount;
-                    $inactiveActivities += $inactiveCount;
-                }
-
-                // Count activities not related to any group (Others) for today
-                $othersCount = ActivitiesUser::select('activities.id')
-                    ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
-                    ->where('activities_users.users_id', $idUser)
-                    ->whereNotIn('activities.id', function ($query) {
-                        $query->select('activities_id')
-                            ->from('activities_groups');
-                    })
-                    // ->where('activities.status_activities_id', 1) // Remove this line to include all activities
-                    ->whereDate('activities.scheduled_at', $today)
-                    ->count();
-
-                $activeOthersCount = ActivitiesUser::select('activities.id')
-                    ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
-                    ->where('activities_users.users_id', $idUser)
-                    ->whereNotIn('activities.id', function ($query) {
-                        $query->select('activities_id')
-                            ->from('activities_groups');
-                    })
-                    ->where('activities.status_activities_id', 1)
-                    ->whereDate('activities.scheduled_at', $today)
-                    ->count();
-
-                $inactiveOthersCount = $othersCount - $activeOthersCount;
-
-                $totalActivities += $othersCount;
-                $activeActivities += $activeOthersCount;
-                $inactiveActivities += $inactiveOthersCount;
-
+                $today = Carbon::now()->startOfDay();
+                $endOfToday = Carbon::now()->endOfDay();
+                $this->fetchActivitiesCount($groups, $idUser, $today, $endOfToday, $activitiesCount, $totalActivities, $activeActivities, $inactiveActivities);
+                $this->fetchOthersCount($idUser, $today, $endOfToday, $othersCount, $activeActivities, $inactiveActivities);
                 break;
 
             default:
@@ -421,6 +257,56 @@ class RegisteredActivityController extends Controller
             'activeActivities' => $activeActivities,
             'inactiveActivities' => $inactiveActivities
         ]);
+    }
+
+    private function fetchActivitiesCount($groups, $idUser, $start, $end, &$activitiesCount, &$totalActivities, &$activeActivities, &$inactiveActivities)
+    {
+        foreach ($groups as $group) {
+            $query = ActivitiesGroup::select('groups_id')
+                ->join('activities', 'activities_groups.activities_id', '=', 'activities.id')
+                ->where('groups_id', $group->groups_id);
+
+            if ($start && $end) {
+                $query->whereBetween('activities.scheduled_at', [$start, $end]);
+            }
+
+            $count = $query->count();
+            $activeQuery = clone $query;
+            $activeCount = $activeQuery->where('activities.status_activities_id', 1)->count();
+            $inactiveCount = $count - $activeCount;
+
+            $activitiesCount[] = [
+                'group_id' => $group->groups_id,
+                'label' => $group->group[0]->course,
+                'number_activities' => $count
+            ];
+
+            $totalActivities += $count;
+            $activeActivities += $activeCount;
+            $inactiveActivities += $inactiveCount;
+        }
+    }
+
+    private function fetchOthersCount($idUser, $start, $end, &$othersCount, &$activeActivities, &$inactiveActivities)
+    {
+        $query = ActivitiesUser::select('activities.id')
+            ->join('activities', 'activities_users.activities_id', '=', 'activities.id')
+            ->where('activities_users.users_id', $idUser)
+            ->whereNotIn('activities.id', function ($query) {
+                $query->select('activities_id')
+                    ->from('activities_groups');
+            });
+
+        if ($start && $end) {
+            $query->whereBetween('activities.scheduled_at', [$start, $end]);
+        }
+
+        $othersCount = $query->count();
+        $activeQuery = clone $query;
+        $activeOthersCount = $activeQuery->where('activities.status_activities_id', 1)->count();
+        $inactiveOthersCount = $othersCount - $activeOthersCount;
+        $activeActivities += $activeOthersCount;
+        $inactiveActivities += $inactiveOthersCount;
     }
 
 
