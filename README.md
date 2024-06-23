@@ -78,7 +78,8 @@ php artisan db:seed --class=ActivitiesUserSeeder
 php artisan db:seed --class=ActivitiesMajorSeeder
  -->
 ### Paso 9: Encriptar las contraseñas de los usuarios.
-Ejecutar `php artisan migrate:refresh --step=1 --path=/database/migrations/2024_06_16_234743_encrypt_existing_passwords.php`.
+Ejecutar `php artisan migrate:refresh --step=1 --path=/database/migrations/2024_06_16_234743_encrypt_existing_passwords.php` o `php artisan migrate:refresh --step=1 --path=database/migrations/2024_06_16_234743_encrypt_existing_passwords.php`.
+
 
 ### Paso 10: Ejecutar el servidor de desarrollo.
 Ejecutar `npm run dev`.
