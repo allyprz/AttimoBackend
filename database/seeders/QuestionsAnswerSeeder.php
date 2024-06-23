@@ -14,19 +14,19 @@ class QuestionsAnswerSeeder extends Seeder
     public function run(): void
     {
         // Respuestas de John
-        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 2]); // John, Gender: Female
+        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 1]); // John, Gender: Male
         QuestionsAnswer::create(['questions_id' => 2, 'answers_id' => 1]); // John, Scholarship: No scholarship
         QuestionsAnswer::create(['questions_id' => 3, 'answers_id' => 5]); // John, Sleep Hours: +9hrs
         QuestionsAnswer::create(['questions_id' => 4, 'answers_id' => 2]); // John, Sports: No
 
         // Respuestas de Mary
-        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 1]); // Mary, Gender: Male
+        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 2]); // Mary, Gender: Female
         QuestionsAnswer::create(['questions_id' => 2, 'answers_id' => 3]); // Mary, Scholarship: Partial scholarship
         QuestionsAnswer::create(['questions_id' => 3, 'answers_id' => 3]); // Mary, Sleep Hours: 7-8hrs
         QuestionsAnswer::create(['questions_id' => 4, 'answers_id' => 1]); // Mary, Sports: Yes
 
         // Respuestas de Peter
-        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 2]); // Peter, Gender: Female
+        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 1]); // Peter, Gender: Male
         QuestionsAnswer::create(['questions_id' => 2, 'answers_id' => 2]); // Peter, Scholarship: Full scholarship
         QuestionsAnswer::create(['questions_id' => 3, 'answers_id' => 2]); // Peter, Sleep Hours: 4-6hrs
         QuestionsAnswer::create(['questions_id' => 4, 'answers_id' => 2]); // Peter, Sports: No
@@ -38,13 +38,13 @@ class QuestionsAnswerSeeder extends Seeder
         QuestionsAnswer::create(['questions_id' => 4, 'answers_id' => 2]); // Anna, Sports: No
 
         // Respuestas de Charles
-        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 2]); // Charles, Gender: Female
+        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 3]); // Charles, Gender: Other
         QuestionsAnswer::create(['questions_id' => 2, 'answers_id' => 1]); // Charles, Scholarship: No scholarship
         QuestionsAnswer::create(['questions_id' => 3, 'answers_id' => 3]); // Charles, Sleep Hours: 7-8hrs
         QuestionsAnswer::create(['questions_id' => 4, 'answers_id' => 2]); // Charles, Sports: No
 
         // Respuestas de Laura
-        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 1]); // Laura, Gender: Male
+        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 2]); // Laura, Gender: Female
         QuestionsAnswer::create(['questions_id' => 2, 'answers_id' => 2]); // Laura, Scholarship: Full scholarship
         QuestionsAnswer::create(['questions_id' => 3, 'answers_id' => 2]); // Laura, Sleep Hours: 4-6hrs
         QuestionsAnswer::create(['questions_id' => 4, 'answers_id' => 2]); // Laura, Sports: No
@@ -68,7 +68,7 @@ class QuestionsAnswerSeeder extends Seeder
         QuestionsAnswer::create(['questions_id' => 4, 'answers_id' => 2]); // Paul, Sports: No
 
         // Respuestas de Sophia
-        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 1]); // Sophia, Gender: Male
+        QuestionsAnswer::create(['questions_id' => 1, 'answers_id' => 2]); // Sophia, Gender: Female
         QuestionsAnswer::create(['questions_id' => 2, 'answers_id' => 1]); // Sophia, Scholarship: No scholarship
         QuestionsAnswer::create(['questions_id' => 3, 'answers_id' => 4]); // Sophia, Sleep Hours: 7-8hrs
         QuestionsAnswer::create(['questions_id' => 4, 'answers_id' => 2]); // Sophia, Sports: No
