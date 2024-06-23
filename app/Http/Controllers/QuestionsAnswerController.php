@@ -57,99 +57,97 @@ class QuestionsAnswerController extends Controller
     }
 
     public function getGraphData()
-{
-    $totalUsers = DB::table('questions_answers')->select('user_id')->distinct()->count();
+    {
+        // Count total users
+        $totalUsers = DB::table('questions_answers')->select('user_id')->distinct()->count();
 
-    $typeScholarship = [
-        [
-            'id' => 0,
-            'value' => DB::table('questions_answers')
-                        ->where('questions_id', 2)
-                        ->where('answers_id', 1)
-                        ->count(),
-        ],
-        [
-            'id' => 1,
-            'value' => DB::table('questions_answers')
-                        ->where('questions_id', 2)
-                        ->where('answers_id', 2)
-                        ->count(),
-        ],
-        [
-            'id' => 2,
-            'value' => DB::table('questions_answers')
-                        ->where('questions_id', 2)
-                        ->where('answers_id', 3)
-                        ->count(),
-        ],
-    ];
-
-    $gender = [
-        [
-            'id' => 0,
-            'value' => DB::table('questions_answers')
-                        ->where('questions_id', 1)
-                        ->where('answers_id', 1)
-                        ->count(),
-        ],
-        [
-            'id' => 1,
-            'value' => DB::table('questions_answers')
-                        ->where('questions_id', 1)
-                        ->where('answers_id', 2)
-                        ->count(),
-        ],
-        [
-            'id' => 2,
-            'value' => DB::table('questions_answers')
-                        ->where('questions_id', 1)
-                        ->where('answers_id', 3)
-                        ->count(),
-        ],
-    ];
-
-    $hoursSleep = [
-        [
-            'id' => 0,
-            'value' => DB::table('questions_answers')
-                        ->where('questions_id', 3)
-                        ->where('answers_id', 1)
-                        ->count(),
-        ],
-        [
-            'id' => 1,
-            'value' => DB::table('questions_answers')
-                        ->where('questions_id', 3)
-                        ->where('answers_id', 2)
-                        ->count(),
-        ],
-        [
-            'id' => 2,
-            'value' => DB::table('questions_answers')
-                        ->where('questions_id', 3)
-                        ->where('answers_id', 3)
-                        ->count(),
-        ],
-        [
-            'id' => 3,
-            'value' => DB::table('questions_answers')
-                        ->where('questions_id', 3)
-                        ->where('answers_id', 4)
-                        ->count(),
-        ],
-    ];
-
-    return response()->json([
-        'totalUsers' => $totalUsers,
-        'typeScholarship' => $typeScholarship,
-        'gender' => $gender,
-        'hoursSleep' => $hoursSleep,
-    ]);
-}
-
-
-
-
+        // Count type of scholarships question id 2
+        
+        $typeScholarship = [
+            [
+                'total' => DB::table('questions_answers')
+                            ->where('questions_id', 2)
+                            ->where('answers_id', 1)
+                            ->count(),
+                'label' => 'No Sch',
+            ],
+            [
+                'total' => DB::table('questions_answers')
+                            ->where('questions_id', 2)
+                            ->where('answers_id', 2)
+                            ->count(),
+                'label' => 'Partial Sch',
+            ],
+            [
+                'total' => DB::table('questions_answers')
+                            ->where('questions_id', 2)
+                            ->where('answers_id', 3)
+                            ->count(),
+                'label' => 'Full Sch',
+            ],
+        ];
+        
+        $gender = [
+            [
+                'total' => DB::table('questions_answers')
+                            ->where('questions_id', 1)
+                            ->where('answers_id', 1)
+                            ->count(),
+                'label' => 'Male',
+            ],
+            [
+                'total' => DB::table('questions_answers')
+                            ->where('questions_id', 1)
+                            ->where('answers_id', 2)
+                            ->count(),
+                'label' => 'Female',
+            ],
+            [
+                'total' => DB::table('questions_answers')
+                            ->where('questions_id', 1)
+                            ->where('answers_id', 3)
+                            ->count(),
+                'label' => 'Other',
+            ],
+        ];
+        
+        $hoursSleep = [
+            [
+                'total' => DB::table('questions_answers')
+                            ->where('questions_id', 3)
+                            ->where('answers_id', 1)
+                            ->count(),
+                'label' => '-4h',
+            ],
+            [
+                'total' => DB::table('questions_answers')
+                            ->where('questions_id', 3)
+                            ->where('answers_id', 2)
+                            ->count(),
+                'label' => '4-6h',
+            ],
+            [
+                'total' => DB::table('questions_answers')
+                            ->where('questions_id', 3)
+                            ->where('answers_id', 3)
+                            ->count(),
+                'label' => '7-8h',
+            ],
+            [
+                'total' => DB::table('questions_answers')
+                            ->where('questions_id', 3)
+                            ->where('answers_id', 4)
+                            ->count(),
+                'label' => '+9h',
+            ],
+        ];
+        
+        return response()->json([
+            'typeScholarship' => $typeScholarship,
+            'gender' => $gender,
+            'hoursSleep' => $hoursSleep,
+        ]);
+    }
 
 
 }

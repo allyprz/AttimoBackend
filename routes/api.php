@@ -58,6 +58,8 @@ Route::post('/user/login', [RegisteredUserController::class, 'index']);
 //Register new question and answer
 Route::post('/questions_answers/add', [QuestionsAnswerController::class, 'store']);
 
+//Get statistics
 Route::get('/statistics', [QuestionsAnswerController::class, 'getStatistics']);
 
+//Get graph data
 Route::get('/graphs', [QuestionsAnswerController::class, 'getGraphData']);
