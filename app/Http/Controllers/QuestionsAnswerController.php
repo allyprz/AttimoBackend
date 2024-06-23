@@ -1,67 +1,62 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\Question;
-use app\Models\Answer;
-use app\Models\QuestionAnswer;
+use Illuminate\Support\Facades\DB;
 
 class QuestionsAnswerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // ...
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        // ...
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //Register the answers and questions
+        // ...
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        // ...
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        // ...
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        // ...
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        // ...
     }
+
+    public function getStatistics()
+    {
+        // Obtén los datos estadísticos
+        $totalUsers = DB::table('users')->count();
+        $playSports = DB::table('questions_answers')->where('questions_id', 4)->where('answers_id', 1)->count();
+        $haveAccommodations = DB::table('questions_answers')->where('questions_id', 3)->count();
+        $haveScholarship = DB::table('questions_answers')->where('questions_id', 2)->where('answers_id', '!=', 1)->count();
+
+        // Retorna una respuesta JSON con los datos estadísticos
+        return response()->json([
+            'totalUsers' => $totalUsers,
+            'playSports' => $playSports,
+            'haveAccommodations' => $haveAccommodations,
+            'haveScholarship' => $haveScholarship,
+        ]);
+    }
+
+
 }
