@@ -59,3 +59,5 @@ Route::post('/user/login', [RegisteredUserController::class, 'index']);
 Route::post('/questions_answers/add', [QuestionsAnswerController::class, 'store']);
 
 Route::get('/statistics', [QuestionsAnswerController::class, 'getStatistics']);
+
+Route::get('/graphs', [QuestionsAnswerController::class, 'getGraphData']);
