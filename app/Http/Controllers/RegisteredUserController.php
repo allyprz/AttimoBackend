@@ -160,39 +160,30 @@ class RegisteredUserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-
+    
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-
-        $user->name = $request->input('name', $user->name);
-        $user->lastname1 = $request->input('lastname1', $user->lastname1);
-        $user->lastname2 = $request->input('lastname2', $user->lastname2);
-        $user->email = $request->input('email', $user->email);
-        $user->username = $request->input('username', $user->username);
-
+    
+        // Actualizar todos los campos directamente sin validación detallada
+        $user->update($request->all());
+    
+        // Opcionalmente, actualizar la imagen si se envía en la solicitud
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = 'user_' . $id . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $filename);
             $user->image = $filename;
+            $user->save(); // Guardar nuevamente después de actualizar la imagen
         }
-        $user->save();
-
-        // Return a JSON response with the updated user data
+    
+        // Devolver una respuesta con los datos actualizados del usuario
         return response()->json([
             'message' => 'User updated successfully',
-            'user' => [
-                'id' => $user->id,
-                'image' => "http://AttimoBackend.test/images/" . $user->image,
-                'name' => $user->name,
-                'lastname1' => $user->lastname1,
-                'lastname2' => $user->lastname2,
-                'email' => $user->email,
-                'username' => $user->username,
-            ]
+            'user' => $user
         ], 200);
     }
+    
 
     /**
      * Remove the specified resource from storage.
