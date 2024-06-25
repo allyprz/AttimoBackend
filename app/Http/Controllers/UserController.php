@@ -115,12 +115,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // The user is already being injected, no need to find it
-        // Check if image was uploaded
+        // Update the image if it has been modified
         if ($request->hasFile('image')) {
             // Check if the old image exists and delete it
             $image_to_remove = 'images/' . $user->image;
-            if (File::exists($image_to_remove)) {
+            if (File::exists($image_to_remove) && $user->image != 'user_default.jpg') {
                 File::delete($image_to_remove);
             }
 
@@ -128,8 +127,7 @@ class UserController extends Controller
             $image = $request->file('image');
             $filename = 'user_' . $user->id . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $filename);
-        } else {
-            $filename = $request->old_image;
+            $user->update(['image' => $filename]);
         }
 
         $data = [
@@ -139,7 +137,6 @@ class UserController extends Controller
             'lastname2' => $request->lastname2,
             'email' => $request->email,
             'users_types_id' => $request->users_types_id,
-            'image' => $filename,
         ];
 
         // Check if password is provided and not empty

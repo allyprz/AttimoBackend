@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -160,30 +161,49 @@ class RegisteredUserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-    
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
     
-        // Actualizar todos los campos directamente sin validación detallada
-        $user->update($request->all());
-    
-        // Opcionalmente, actualizar la imagen si se envía en la solicitud
+        //Update user
+        $user->update([
+            'name' => $request->name,
+            'lastname1' => $request->lastname1,
+            'lastname2' => $request->lastname2,
+            'email' => $request->email,
+            'username' => $request->username,
+        ]);
+
+        // Update the image if it has been modified
         if ($request->hasFile('image')) {
+            // Check if the old image exists and delete it
+            $image_to_remove = 'images/' . $user->image;
+            if (File::exists($image_to_remove) && $user->image != 'user_default.jpg') {
+                File::delete($image_to_remove);
+            }
+
+            // Store the new image with the user ID in the file name
             $image = $request->file('image');
-            $filename = 'user_' . $id . '.' . $image->getClientOriginalExtension();
+            $filename = 'user_' . $user->id . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $filename);
-            $user->image = $filename;
-            $user->save(); // Guardar nuevamente después de actualizar la imagen
+            $user->update(['image' => $filename]);
         }
     
         // Devolver una respuesta con los datos actualizados del usuario
         return response()->json([
             'message' => 'User updated successfully',
-            'user' => $user
+            'user' => [
+                'id' => $user->id,
+                'image' => "http://AttimoBackend.test/images/" . $user->image,
+                'name' => $user->name,
+                'lastname1' => $user->lastname1,
+                'lastname2' => $user->lastname2,
+                'email' => $user->email,
+                'username' => $user->username,
+                'users_types_id' => $user->users_types_id,
+            ]
         ], 200);
     }
-    
 
     /**
      * Remove the specified resource from storage.
