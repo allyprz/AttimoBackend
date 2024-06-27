@@ -66,7 +66,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:8', 
+            'password' => 'required', 
         ]);
 
         $user = User::where('email', $request->email)->first();
