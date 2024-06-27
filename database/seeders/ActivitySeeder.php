@@ -309,7 +309,7 @@ class ActivitySeeder extends Seeder
         ]);
 
         Activity::create([
-            'name' => 'Biodiversity Conservation Workshop',
+            'name' => 'Biodiversity Conservation',
             'description' => 'Participate in a workshop focused on strategies for biodiversity conservation and management.',
             'image' => 'activity_27.jpg',
             'percent' => 0,
