@@ -1,3 +1,4 @@
+@if (session()->has('user'))
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -14,5 +15,7 @@
         @yield('content')
     </section>
 </body>
-
 </html>
+@else
+<?php header('Location: ' . route('admin.login')); exit(); ?>
+@endif

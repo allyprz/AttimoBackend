@@ -20,11 +20,6 @@ class UserController extends Controller
         return view('users.index', compact('results', 'users'));
     }
 
-    public function isAdmin()
-    {
-        return $this->users_types_id === 3;
-    }
-
     /**
      * Search for a specific user.
      */
