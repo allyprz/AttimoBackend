@@ -193,15 +193,13 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
         $userInfo = User::where('email', '=', $request->email)->first();
-
         if (!$userInfo) {
             return back()->with('fail', 'We do not recognize your email address');
         } else {
             if (Auth::attempt($request->only('email', 'password'))) {
                 if ($userInfo->users_types_id == 3) {
-                    // $request->session()->put('user', $userInfo);
+                    $request->session()->put('user', $userInfo);
                     return redirect()->route('users.index');
                 } else {
                     return back()->with('fail', 'We do not recognize your email address');
