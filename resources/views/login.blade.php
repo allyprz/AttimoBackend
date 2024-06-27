@@ -7,6 +7,7 @@
     <title>Login</title>
     @vite('resources/css/app.css')
 </head>
+
 <body class="bg-clr-light-bg max-w-[92%] mx-auto">
 
     @if ($errors->any())
@@ -19,8 +20,17 @@
         </ul>
     </div>
     @endif
+
+
     <main class="flex justify-center items-center min-h-screen p-6 w-full">
+        @if ($message = Session::get('success'))
+        <div class="p-3 text-sm rounded-md mb-4 bg-[#D0DDEF] text-clr-blue">
+            <p>{{ $message }}</p>
+        </div>
+        @endif
+
         <form action="{{ route('admin.check') }}" method="POST" class="bg-white p-6 rounded-2xl max-w-[27rem] grid gap-4">
+            @csrf
             <h1 class="text-clr-blue font-semibold text-center text-7xl">User Login</h1>
             <div class="w-full">
                 <label class="text-clr-dark" for="email">Email</label>
@@ -36,4 +46,5 @@
         </form>
     </main>
 </body>
+
 </html>

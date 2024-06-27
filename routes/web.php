@@ -28,5 +28,6 @@ Route::resource('courses', CourseController::class);
 Route::resource('groups', GroupController::class);
 
 //Login routes
-Route::post('/check', [UserController::class, 'check'])->name('check');
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::post('/check', [UserController::class, 'check'])->name('admin.check');
+Route::get('/logout', [UserController::class, 'logout'])->name('admin.logout');
+Route::get('/login', [UserController::class, 'login'])->name('admin.login');

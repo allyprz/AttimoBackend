@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UsersType;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -46,7 +47,7 @@ class UserController extends Controller
         $total = $results->total();
         return view('users.index', compact('results', 'users'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      */
@@ -169,7 +170,56 @@ class UserController extends Controller
 
         // Delete the user
         $user->delete();
-
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+    }
+
+    /**
+     * Show the login form.
+     */
+    public function login()
+    {
+        return view('login');
+    }
+
+    /**
+     * Check if the user is logged (email and password) in and has an users_types_id of 3 (admin)
+     */
+    /**
+     * Authenticate user credentials and redirect based on role.
+     */
+    public function check(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $userInfo = User::where('email', '=', $request->email)->first();
+
+        if (!$userInfo) {
+            return back()->with('fail', 'We do not recognize your email address');
+        } else {
+            if (Auth::attempt($request->only('email', 'password'))) {
+                if ($userInfo->users_types_id == 3) {
+                    // $request->session()->put('user', $userInfo);
+                    return redirect()->route('users.index');
+                } else {
+                    return back()->with('fail', 'We do not recognize your email address');
+                }
+            } else {
+                return back()->with('fail', 'Incorrect password');
+            }
+        }
+    }
+
+    /**
+     * Log out the user
+     */
+    public function logout()
+    {
+        if (session()->has('user')) {
+            session()->pull('user');
+        }
+        return redirect('/login');
     }
 }
