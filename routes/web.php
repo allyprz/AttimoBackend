@@ -9,7 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GroupController;
 
 //Main route to activities/index
-Route::get('/', [ActivityController::class, 'index']);
+Route::get('/', [UserController::class, 'login'])->name('admin.login');
 
 Route::get('/major/{id}', [MajorController::class, 'show'])->name('major.show');
 Route::get('/major/{id}/edit', [MajorController::class, 'edit'])->name('major.edit');
