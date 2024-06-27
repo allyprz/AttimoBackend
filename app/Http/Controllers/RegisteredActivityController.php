@@ -77,7 +77,7 @@ class RegisteredActivityController extends Controller
      */
     public function show($id)
     {
-        //Get the activity by id
+        //Get the activity by id and get the categories name, labels name, status name, course name and group number (this last two through the join with activities_groups (which has the groups_id, and this one has the courses_id)
         $activity = Activity::select(
             'activities.id',
             'activities.name',
@@ -87,18 +87,22 @@ class RegisteredActivityController extends Controller
             'activities.scheduled_at',
             'labels_activities.name as label',
             'categories_activities.name as category',
-            'status_activities.isActive as status'
+            'status_activities.isActive as status',
+            'courses.name as course',
+            'groups.number as group'
         )
             ->join('labels_activities', 'activities.labels_activities_id', '=', 'labels_activities.id')
             ->join('categories_activities', 'activities.categories_activities_id', '=', 'categories_activities.id')
             ->join('status_activities', 'activities.status_activities_id', '=', 'status_activities.id')
+            ->join('activities_groups', 'activities.id', '=', 'activities_groups.activities_id')
+            ->join('groups', 'activities_groups.groups_id', '=', 'groups.id')
+            ->join('courses', 'groups.courses_id', '=', 'courses.id')
             ->where('activities.id', $id)
-            ->orderBy('activities.scheduled_at', 'asc')
             ->get();
 
         //Change the status to Active or Inactive instead of 1 or 0
         foreach ($activity as $act) {
-            $act->image = "http://AttimoBackend.test/public/images/" . $act->image;
+            $act->image = "http://AttimoBackend.test/images/" . $act->image;
             $act->status = $act->status == 1 ? 'Active' : 'Inactive';
         }
         //Change the format of the scheduled_at in date and time
