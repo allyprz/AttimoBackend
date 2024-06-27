@@ -23,6 +23,7 @@ class UsersGroupSeeder extends Seeder
             UsersGroup::create(['users_id' => 1, 'groups_id' => 7]);
             UsersGroup::create(['users_id' => 1, 'groups_id' => 8]);
             UsersGroup::create(['users_id' => 1, 'groups_id' => 9]);
+            UsersGroup::create(['users_id' => 1, 'groups_id' => 10]);
 
             //student's Computer Science (Peter Williams 2)(Mary Johnson)(George Clark)
             UsersGroup::create(['users_id' => 2, 'groups_id' => 1]);
@@ -84,8 +85,15 @@ class UsersGroupSeeder extends Seeder
             UsersGroup::create(['users_id' => 14, 'groups_id' => 8]);
             UsersGroup::create(['users_id' => 14, 'groups_id' => 9]);
 
+            ////student & professor Biochemistry (Charles 5)(Paul 9)
+            UsersGroup::create(['users_id' => 5, 'groups_id' => 10]);
+            UsersGroup::create(['users_id' => 9, 'groups_id' => 10]);
+
+            //professor (Betta 14)
+            UsersGroup::create(['users_id' => 14, 'groups_id' => 10]);
+
             //professor humanities
-            UsersGroup::create(['users_id' => 12, 'groups_id' => 1]); 
+            UsersGroup::create(['users_id' => 12, 'groups_id' => 1]);
         }
     }
 }

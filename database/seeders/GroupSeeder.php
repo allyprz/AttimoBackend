@@ -31,5 +31,7 @@ class GroupSeeder extends Seeder
         // Biology's Courses
         Group::create(['courses_id' => 8, 'users_id' => 14, 'number' => 1, 'consultations' => 'Monday 13:00 - 15:00']); // Molecular Biology
         Group::create(['courses_id' => 9, 'users_id' => 14, 'number' => 1, 'consultations' => 'Monday 13:00 - 15:00']); // Ecology and Environmental Biology
+        //Biochemistry
+        Group::create(['courses_id' => 10, 'users_id' => 14, 'number' => 1, 'consultations' => 'Monday 13:00 - 15:00']); // Biochemistry
     }
 }

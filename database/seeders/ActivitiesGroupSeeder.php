@@ -57,5 +57,10 @@ class ActivitiesGroupSeeder extends Seeder
         ActivitiesGroup::create(['activities_id' => 25, 'groups_id' => 9]);
         ActivitiesGroup::create(['activities_id' => 26, 'groups_id' => 9]);
         ActivitiesGroup::create(['activities_id' => 27, 'groups_id' => 9]);
+
+        // Asociar actividades de Biochemistry al grupo 1
+        ActivitiesGroup::create(['activities_id' => 34, 'groups_id' => 10]);
+        ActivitiesGroup::create(['activities_id' => 35, 'groups_id' => 10]);
+        ActivitiesGroup::create(['activities_id' => 36, 'groups_id' => 10]);
     }
 }

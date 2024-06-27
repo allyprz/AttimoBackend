@@ -46,14 +46,19 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 25, 'users_id' => 1]); //Ecology and Environmental Biology - Field Study Excursion
         ActivitiesUser::create(['activities_id' => 26, 'users_id' => 1]); //Ecology and Environmental Biology - Environmental Impact Assessment
         ActivitiesUser::create(['activities_id' => 27, 'users_id' => 1]); //Ecology and Environmental Biology - Biodiversity Conservation Workshop
-        
+
         // level activities
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 1]); // University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 1]); // University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 1]); // University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 1]); // University level activities - Student Council Elections
         // ActivitiesUser::create(['activities_id' => 30,'users_id' => 1]); // Student level activities - Study Group Session
         // ActivitiesUser::create(['activities_id' => 31,'users_id' => 1]); // Student level activities - Career Fair
-        ActivitiesUser::create(['activities_id' => 32,'users_id' => 1]); // Major level activities - Industry Guest Lecture
-        ActivitiesUser::create(['activities_id' => 33,'users_id' => 1]); // Major level activities - Major Networking Event
+        ActivitiesUser::create(['activities_id' => 32, 'users_id' => 1]); // Major level activities - Industry Guest Lecture
+        ActivitiesUser::create(['activities_id' => 33, 'users_id' => 1]); // Major level activities - Major Networking Event
+        //Biochemistry
+        ActivitiesUser::create(['activities_id' => 34, 'users_id' => 1]); // Biochemistry - Laboratory Techniques
+        ActivitiesUser::create(['activities_id' => 35, 'users_id' => 1]); // Biochemistry - Mutations
+        ActivitiesUser::create(['activities_id' => 36, 'users_id' => 1]); // Biochemistry - DNA Replication
+
 
         //Professors
         // Associate Professor Pamm to their activities in Computer Science 
@@ -65,7 +70,7 @@ class ActivitiesUserSeeder extends Seeder
         // Associate Professor Karl to their activities in Medicine
         ActivitiesUser::create(['activities_id' => 28, 'users_id' => 11]); // University level activities - Welcome Ceremony
         ActivitiesUser::create(['activities_id' => 29, 'users_id' => 11]); // University level activities - Student Council Elections
-        
+
         // Associate Professor Pete to their activities in Arquitecture
         ActivitiesUser::create(['activities_id' => 28, 'users_id' => 13]); // University level activities- Welcome Ceremony
         ActivitiesUser::create(['activities_id' => 29, 'users_id' => 13]); // University level activities - Student Council Elections
@@ -74,7 +79,7 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 28, 'users_id' => 14]); // University level activities- Welcome Ceremony
         ActivitiesUser::create(['activities_id' => 29, 'users_id' => 14]); // University level activities - Student Council Elections
 
-        
+
         /*
         Students:
         All students are associated with the following activities:
@@ -93,12 +98,12 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 7, 'users_id' => 2]); // Advanced Web Development - Server-Side Programming Lab
         ActivitiesUser::create(['activities_id' => 8, 'users_id' => 2]); // Advanced Web Development - Client-Side Scripting Assignment
         ActivitiesUser::create(['activities_id' => 9, 'users_id' => 2]); // Advanced Web Development - Database Integration Project
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 2]); // University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 2]); // University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 2]); // Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 2]); // Student level activities - Career Fair
-        ActivitiesUser::create(['activities_id' => 32,'users_id' => 2]); // Major level activities - Industry Guest Lecture
-        ActivitiesUser::create(['activities_id' => 33,'users_id' => 2]); // Major level activities - Major Networking Event
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 2]); // University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 2]); // University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30, 'users_id' => 2]); // Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31, 'users_id' => 2]); // Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 32, 'users_id' => 2]); // Major level activities - Industry Guest Lecture
+        ActivitiesUser::create(['activities_id' => 33, 'users_id' => 2]); // Major level activities - Major Networking Event
 
 
         // Associate student Mary to their activities in Computer Science 
@@ -111,12 +116,12 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 7, 'users_id' => 3]); // Advanced Web Development - Server-Side Programming Lab
         ActivitiesUser::create(['activities_id' => 8, 'users_id' => 3]); // Advanced Web Development - Client-Side Scripting Assignment
         ActivitiesUser::create(['activities_id' => 9, 'users_id' => 3]); // Advanced Web Development - Database Integration Project
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 3]); // University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 3]); // University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 3]); // Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 3]); // Student level activities - Career Fair
-        ActivitiesUser::create(['activities_id' => 32,'users_id' => 3]); // Major level activities - Industry Guest Lecture
-        ActivitiesUser::create(['activities_id' => 33,'users_id' => 3]); // Major level activities - Major Networking Event
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 3]); // University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 3]); // University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30, 'users_id' => 3]); // Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31, 'users_id' => 3]); // Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 32, 'users_id' => 3]); // Major level activities - Industry Guest Lecture
+        ActivitiesUser::create(['activities_id' => 33, 'users_id' => 3]); // Major level activities - Major Networking Event
 
         // Associate student George to their activities in Computer Science 
         ActivitiesUser::create(['activities_id' => 1, 'users_id' => 7]); // Humanities -Literature Review
@@ -128,12 +133,12 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 7, 'users_id' => 7]); // Advanced Web Development - Server-Side Programming Lab 
         ActivitiesUser::create(['activities_id' => 8, 'users_id' => 7]); // Advanced Web Development - CLient-Side Scripting Assignment
         ActivitiesUser::create(['activities_id' => 9, 'users_id' => 7]); // Advanced Web Development - Database Integration Project
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 7]); // University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 7]); // University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 7]); // Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 7]); // Student level activities - Career Fair
-        ActivitiesUser::create(['activities_id' => 32,'users_id' => 7]); // Major level activities - Industry Guest Lecture
-        ActivitiesUser::create(['activities_id' => 33,'users_id' => 7]); // Major level activities - Major Networking Event
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 7]); // University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 7]); // University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30, 'users_id' => 7]); // Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31, 'users_id' => 7]); // Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 32, 'users_id' => 7]); // Major level activities - Industry Guest Lecture
+        ActivitiesUser::create(['activities_id' => 33, 'users_id' => 7]); // Major level activities - Major Networking Event
 
         // Associate student Anna to their activities in Medicine
         ActivitiesUser::create(['activities_id' => 1, 'users_id' => 4]); // Humanities -Literature Review
@@ -145,10 +150,10 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 13, 'users_id' => 4]); //Pathology - Disease Case Study
         ActivitiesUser::create(['activities_id' => 14, 'users_id' => 4]); //Pathology - Histopathology Lab
         ActivitiesUser::create(['activities_id' => 15, 'users_id' => 4]); //Pathology - Pathology Seminar
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 4]); // University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 4]); // University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 4]); // Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 4]); // Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 4]); // University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 4]); // University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30, 'users_id' => 4]); // Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31, 'users_id' => 4]); // Student level activities - Career Fair
 
         // Associate student Elena to their activities in Medicine
         ActivitiesUser::create(['activities_id' => 1, 'users_id' => 8]); // Humanities -Literature Review
@@ -160,12 +165,12 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 13, 'users_id' => 8]); //Pathology - Disease Case Study
         ActivitiesUser::create(['activities_id' => 14, 'users_id' => 8]); //Pathology - Histopathology Lab
         ActivitiesUser::create(['activities_id' => 15, 'users_id' => 8]); //Pathology - Pathology Seminar
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 8]); // University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 8]); // University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 8]); // Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 8]); // Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 8]); // University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 8]); // University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30, 'users_id' => 8]); // Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31, 'users_id' => 8]); // Student level activities - Career Fair
 
-    
+
         // Associate student Laura to their activities in Arquitecture
         ActivitiesUser::create(['activities_id' => 1, 'users_id' => 6]); // Humanities -Literature Review
         ActivitiesUser::create(['activities_id' => 2, 'users_id' => 6]); // Humanities -Philosophy Debate
@@ -176,10 +181,10 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 19, 'users_id' => 6]); //History of Architecture - Architectural Site Visit
         ActivitiesUser::create(['activities_id' => 20, 'users_id' => 6]); //History of Architecture - Architectural Theory Essay
         ActivitiesUser::create(['activities_id' => 21, 'users_id' => 6]); //History of Architecture - Architectural Timeline Project
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 6]); // University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 6]); // University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 6]); // Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 6]); // Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 6]); // University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 6]); // University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30, 'users_id' => 6]); // Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31, 'users_id' => 6]); // Student level activities - Career Fair
 
         // Associate student Sophia to their activities in Arquitecture
         ActivitiesUser::create(['activities_id' => 1, 'users_id' => 10]); // Humanities -Literature Review
@@ -191,10 +196,10 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 19, 'users_id' => 10]); //History of Architecture - Architectural Site Visit
         ActivitiesUser::create(['activities_id' => 20, 'users_id' => 10]); //History of Architecture - Architectural Theory Essay
         ActivitiesUser::create(['activities_id' => 21, 'users_id' => 10]); //History of Architecture - Architectural Timeline Project
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 10]); // University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 10]); // University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 10]); // Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 10]); // Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 10]); // University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 10]); // University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30, 'users_id' => 10]); // Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31, 'users_id' => 10]); // Student level activities - Career Fair
 
         // Associate student Paul to their activities in Biology
         ActivitiesUser::create(['activities_id' => 1, 'users_id' => 9]); // Humanities -Literature Review
@@ -206,10 +211,10 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 25, 'users_id' => 9]); //Ecology and Environmental Biology - Field Study Excursion
         ActivitiesUser::create(['activities_id' => 26, 'users_id' => 9]); //Ecology and Environmental Biology - Environmental Impact Assessment
         ActivitiesUser::create(['activities_id' => 27, 'users_id' => 9]); //Ecology and Environmental Biology - Biodiversity Conservation Workshop
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 9]); // University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 9]); // University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 9]); // Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 9]); // Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 9]); // University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 9]); // University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30, 'users_id' => 9]); // Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31, 'users_id' => 9]); // Student level activities - Career Fair
 
         // Associate student Charles to their activities in Biology
         ActivitiesUser::create(['activities_id' => 1, 'users_id' => 5]); // Humanities -Literature Review
@@ -221,10 +226,10 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 25, 'users_id' => 5]); //Ecology and Environmental Biology - Field Study Excursion
         ActivitiesUser::create(['activities_id' => 26, 'users_id' => 5]); //Ecology and Environmental Biology - Environmental Impact Assessment
         ActivitiesUser::create(['activities_id' => 27, 'users_id' => 5]); //Ecology and Environmental Biology - Biodiversity Conservation Workshop
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 5]); //University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 5]); //University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 5]); //Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 5]); //Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 5]); //University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 5]); //University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30, 'users_id' => 5]); //Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31, 'users_id' => 5]); //Student level activities - Career Fair
 
         // Associate student Lewis to their activities in Biology
         ActivitiesUser::create(['activities_id' => 1, 'users_id' => 15]); // Humanities -Literature Review
@@ -236,10 +241,19 @@ class ActivitiesUserSeeder extends Seeder
         ActivitiesUser::create(['activities_id' => 25, 'users_id' => 15]); //Ecology and Environmental Biology - Field Study Excursion
         ActivitiesUser::create(['activities_id' => 26, 'users_id' => 15]); //Ecology and Environmental Biology - Environmental Impact Assessment
         ActivitiesUser::create(['activities_id' => 27, 'users_id' => 15]); //Ecology and Environmental Biology - Biodiversity Conservation Workshop
-        ActivitiesUser::create(['activities_id' => 28,'users_id' => 15]); //University level activities - Welcome Ceremony
-        ActivitiesUser::create(['activities_id' => 29,'users_id' => 15]); //University level activities - Student Council Elections
-        ActivitiesUser::create(['activities_id' => 30,'users_id' => 15]); //Student level activities - Study Group Session
-        ActivitiesUser::create(['activities_id' => 31,'users_id' => 15]); //Student level activities - Career Fair
+        ActivitiesUser::create(['activities_id' => 28, 'users_id' => 15]); //University level activities - Welcome Ceremony
+        ActivitiesUser::create(['activities_id' => 29, 'users_id' => 15]); //University level activities - Student Council Elections
+        ActivitiesUser::create(['activities_id' => 30, 'users_id' => 15]); //Student level activities - Study Group Session
+        ActivitiesUser::create(['activities_id' => 31, 'users_id' => 15]); //Student level activities - Career Fair
 
+        // Associate student Charles to their activities in Biochemistry
+        ActivitiesUser::create(['activities_id' => 34, 'users_id' => 5]); // Biochemistry - Laboratory Techniques
+        ActivitiesUser::create(['activities_id' => 35, 'users_id' => 5]); // Biochemistry - Mutations
+        ActivitiesUser::create(['activities_id' => 36, 'users_id' => 5]); // Biochemistry - DNA Replication
+
+        // Associate student Paul to their activities in Biochemistry
+        ActivitiesUser::create(['activities_id' => 34, 'users_id' => 9]); // Biochemistry - Laboratory Techniques
+        ActivitiesUser::create(['activities_id' => 35, 'users_id' => 9]); // Biochemistry - Mutations
+        ActivitiesUser::create(['activities_id' => 36, 'users_id' => 9]); // Biochemistry - DNA Replication
     }
 }

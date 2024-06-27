@@ -387,5 +387,36 @@ class ActivitySeeder extends Seeder
             'categories_activities_id' => 4, // major
             'status_activities_id' => 1, // active
         ]);
+        // Biology: Biochemistry (id 10)
+        Activity::create([
+            'name' => 'Laboratory Techniques',
+            'description' => 'Hands-on workshop focusing on essential laboratory techniques in biochemistry, including chromatography, spectrophotometry, and electrophoresis.',
+            'image' => 'activity_34.jpg',
+            'percent' => 10,
+            'scheduled_at' => '2024-07-16 10:00:00',
+            'labels_activities_id' => 2, // homework
+            'categories_activities_id' => 1, // course
+            'status_activities_id' => 1, // active
+        ]);
+        Activity::create([
+            'name' => 'Mutations',
+            'description' => 'Study session on genetic mutations, their causes, types (point mutations, insertions, deletions, etc.), and implications for protein synthesis and inheritance.',
+            'image' => 'activity_35.jpg',
+            'percent' => 5,
+            'scheduled_at' => '2024-07-23 10:00:00',
+            'labels_activities_id' => 2, // homework
+            'categories_activities_id' => 1, // course
+            'status_activities_id' => 1, // active
+        ]);
+        Activity::create([
+            'name' => 'DNA Replication',
+            'description' => 'Hands-on workshop on the process of DNA replication, covering molecular mechanisms, enzymes involved, and the significance of fidelity in genetic inheritance.',
+            'image' => 'activity_36.jpg',
+            'percent' => 0,
+            'scheduled_at' => '2024-08-05 09:00:00',
+            'labels_activities_id' => 1, // event
+            'categories_activities_id' => 1, // course
+            'status_activities_id' => 1, // active
+        ]);
     }
 }
