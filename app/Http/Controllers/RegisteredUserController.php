@@ -197,7 +197,7 @@ class RegisteredUserController extends Controller
     
             // Almacenar la nueva imagen con un nombre único
             $image = $request->file('image');
-            $filename = 'user_' . $user->id . '_' . time() . '.' . $image->getClientOriginalExtension();
+            $filename = 'user_' . $user->id . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $filename);
             $user->update(['image' => $filename]);
         }
