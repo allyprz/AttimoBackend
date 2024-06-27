@@ -159,51 +159,64 @@ class RegisteredUserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        $user = User::find($id);
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-    
-        //Update user
-        $user->update([
-            'name' => $request->name,
-            'lastname1' => $request->lastname1,
-            'lastname2' => $request->lastname2,
-            'email' => $request->email,
-            'username' => $request->username,
-        ]);
+{
+    // Buscar al usuario por su ID
+    $user = User::find($id);
 
-        // Update the image if it has been modified
-        if ($request->hasFile('image')) {
-            // Check if the old image exists and delete it
-            $image_to_remove = 'images/' . $user->image;
-            if (File::exists($image_to_remove) && $user->image != 'user_default.jpg') {
-                File::delete($image_to_remove);
-            }
-
-            // Store the new image with the user ID in the file name
-            $image = $request->file('image');
-            $filename = 'user_' . $user->id . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $filename);
-            $user->update(['image' => $filename]);
-        }
-    
-        // Devolver una respuesta con los datos actualizados del usuario
-        return response()->json([
-            'message' => 'User updated successfully',
-            'user' => [
-                'id' => $user->id,
-                'image' => "http://AttimoBackend.test/images/" . $user->image,
-                'name' => $user->name,
-                'lastname1' => $user->lastname1,
-                'lastname2' => $user->lastname2,
-                'email' => $user->email,
-                'username' => $user->username,
-                'users_types_id' => $user->users_types_id,
-            ]
-        ], 200);
+    // Si el usuario no existe, devolver un error 404
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
     }
+
+    // Validar los datos recibidos
+    $validatedData = $request->validate([
+        'name' => 'required',
+        'lastname1' => 'required',
+        'lastname2' => 'required',
+        'email' => 'required|email|unique:users,email,' . $id,
+        'username' => 'required|unique:users,username,' . $id,
+    ]);
+
+    // Actualizar los campos del usuario
+    $user->update([
+        'name' => $validatedData['name'],
+        'lastname1' => $validatedData['lastname1'],
+        'lastname2' => $validatedData['lastname2'],
+        'email' => $validatedData['email'],
+        'username' => $validatedData['username'],
+    ]);
+
+    // Actualizar la imagen si se ha modificado
+    if ($request->hasFile('image')) {
+        // Eliminar la imagen anterior si existe y no es la imagen por defecto
+        $image_to_remove = 'images/' . $user->image;
+        if (File::exists($image_to_remove) && $user->image != 'user_default.jpg') {
+            File::delete($image_to_remove);
+        }
+
+        // Almacenar la nueva imagen con el ID del usuario en el nombre del archivo
+        $image = $request->file('image');
+        $filename = 'user_' . $user->id . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $filename);
+        $user->update(['image' => $filename]);
+    }
+
+    // Devolver una respuesta con los datos actualizados del usuario
+    return response()->json([
+        'message' => 'User updated successfully',
+        'user' => [
+            'id' => $user->id,
+            'image' => "http://AttimoBackend.test/images/" . $user->image,
+            'name' => $user->name,
+            'lastname1' => $user->lastname1,
+            'lastname2' => $user->lastname2,
+            'email' => $user->email,
+            'username' => $user->username,
+            'users_types_id' => $user->users_types_id,
+        ]
+    ], 200);
+}
+
 
     /**
      * Remove the specified resource from storage.
